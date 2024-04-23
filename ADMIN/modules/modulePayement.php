@@ -13,7 +13,6 @@ class Payement {
         $query->execute();
         $res = $query->fetchAll(PDO::FETCH_ASSOC);
         return json_encode($res);
-
     }
 
     function insertPayer($dbo, $montantPayer, $numLog, $modePayer){
