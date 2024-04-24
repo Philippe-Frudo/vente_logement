@@ -4,7 +4,7 @@ require_once("../../Rooteur/rooteur.php");
 require_once("../../Database/connexionBD.php");
 $dbo = new connexionBD();
 
-require_once("../modules/moduleclient.php");
+require_once("../modules/moduleClient.php");
 $client = new Client();
 
 

@@ -5,7 +5,7 @@ require_once("../../Rooteur/rooteur.php");
 require_once("../../Database/connexionBD.php");
 $dbo = new connexionBD();
 
-require_once("../modules/modulepayement.php");
+require_once("../modules/modulePayement.php");
 $payement = new Payement();
 
 
@@ -13,7 +13,6 @@ $action = $_POST["action"] ?? $_GET["action"];
 
 if ( isset($_POST["action"]) && !empty($_POST["action"]) ) {
     
-    //SELECTIONNER TOUS LE payement
     if ($_POST["action"] == "getAllPayer") {
         $search = empty($_POST["search"]) ?? "";
 
@@ -44,6 +43,7 @@ if ( isset($_POST["action"]) && !empty($_POST["action"]) ) {
 
     elseif ($_POST["action"] == "deletePayer") {
         $codePayer = $_POST["codePayer"];
+        
         $res = $payement->deletePayer($dbo, $codePayer);
         echo $res;
     }

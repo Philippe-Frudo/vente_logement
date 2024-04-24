@@ -2,7 +2,7 @@
 
 class Payement {
     
-    function getAllPayer($dbo, $numLog, $codeP){
+    function getAllPayer($dbo, $search){
         //WHERE l.descPayer =:descPayer OR p.nomProvince =:province OR a.libAg=:libAg
         $cmd = "SELECT *, SUM(p.montantPayer) AS Total_Montant_P FROM  payement p
                 LEFT JOIN logement l ON l.numLog = p.numLog

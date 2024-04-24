@@ -5,7 +5,7 @@ require_once("../../Rooteur/rooteur.php");
 require_once("../../Database/connexionBD.php");
 $dbo = new connexionBD();
 
-require_once("../modules/modulecite.php");
+require_once("../modules/moduleCite.php");
 $cite = new Cite();
 
 

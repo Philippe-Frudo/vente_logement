@@ -4,7 +4,7 @@ require_once("../../Rooteur/rooteur.php");
 require_once("../../Database/connexionBD.php");
 $dbo = new connexionBD();
 
-require_once("../modules/moduleagence.php");
+require_once("../modules/moduleAgence.php");
 $agence = new Agence();
 
 $action = $_POST["action"] ?? $_GET["action"];
@@ -37,7 +37,7 @@ if ( isset($_POST["action"]) && !empty($_POST["action"]) ) {
         $telAg= $_POST["telAg"];
         $password = $_POST["passwordAg"];
 
-        $res = $agence->insertAg($dbo, $codeAg, $libAg, $codeProvAg, $adrsAg, $telAg, $password);
+        $res = $agence->updateAg($dbo, $codeAg, $libAg, $codeProvAg, $adrsAg, $telAg, $password);
         echo $res;
     }
 

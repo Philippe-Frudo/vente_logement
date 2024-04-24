@@ -5,7 +5,7 @@ require_once("../../Database/connexionBD.php");
 $dbo = new connexionBD();
 // new connexionBD();
 
-require_once("../modules/moduleterrain.php");
+require_once("../modules/moduleTerrain.php");
 $terrain = new Terrain();
 
 $action = $_POST["action"] ?? $_GET["action"];
