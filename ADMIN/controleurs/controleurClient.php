@@ -10,21 +10,27 @@ $client = new Client();
 
 $action = $_POST["action"] ?? $_GET["action"];
 
-if ( isset($_POST["action"]) && !empty($_POST["action"]) ) {
-    
-    if ($_POST["action"] == "getAllCli") {
-        $search = empty($_POST["searchCli"]) ?? " ";
+if ( isset($action) && !empty($action) ) {
+    function getD(){
+        $dbo = new connexionBD();
+        $client = new Client();
+        $search = empty($_POST["searchCli"]) ?? "";
         $res = $client->getAllCli($dbo, $search);
-        echo json_encode($res);
+        echo  json_encode($res);
+
     }
 
-    elseif ($_POST["action"] == "insertCli") {
+    if ($action == "getAllCli") {
+        getD();
+    }
+    
+    elseif ($action == "insertCli") {
 
         $nomCli= $_POST["nomCli"];
         $adrsCli= $_POST["adrsCli"]; 
         $prenomCli= $_POST["prenomCli"];
         $CINCli= $_POST["CINCli"]; 
-        $sexeCli= $_POST["sexeCli"];
+        // $sexeCli= $_POST["sexeCli"];
         $professionCli= $_POST["professionCli"]; 
         $telCli= $_POST["telCli"];
 
@@ -37,11 +43,15 @@ if ( isset($_POST["action"]) && !empty($_POST["action"]) ) {
         $upload_photo = FOLDER_IMG_CLIENT . $unique_photo;
         move_uploaded_file($photo_temp, $upload_photo);
 
-        $res = $client->insertCli($dbo, $nomCli, $adrsCli, $prenomCli, $CINCli, $sexeCli, $professionCli, $telCli, $upload_photo);
-        echo $res;
+        $res = $client->insertCli($dbo, $nomCli, $adrsCli, $prenomCli, $CINCli , $professionCli, $telCli, $upload_photo);
+        
+        echo json_encode($res);
+        header("ContentType: application/json");
+        getD();
+        exit();
     }
 
-    elseif ($_POST["action"] == "updateCli") {
+    elseif ($action == "updateCli") {
         $numCli= $_POST["numCli"];
         $nomCli= $_POST["nomCli"];
         $adrsCli= $_POST["adrsCli"]; 
@@ -64,7 +74,7 @@ if ( isset($_POST["action"]) && !empty($_POST["action"]) ) {
         echo $res;
     }
 
-    elseif ($_POST["action"] == "deleteCli") {
+    elseif ($action == "deleteCli") {
         $numCli = $_POST["numCli"];
         $res = $client->deleteCli($dbo, $numCli);
         echo $res;

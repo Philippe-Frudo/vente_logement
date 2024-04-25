@@ -5,12 +5,12 @@ class Province {
     function getAllProv($dbo, $search){
         //WHERE l.descLog =:descLog OR p.nomProvince =:province OR a.libAg=:libAg
 
-        $cmd = "SELECT * FROM province WHERE nomProvince LIKE %:nomProv%";
+        $cmd = "SELECT * FROM province";
 
         $query = $dbo->conn->prepare($cmd);
-        $query->execute([":nomProv"=>$search]);
+        $query->execute();
         $res = $query->fetchAll(PDO::FETCH_ASSOC);
-        return json_encode($res);
+        return $res;
 
     }
 

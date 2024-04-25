@@ -9,16 +9,16 @@ $Province = new Province();
 
 $action = $_POST["action"] ?? $_GET["action"];
 
-if ( isset($_POST["action"]) && !empty($_POST["action"]) ) {
+if ( isset($action) && !empty($action) ) {
     
         //SELECTIONNER TOUS LE Province
-        if ($_POST["action"] == "getAllProv") {
+        if ($action == "getAllProv") {
             $search = $_POST["search"] ?? " ";
             $res = $Province->getAllProv($dbo, $search);
             echo json_encode($res);
         }
     
-        elseif ($_POST["action"] == "insertProv") {
+        elseif ($action == "insertProv") {
             $codeProv = $_POST["codeProv"];
             $nomProv = $_POST["nomProv"];
     
@@ -26,7 +26,7 @@ if ( isset($_POST["action"]) && !empty($_POST["action"]) ) {
             echo $res;
         }
             
-        elseif ($_POST["action"] == "deleteProv") {
+        elseif ($action == "deleteProv") {
             $codeProv = $_POST["codeProv"];
 
             $res = $Province->deleteProv($dbo, $codeProv);

@@ -4,12 +4,12 @@ class Terrain {
 
     function getAllTer($dbo, $search){
         //WHERE l.descLog =:descLog OR p.nomterrain =:terrain OR a.libAg=:libAg
-        $cmd = "SELECT * FROM terrain WHERE numTer LIKE %:numTer%";
+        $cmd = "SELECT * FROM terrain";
 
         $query = $dbo->conn->prepare($cmd);
-        $query->execute([":nomTer"=>$search]);
+        $query->execute();
         $res = $query->fetchAll(PDO::FETCH_ASSOC);
-        return json_encode($res);
+        return $res;
     }
 
     function insertTer($dbo, $numTer, $superficieTer){
@@ -23,6 +23,7 @@ class Terrain {
                     ":numTer"=>$numTer, 
                     ":superficieTer"=>$superficieTer 
                 ]);
+                
             return "L'ajout de terrain a ete succes";
 
         } catch (Exception $e) {

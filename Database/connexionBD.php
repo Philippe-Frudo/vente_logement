@@ -19,7 +19,7 @@ class connexionBD {
             //Modifier le mode d'erreur d'exception du PDO
             $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-            echo "Connexion succes";
+            // echo "Connexion succes";
 
         } catch (PDOException $e) {
             echo "Erreur de connexion Base de donnee" . $e->getMessage();
@@ -27,6 +27,6 @@ class connexionBD {
     }
 
 }
-new connexionBD();
+// new connexionBD();
 
 ?>

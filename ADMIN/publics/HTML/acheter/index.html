@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ACHETER</title>
+    <!----------------- Style -------------->
+    <link rel="stylesheet" href="../../CSS/default/style.css">
+    <link rel="stylesheet" href="../../CSS/default/fenetre_modale.css">
+    <link rel="stylesheet" href="../../CSS/agence/style.css">
+</head>
+<body>
+    <!-------------------Navigateu ------------->
+    <div class="container">
+        <div class="container">
+            <div class="navigation">
+                <ul>
+                    <li>
+                        <a href="#">
+                            <span class="icon">
+                                <!-- <img src="../../Cicone/icons8_chevron_right_52px_1.png"> -->
+                                <img src="../../icon/icons8_chevron_right_52px_1.png">
+                            </span>
+                            <span class="title">YSON</span>
+                        </a>
+                    </li>
+    
+                    <li class="linkDashbord">
+                        <a href="../dashbord/index.html" >
+                            <span class="icon">
+                                <!-- <img src="icone/icons8_contrast_64px.png"> -->
+                                <img src="../../icon/icons8_home_48px.png">
+                            </span>
+                            <span class="title">Dashboard</span>
+                        </a>
+                    </li>
+    
+                    <li class="linkLogement">
+                        <a href="../logement/index.html">
+                            <span class="icon">
+                                <!-- <img src="icone/icons8_customer_48px_1.png"> -->
+                                <img src="../../icon/icons8_3d_house_60px.png">
+                            </span>
+                            <span class="title">Logement</span>
+                        </a>
+                    </li>
+    
+                    <li class="linkClient">
+                        <a href="../client/index.html">
+                            <span class="icon">
+                                <!-- <img src="icone/icons8_down_button_48px_4.png"> -->
+                                <img src="../../icon/icons8_staff_48px_1.png">
+                            </span>
+                            <span class="title">Client</span>
+                        </a>
+                    </li>
+    
+                    <li class="linkAgence">
+                        <a href="../agence/index.html">
+                            <span class="icon">
+                                <!-- <img src="icone/icons8_export_48px.png"> -->
+                                <img src="../../icon/icons8_grand_canyon_48px.png">
+                            </span>
+                            <span class="title">Agence</span>
+                        </a>
+                    </li>
+    
+                    <li class="linkTerrain">
+                        <a href="../terrain/index.html">
+                            <span class="icon">
+                                <!-- <img src="icone/icons8_export_48px.png"> -->
+                                <img src="../../icon/icons8_grand_canyon_48px.png">
+                            </span>
+                            <span class="title">Terrain</span>
+                        </a>
+                    </li>
+    
+                    <li class="linkPayement">
+                        <a href="../acheter/index.html">
+                            <span class="icon">
+                                <!-- <img src="icone/icons8_forward_arrow_48px_2.png"> -->
+                                <img src="../../icon/icons8_pay.ico">
+                            </span>
+                            <span class="title">Payement</span>
+                        </a>
+                    </li>
+    
+                    <li class="linkParametre"> 
+                        <a href="#">
+                            <span class="icon">
+                                <!-- <img src="icone/icons8_settings_100px_2.png"> -->
+                                <img src="../../icon/icons8_settings_100px_2.png">
+                            </span>
+                            <span class="title">Parametre</span>
+                        </a>
+                    </li>
+    
+                    <li class="linkSignOut">
+                        <a href="#">
+                            <span class="icon">
+                                <!-- <img src="icone/icons8_user_groups_52px_1.png"> -->
+                                <img src="../../icon/icons8_user_groups_52px_1.png">
+                            </span>
+                            <span class="title">SignOut</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+    
+        <!-- ===================== Main =====================  -->
+
+        <div class="main">
+            <div class="topbar">
+                <div class="toggle">
+                    <!-- <img src="icone/icons8_menu_30px.png"> -->
+                    <img src="../../icon/icons8_menu_30px.png">
+                </div>
+
+                <div class="search">
+                    <label>
+                        <input type="text" placeholder="Search here">
+                        <!-- <img src="icone/icons8_delete_48px_1.png"> -->
+                        <img src="../../icon/icons8_delete_48px_1.png">
+                    </label>
+                </div>
+
+                <div class="user">
+                    <!-- <img src="image/Atik20230220_100155_👹👹Atik SE 4👹👹.jpg"> -->
+                    <img src="../../images/Atik20230220_100155_👹👹Atik SE 4👹👹.jpg">
+                </div>
+            </div>
+
+
+            <!-- ===================== Orders Details List =====================  -->
+
+            <div class="details">
+                <div class="recentOrders">
+                    <div class="cardHeader">
+                        <h2>AGENCES</h2>
+                        <a href="#" class="btn">Ajouter Nouveau</a>
+                    </div>
+
+                    <table>
+                        <thead class="liste_terrain">
+                            <tr>
+                                <th colspan="3">Information Client</th>
+                                <th colspan="2">Information Longement</th>
+                                <th colspan="4">Vente</th>
+                                <th></th>
+                            </tr>
+                            <tr>
+                                <td>Id</td>
+                                <td>Nom</td>
+                                <td>Prénom</td>
+
+                                <td>Libélé</td>
+                                <td>Description</td>
+
+                                <td>Type</td>
+                                <td>Date</td>
+                                <td>Date limit</td>
+                                <td>Payement</td>
+
+                                <td>Action</td>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr class="tr liste_terrain">
+                                <td><span class="status delivered">Delivered</span></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td class="action">
+                                    <div class="tr_hover">
+                                        <a href="#"><img src="../../icon/icons8_eye_60px_4.png"></a>
+                                        <a href="#"><img src="../../icon/icons8_edit_48px_1.png"></a>
+                                        <a href="#"><img src="../../icon/icons8_trash_can_48px.png"></a>
+                                    </div>
+                                    <div class="tr_dishover">
+                                        <a href="#"><img src="../../icon/icons8_eye_60px_5.png"></a>
+                                        <a href="#"><img src="../../icon/icons8_edit_48px_2.png" class="edit_log"></a>
+                                        <a href="#"><img src="../../icon/icons8_remove_48px_2.png" class="delete_log"></a>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <tr class="tr liste_terrain">
+                                <td><span class="status pending">Pending</span></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td class="action">
+                                    <div class="tr_hover">
+                                        <a href="#"><img src="../../icon/icons8_eye_60px_4.png"></a>
+                                        <a href="#"><img src="../../icon/icons8_edit_48px_1.png"></a>
+                                        <a href="#"><img src="../../icon/icons8_trash_can_48px.png"></a>
+                                    </div>  
+                                    <div class="tr_dishover">
+                                        <a href="#"><img src="../../icon/icons8_eye_60px_5.png"></a>
+                                        <a href="#"><img src="../../icon/icons8_edit_48px_2.png" class="edit_log"></a>
+                                        <a href="#"><img src="../../icon/icons8_remove_48px_2.png" class="delete_log"></a>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <tr class="tr liste_terrain">
+                                <td><span class="status return">Return</span></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td class="action">
+                                    <div class="tr_hover">
+                                        <a href="#"><img src="../../icon/icons8_eye_60px_4.png"></a>
+                                        <a href="#"><img src="../../icon/icons8_edit_48px_1.png"></a>
+                                        <a href="#"><img src="../../icon/icons8_trash_can_48px.png"></a>
+                                    </div>  
+                                    <div class="tr_dishover">
+                                        <a href="#"><img src="../../icon/icons8_eye_60px_5.png"></a>
+                                        <a href="#"><img src="../../icon/icons8_edit_48px_2.png" class="edit_log"></a>
+                                        <a href="#"><img src="../../icon/icons8_remove_48px_2.png" class="delete_log"></a>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <tr class="tr liste_terrain">
+                                <td><span class="status inProgress">In Progress</span></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td class="action">
+                                    <div class="tr_hover">
+                                        <a href="#"><img src="../../icon/icons8_eye_60px_4.png"></a>
+                                        <a href="#"><img src="../../icon/icons8_edit_48px_1.png"></a>
+                                        <a href="#"><img src="../../icon/icons8_trash_can_48px.png"></a>
+                                    </div>  
+                                    <div class="tr_dishover">
+                                        <a href="#"><img src="../../icon/icons8_eye_60px_5.png"></a>
+                                        <a href="#"><img src="../../icon/icons8_edit_48px_2.png" class="delete_log"></a>
+                                        <a href="#"><img src="../../icon/icons8_remove_48px_2.png" class="delete_log"></a>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <tr class="tr liste_terrain">
+                                <td><span class="status delivered">Delivered</span></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td class="action">
+                                    <div class="tr_hover">
+                                        <a href="#"><img src="../../icon/icons8_eye_60px_4.png"></a>
+                                        <a href="#"><img src="../../icon/icons8_edit_48px_1.png"></a>
+                                        <a href="#"><img src="../../icon/icons8_trash_can_48px.png"></a>
+                                    </div>  
+                                    <div class="tr_dishover">
+                                        <a href="#"><img src="../../icon/icons8_eye_60px_5.png"></a>
+                                        <a href="#"><img src="../../icon/icons8_edit_48px_2.png" class="edit_log"></a>
+                                        <a href="#"><img src="../../icon/icons8_remove_48px_2.png" class="delete_log"></a>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <tr class="tr liste_terrain">
+                                <td><span class="status inProgress">In Progress</span></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td class="action">
+                                    <div class="tr_hover">
+                                        <a href="#"><img src="../../icon/icons8_eye_60px_4.png"></a>
+                                        <a href="#"><img src="../../icon/icons8_edit_48px_1.png"></a>
+                                        <a href="#"><img src="../../icon/icons8_trash_can_48px.png"></a>
+                                    </div>  
+                                    <div class="tr_dishover">
+                                        <a href="#"><img src="../../icon/icons8_eye_60px_5.png"></a>
+                                        <a href="#"><img src="../../icon/icons8_edit_48px_2.png" class="edit_log"></a>
+                                        <a href="#"><img src="../../icon/icons8_remove_48px_2.png" class="delete_log"></a>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+             </div>
+        </div>
+    </div>
+
+
+<!-- AJOUTER NOUVEAU ACHAT -->
+    <div class="fenetre_modale_ajout_log">
+        <div class="formulaire">
+            <div class="paragraphe">
+                <p>Nouveau Agence</p>
+                <img src="../../icon/icons8_cancel_64px_1.png" class="close">
+            </div>
+            <form action="#" class="form_input">
+                <div class="group_input">
+                    <label for="">Nom</label>
+                    <input type="text">
+                </div>
+                <div class="group_input">
+                    <label for="">Phone</label>
+                    <input type="text">
+                </div>
+                <div class="group_input">
+                    <label for="">Mot de passe</label>
+                    <input type="password">
+                </div>
+                <div class="group_input">
+                    <label for="">Libélé</label>
+                    <textarea name="" id="" cols="30" rows="10"></textarea>
+                </div>
+                <div class="group_select">
+                    <div class="element_select">
+                        <span>Province</span>
+                        <select name="" id="">
+                            <option value="">--select province</option>
+                            <option value=""></option>
+                        </select>
+                    </div>
+                    <div>
+                        <p></p>
+                    </div>
+                </div>
+                <div class="button_ajout_log">
+                    <button type="reset">Annuler</button>
+                    <button type="submit" class="creer_terr">Créer</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    
+    <!----------------- Scripts -------------->
+    <script>
+        document.querySelector(".navigation ul li.linkPayement").classList.add("hovered");
+    </script>
+    <script src="../../JS/default/index.js"></script>
+    <script src="../../JS/agence/index.js"></script>
+
+</body>
+</html>

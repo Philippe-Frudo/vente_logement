@@ -1,0 +1,219 @@
+:root{
+    --blue: #2a2185;
+    --white: #fff;
+    --gray: #f5f5f5;
+    --black1: #222;
+    --black2: #999;
+    /* --blue1:rgb(42, 33, 133) */
+}
+
+
+.fenetre_modale_ajout_log{
+    display: none;
+}
+
+.fenetre_modale_ajout_log.ajout{
+    display: block;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.formulaire{
+    width: 550px;
+    /* height: 97vh; */
+    background-color: white;
+    border-radius: 10px;
+    overflow: hidden;
+    animation: animate 0.5s;
+}
+
+@keyframes animate {
+    0%{
+        transform: translateY(-100px);
+        opacity: 0;
+    }
+    10%{
+        opacity: 1;
+    }
+    100%{
+        transform: translateY(0px);
+        opacity: 1;
+    }
+}
+
+/* FROMULAIRE */
+
+.formulaire .paragraphe{
+    background-color: var(--blue);
+    padding: 12px 15px;
+    color: var(--white);
+    font-weight: 900;
+    font-family: sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.formulaire .paragraphe img{
+    width: 30px;
+    cursor: pointer;
+}
+
+
+
+/* INPUT TYPE FILE */
+
+.form_input{
+    padding: 20px;
+}
+
+.form_input .photo_logement_ajo{
+    border: 2px solid rgb(214, 207, 207);
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    padding: 0 40px;
+    opacity: 0.8;
+    margin-bottom: 20px;
+    margin-top: -10px;
+}
+
+.form_input .photo_logement_ajo div:nth-child(1){
+    margin-right: 50px;
+}
+
+.form_input .photo_logement_ajo div:nth-child(1) img{
+    width: 100px;
+}
+
+.form_input .photo_logement_ajo div:nth-child(2){
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-left: 3px solid rgb(214, 207, 207);
+    padding: 0 0 10px 20px;
+    line-height: 50px;
+    font-weight: 900;
+    color: rgb(75, 75, 75);
+}
+
+/* GROUP INPUT */
+.input{
+    margin-top: -20px;
+}
+
+.group_input{
+    display: flex;
+    flex-direction: column;
+}
+
+.group_input label{
+    font-weight: 900;
+    font-family: sans-serif;
+    font-size: 13px;
+    margin: 15px 0 5px;
+}
+
+.group_input input,
+.input .group_input textarea,
+.group_select .element_select{
+    /* background-color: rgba(0, 0, 0, 0.61); */
+    border: 2px solid rgb(214, 207, 207);
+    border-radius: 5px;
+    outline: none;
+    padding: 8px 10px;
+    font-family: sans-serif;
+    font-size: 15px;
+}
+
+
+/* TEXTAREA */
+
+.input .group_input textarea{
+    width: 100%;
+    height: 50px;
+    resize: none;
+    outline: none;
+}
+
+/* GROUP SELECT */
+
+.group_select{
+    position: relative;
+    height: 40px;
+    width: 93%;
+}
+
+.group_select .element_select{
+    padding: 0;
+    margin: 8px 0;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+}
+
+.group_select .element_select span{
+    background-color: rgb(77, 76, 76);
+    color: white;
+    text-transform: uppercase;
+    font-size: 12px;
+    font-weight: 900;
+    text-align: center;
+    padding: 5px 10px;
+    height: 100%;
+    letter-spacing: 1px;
+    opacity: 0.8;
+
+}
+
+.group_select .element_select select{
+    width: 100%;
+    padding: 5px;
+    margin-left: 10px;
+    outline: none;
+    border: none;
+}
+
+.group_select div:nth-child(2){
+    width: 30px;
+    height: 30px;
+    background-color: rgb(209, 206, 206);
+    border-radius: 5px;
+    cursor: pointer;
+    position: absolute;
+    right: -35px;
+    top: 8px;
+    border: 2px solid gray;
+}
+
+
+/* BUTTON AJOUTER LONGEMENT */
+
+.button_ajout_log button{
+    font-family: sans-serif;
+    font-size: 14px;
+    background-color: transparent;
+    padding: 5px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    letter-spacing: 1px;
+    font-weight: 900;
+    margin-top: 10px;
+}
+
+.button_ajout_log button[type="reset"]{
+    border: 2px solid gray;
+}
+
+.button_ajout_log button[type="submit"]{
+    border: 2px solid blue;
+    background-color: var(--blue);
+    color: white;
+}

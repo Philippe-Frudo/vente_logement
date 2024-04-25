@@ -1,0 +1,99 @@
+.fenetre_modale_ajout_log .formulaire table{
+    width: 100%;
+    text-align: left;
+    border-collapse: collapse;
+}
+
+.formulaire .form_input table thead th{
+    text-transform: uppercase;
+    font-size: 12px;
+    font-weight: 900;
+    color: black;
+    font-family: sans-serif;
+    padding-bottom: 10px;
+}
+
+.formulaire .form_input table tbody td{
+    padding: 0;
+    position: relative;
+    padding: 5px 0;
+}
+
+.formulaire .form_input table tbody td:nth-child(1),
+.formulaire .form_input table tbody td:nth-child(3){
+    width: 12px;
+    padding: 5px 10px 5px 0;
+}
+
+.formulaire .form_input table tbody td img{
+    width: 100%;
+}
+
+.formulaire .form_input table tbody td input{
+    width: 89.5%;
+    height: 40px;
+    border: 2px solid gray;
+    border-radius: 5px;
+    outline: none;
+    padding: 0 10px;
+    font-weight: 900;
+    color: gray;
+    font-family: sans-serif;
+}
+
+.formulaire .form_input table tbody td:nth-child(1) div,
+.formulaire .form_input table tbody td:nth-child(3) div{
+    border: 2px solid gray;
+    /* position: absolute; */
+    top: 0;
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    width: 45px;
+    height: 40px;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+.formulaire .form_input table tbody td:nth-child(3) div{
+    padding: 10px;
+    position: absolute;
+    right: 5px;
+    top: 5px;
+}
+
+.formulaire .button_ajout_log{
+    margin-top: 20px;
+}
+
+.supperficie{
+    position: relative;
+}
+
+.supperficie p{
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: aquamarine;
+    border-radius: 10px;
+    font-size: 12px;
+    font-weight: 900;
+    padding: 3px 15px;
+    letter-spacing: 0.5px;
+    color: gray;
+}
+
+.formulaire .form_input .hiddene{
+    height: 130px;
+    max-height: 130px;
+    overflow-y: auto;
+}
+
+.liste_terrain td:nth-child(2),
+.liste_terrain td:nth-child(2){
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

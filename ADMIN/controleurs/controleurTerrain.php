@@ -10,24 +10,33 @@ $terrain = new Terrain();
 
 $action = $_POST["action"] ?? $_GET["action"];
 
-if ( isset($_POST["action"]) && !empty($_POST["action"]) ) {
-    
-        if ($_POST["action"] == "getAllTer") {
-            $search = empty($_POST["searchTer"]) ?? "";
+if ( isset($action) && !empty($action) ) {
 
+        function getD(){
+            $dbo = new connexionBD();
+            $terrain = new Terrain();
+            $search = empty($_POST["searchTer"]) ?? "";
+    
             $res = $terrain->getAllTer($dbo, $search);
             echo json_encode($res);
+
         }
     
-        elseif ($_POST["action"] == "insertTer") {
+        if ($action == "getAllTer") {
+            getD();
+        }
+    
+        elseif ($action == "insertTer") {
             $numTer = $_POST["numTer"];
             $superficieTer = $_POST["superficieTer"];
     
             $res = $terrain->insertTer($dbo, $numTer, $superficieTer);
-            echo $res;
+            echo json_decode($res);
+            header("ContentType: application/json");
+            getD();
         }
 
-        elseif ($_POST["action"] == "updateTer") {
+        elseif ($action == "updateTer") {
             $numTer = $_POST["numTer"];
             $superficieTer = $_POST["superficieTer"];
     
@@ -35,7 +44,7 @@ if ( isset($_POST["action"]) && !empty($_POST["action"]) ) {
             echo $res;
         }
             
-        elseif ($_POST["action"] == "deleteTer") {
+        elseif ($action == "deleteTer") {
             $numTer = $_POST["numTer"];
 
             $res = $terrain->deleteTer($dbo, $numTer, $superficieTer);

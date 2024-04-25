@@ -1,0 +1,105 @@
+/* INPUT DISPLAY */
+.dispaly_input{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.dispaly_input .group_input{
+    width: 100%;
+}
+
+.dispaly_input .group_input input{
+    width: 99%;
+}
+
+
+/* CONFIRMATION DELETE PRODUIT */
+.confirmater_supp_pro{
+    display: none;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.3);
+    z-index: 20000000;
+}
+.confirmater_supp_pro.active{
+    display: block;
+}
+
+.confirmater_supp_pro .division{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    width: 500px;
+    height: 300px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    /* line-height: 40px; */
+}
+
+.confirmater_supp_pro .division .image_attention img{
+    width: 100px;
+    margin-bottom: 10px;
+}
+
+.text_del{
+    text-align: center;
+    line-height: 40px;
+}
+.text_del span{
+    font-weight: 900;
+    color: gray;
+}
+
+.text_del p{
+    font-family: sans-serif;
+    color: rgb(39, 38, 38);
+    font-weight: 900;
+    font-size: 20px;
+}
+
+.btn_dec_del button{
+    font-weight: 900;
+    border: none;
+    border-radius: 5px;
+    padding: 8px 10px;
+    margin: 10px 2px;
+    cursor: pointer;
+    color: white;
+    opacity: 0.8;
+    margin-top: 20px;
+}
+.btn_dec_del button:nth-child(1){
+    background-color: blue;
+}
+.btn_dec_del button:nth-child(2){
+    background-color: red;
+}
+
+
+/* allez au details produits */
+.modifier_com{
+    display: block;
+}
+
+.modifier_com.activity{
+    display: block;
+}
+
+/* allez au details produits */
+.produits_comm{
+    display: none;
+}
+.produits_comm.activity{
+    display: block;
+}

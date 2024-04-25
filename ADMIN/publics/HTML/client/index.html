@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CLIENT</title>
+    <!----------------- Style -------------->
+    <link rel="stylesheet" href="../../CSS/default/style.css">
+    <link rel="stylesheet" href="../../CSS/default/fenetre_modale.css">
+    <link rel="stylesheet" href="../../CSS/client/style.css">
+</head>
+<body>
+    <!-------------------Navigateu ------------->
+    <div class="container">
+        <div class="container">
+            <div class="navigation">
+                <ul>
+                    <li>
+                        <a href="#">
+                            <span class="icon">
+                                <!-- <img src="../../Cicone/icons8_chevron_right_52px_1.png"> -->
+                                <img src="../../icon/icons8_chevron_right_52px_1.png">
+                            </span>
+                            <span class="title">YSON</span>
+                        </a>
+                    </li>
+    
+                    <li class="linkDashbord">
+                        <a href="../dashbord/index.html" >
+                            <span class="icon">
+                                <!-- <img src="icone/icons8_contrast_64px.png"> -->
+                                <img src="../../icon/icons8_home_48px.png">
+                            </span>
+                            <span class="title">Dashboard</span>
+                        </a>
+                    </li>
+    
+                    <li class="linkLogement">
+                        <a href="../logement/index.html">
+                            <span class="icon">
+                                <!-- <img src="icone/icons8_customer_48px_1.png"> -->
+                                <img src="../../icon/icons8_3d_house_60px.png">
+                            </span>
+                            <span class="title">Logement</span>
+                        </a>
+                    </li>
+    
+                    <li class="linkClient">
+                        <a href="../client/index.html">
+                            <span class="icon">
+                                <!-- <img src="icone/icons8_down_button_48px_4.png"> -->
+                                <img src="../../icon/icons8_staff_48px_1.png">
+                            </span>
+                            <span class="title">Client</span>
+                        </a>
+                    </li>
+    
+                    <li class="linkAgence">
+                        <a href="../agence/index.html">
+                            <span class="icon">
+                                <!-- <img src="icone/icons8_export_48px.png"> -->
+                                <img src="../../icon/icons8_grand_canyon_48px.png">
+                            </span>
+                            <span class="title">Agence</span>
+                        </a>
+                    </li>
+    
+                    <li class="linkTerrain">
+                        <a href="../terrain/index.html">
+                            <span class="icon">
+                                <!-- <img src="icone/icons8_export_48px.png"> -->
+                                <img src="../../icon/icons8_grand_canyon_48px.png">
+                            </span>
+                            <span class="title">Terrain</span>
+                        </a>
+                    </li>
+    
+                    <li class="linkPayement">
+                        <a href="../acheter/index.html">
+                            <span class="icon">
+                                <!-- <img src="icone/icons8_forward_arrow_48px_2.png"> -->
+                                <img src="../../icon/icons8_pay.ico">
+                            </span>
+                            <span class="title">Payement</span>
+                        </a>
+                    </li>
+    
+                    <li class="linkParametre"> 
+                        <a href="#">
+                            <span class="icon">
+                                <!-- <img src="icone/icons8_settings_100px_2.png"> -->
+                                <img src="../../icon/icons8_settings_100px_2.png">
+                            </span>
+                            <span class="title">Parametre</span>
+                        </a>
+                    </li>
+    
+                    <li class="linkSignOut">
+                        <a href="#">
+                            <span class="icon">
+                                <!-- <img src="icone/icons8_user_groups_52px_1.png"> -->
+                                <img src="../../icon/icons8_user_groups_52px_1.png">
+                            </span>
+                            <span class="title">SignOut</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+    
+        <!-- ===================== Main =====================  -->
+
+        <div class="main">
+            <div class="topbar">
+
+                <div class="toggle">
+                    <!-- <img src="icone/icons8_menu_30px.png"> -->
+                    <img src="../../icon/icons8_menu_30px.png">
+                </div>
+
+                <div class="search">
+                    <label>
+                        <input type="text" placeholder="Search here">
+                        <!-- <img src="icone/icons8_delete_48px_1.png"> -->
+                        <img src="../../icon/icons8_delete_48px_1.png">
+                    </label>
+                </div>
+
+                <div class="user">
+                    <!-- <img src="image/Atik20230220_100155_👹👹Atik SE 4👹👹.jpg"> -->
+                    <img src="../../images/Atik20230220_100155_👹👹Atik SE 4👹👹.jpg">
+                </div>
+            </div>
+
+
+            <!-- ===================== Orders Details List =====================  -->
+
+            <div class="details">
+                <div class="recentOrders">
+                    <div class="cardHeader">
+                        <div class="add_new">
+                            <h2>CLIENTS</h2>
+                            <p>
+                                <a href="#" class="btn">
+                                    Ajouter Nouveau
+                                </a></p>
+                        </div>
+                        <a href="#" class="btn">Filtrer</a>
+                    </div>
+
+                    <table>
+                        <thead>
+                            <tr>
+                                <td>Photo</td>
+                                <td>Nom</td>
+                                <td>Prénom</td>
+                                <td>Profession</td>
+                                <td>CIN</td>
+                                <td>Phone</td>
+                                <td>Sexe</td>
+                                <td>Situation Matri</td>
+                                <td>Action</td>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr class="tr">
+                                <td class="photo_log">
+                                    <div>
+                                        <img src="../../images/1681933872284.jpg">
+                                    </div>
+                                </td>
+                                <td>Maison des jeunes</td>
+                                <td>Trano vato</td>
+                                <td>590000Km<sup>2</sup></td>
+                                <td>Star Refrigerator</td>
+                                <td>$1200</td>
+                                <td>Paid</td>
+                                <td><span class="status delivered">Delivered</span></td>
+                                <td class="action">
+                                    <div class="tr_hover">
+                                        <a href="#"><img src="../../icon/icons8_eye_60px_4.png"></a>
+                                        <a href="#"><img src="../../icon/icons8_edit_48px_1.png"></a>
+                                        <a href="#"><img src="../../icon/icons8_trash_can_48px.png"></a>
+                                    </div>  
+                                    <div class="tr_dishover">
+                                        <a href="#"><img src="../../icon/icons8_eye_60px_5.png"></a>
+                                        <a href="#"><img src="../../icon/icons8_edit_48px_2.png"></a>
+                                        <a href="#"><img src="../../icon/icons8_remove_48px_2.png"></a>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <tr class="tr">
+                                <td class="photo_log">
+                                    <div>
+                                        <img src="../../images/1681933872284.jpg">
+                                    </div>
+                                </td>
+                                <td>Maison des jeunes</td>
+                                <td>Trano vato</td>
+                                <td>590000Km<sup>2</sup></td>
+                                <td>Star Refrigerator</td>
+                                <td>$1200</td>
+                                <td>Paid</td>
+                                <td><span class="status pending">Pending</span></td>
+                                <td class="action">
+                                    <div class="tr_hover">
+                                        <a href="#"><img src="../../icon/icons8_eye_60px_4.png"></a>
+                                        <a href="#"><img src="../../icon/icons8_edit_48px_1.png"></a>
+                                        <a href="#"><img src="../../icon/icons8_trash_can_48px.png"></a>
+                                    </div>  
+                                    <div class="tr_dishover">
+                                        <a href="#"><img src="../../icon/icons8_eye_60px_5.png"></a>
+                                        <a href="#"><img src="../../icon/icons8_edit_48px_2.png"></a>
+                                        <a href="#"><img src="../../icon/icons8_remove_48px_2.png"></a>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <tr class="tr">
+                                <td class="photo_log">
+                                    <div>
+                                        <img src="../../images/1681933872284.jpg">
+                                    </div>
+                                </td>
+                                <td>Maison des jeunes</td>
+                                <td>Trano vato</td>
+                                <td>590000Km<sup>2</sup></td>
+                                <td>Apple Watch</td>
+                                <td>$1200</td>
+                                <td>Paid</td>
+                                <td><span class="status return">Return</span></td>
+                                <td class="action">
+                                    <div class="tr_hover">
+                                        <a href="#"><img src="../../icon/icons8_eye_60px_4.png"></a>
+                                        <a href="#"><img src="../../icon/icons8_edit_48px_1.png"></a>
+                                        <a href="#"><img src="../../icon/icons8_trash_can_48px.png"></a>
+                                    </div>  
+                                    <div class="tr_dishover">
+                                        <a href="#"><img src="../../icon/icons8_eye_60px_5.png"></a>
+                                        <a href="#"><img src="../../icon/icons8_edit_48px_2.png"></a>
+                                        <a href="#"><img src="../../icon/icons8_remove_48px_2.png"></a>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <tr class="tr">
+                                <td class="photo_log">
+                                    <div>
+                                        <img src="../../images/1681933872284.jpg">
+                                    </div>
+                                </td>
+                                <td>Maison des jeunes</td>
+                                <td>Trano vato</td>
+                                <td>590000Km<sup>2</sup></td>
+                                <td>Addidas Shoes</td>
+                                <td>$620</td>
+                                <td>Due</td>
+                                <td><span class="status inProgress">In Progress</span></td>
+                                <td class="action">
+                                    <div class="tr_hover">
+                                        <a href="#"><img src="../../icon/icons8_eye_60px_4.png"></a>
+                                        <a href="#"><img src="../../icon/icons8_edit_48px_1.png"></a>
+                                        <a href="#"><img src="../../icon/icons8_trash_can_48px.png"></a>
+                                    </div>  
+                                    <div class="tr_dishover">
+                                        <a href="#"><img src="../../icon/icons8_eye_60px_5.png"></a>
+                                        <a href="#"><img src="../../icon/icons8_edit_48px_2.png"></a>
+                                        <a href="#"><img src="../../icon/icons8_remove_48px_2.png"></a>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <tr class="tr">
+                                <td class="photo_log">
+                                    <div>
+                                        <img src="../../images/1681933872284.jpg">
+                                    </div>
+                                </td>
+                                <td>Maison des jeunes</td>
+                                <td>Trano vato</td>
+                                <td>590000Km<sup>2</sup></td>
+                                <td>Star Refrigerator</td>
+                                <td>$1200</td>
+                                <td>Paid</td>
+                                <td><span class="status delivered">Delivered</span></td>
+                                <td class="action">
+                                    <div class="tr_hover">
+                                        <a href="#"><img src="../../icon/icons8_eye_60px_4.png"></a>
+                                        <a href="#"><img src="../../icon/icons8_edit_48px_1.png"></a>
+                                        <a href="#"><img src="../../icon/icons8_trash_can_48px.png"></a>
+                                    </div>  
+                                    <div class="tr_dishover">
+                                        <a href="#"><img src="../../icon/icons8_eye_60px_5.png"></a>
+                                        <a href="#"><img src="../../icon/icons8_edit_48px_2.png"></a>
+                                        <a href="#"><img src="../../icon/icons8_remove_48px_2.png"></a>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <tr class="tr">
+                                <td class="photo_log">
+                                    <div>
+                                        <img src="../../images/1681933872284.jpg">
+                                    </div>
+                                </td>
+                                <td>Maison des jeunes</td>
+                                <td>Trano vato</td>
+                                <td>590000Km<sup>2</sup></td>
+                                <td>Dell Laptop</td>
+                                <td>$110</td>
+                                <td>Due</td>
+                                <td><span class="status pending">Pending</span></td>
+                                <td class="action">
+                                    <div class="tr_hover">
+                                        <a href="#"><img src="../../icon/icons8_eye_60px_4.png"></a>
+                                        <a href="#"><img src="../../icon/icons8_edit_48px_1.png"></a>
+                                        <a href="#"><img src="../../icon/icons8_trash_can_48px.png"></a>
+                                    </div>  
+                                    <div class="tr_dishover">
+                                        <a href="#"><img src="../../icon/icons8_eye_60px_5.png"></a>
+                                        <a href="#"><img src="../../icon/icons8_edit_48px_2.png"></a>
+                                        <a href="#"><img src="../../icon/icons8_remove_48px_2.png"></a>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <tr class="tr">
+                                <td class="photo_log">
+                                    <div>
+                                        <img src="../../images/1681933872284.jpg">
+                                    </div>
+                                </td>
+                                <td>Maison des jeunes</td>
+                                <td>Trano vato</td>
+                                <td>590000Km<sup>2</sup></td>
+                                <td>Apple Watch</td>
+                                <td>$1200</td>
+                                <td>Paid</td>
+                                <td><span class="status return">Return</span></td>
+                                <td class="action">
+                                    <div class="tr_hover">
+                                        <a href="#"><img src="../../icon/icons8_eye_60px_4.png"></a>
+                                        <a href="#"><img src="../../icon/icons8_edit_48px_1.png"></a>
+                                        <a href="#"><img src="../../icon/icons8_trash_can_48px.png"></a>
+                                    </div>  
+                                    <div class="tr_dishover">
+                                        <a href="#"><img src="../../icon/icons8_eye_60px_5.png"></a>
+                                        <a href="#"><img src="../../icon/icons8_edit_48px_2.png"></a>
+                                        <a href="#"><img src="../../icon/icons8_remove_48px_2.png"></a>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <tr class="tr">
+                                <td class="photo_log">
+                                    <div>
+                                        <img src="../../images/1681933872284.jpg">
+                                    </div>
+                                </td>
+                                <td>Maison des jeunes</td>
+                                <td>Trano vato</td>
+                                <td>590000Km<sup>2</sup></td>
+                                <td>Addidas Shoes</td>
+                                <td>$620</td>
+                                <td>Due</td>
+                                <td><span class="status inProgress">In Progress</span></td>
+                                <td class="action">
+                                    <div class="tr_hover">
+                                        <a href="#"><img src="../../icon/icons8_eye_60px_4.png"></a>
+                                        <a href="#"><img src="../../icon/icons8_edit_48px_1.png"></a>
+                                        <a href="#"><img src="../../icon/icons8_trash_can_48px.png"></a>
+                                    </div>  
+                                    <div class="tr_dishover">
+                                        <a href="#"><img src="../../icon/icons8_eye_60px_5.png"></a>
+                                        <a href="#"><img src="../../icon/icons8_edit_48px_2.png"></a>
+                                        <a href="#"><img src="../../icon/icons8_remove_48px_2.png"></a>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+             </div>
+        </div>
+    </div>
+
+<!-- AJOUTER NOUVEAU CLIENT -->
+    <div class="fenetre_modale_ajout_log">
+        <div class="formulaire">
+            <div class="paragraphe">
+                <p>Nouveau Client</p>
+                <img src="../../icon/icons8_cancel_64px_1.png" class="close">
+            </div>
+            <form action="#" class="form_input">
+                <div class="photo_logement_ajo">
+                    <div>
+                        <img src="../../icon/icons8_photo_video_48px.png">
+                    </div>
+                    <div>
+                        Télecharger image
+                        <input type="file">
+                    </div>
+                </div>
+                <div class="dispaly_input">
+                    <div class="group_input">
+                        <label for="#">Nom</label>
+                        <input type="text" placeholder="">
+                    </div>
+                    <div class="group_input">
+                        <label for="#">Prénom</label>
+                        <input type="text" placeholder="">
+                    </div>
+                </div>
+                <div class="dispaly_input">
+                    <div class="group_input">
+                        <label for="#">Profession</label>
+                        <input type="text" placeholder="">
+                    </div>
+                    <div class="group_input">
+                        <label for="#">CIN N°</label>
+                        <input type="text" placeholder="">
+                    </div>
+                </div>
+                <div class="dispaly_input">
+                    <div class="group_input">
+                        <label for="#">Phone</label>
+                        <input type="text" placeholder="">
+                    </div>
+                    <div class="group_input">
+                        <label for="#">Situation Matrimoniale</label>
+                        <input type="text" placeholder="">
+                    </div>
+                </div>
+                <div class="button_ajout_log">
+                    <button type="reset">Annuler</button>
+                    <button type="submit" class="creer_terr">Enregistrer</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <!----------------- Scripts -------------->
+    <script>
+        document.querySelector(".navigation ul li.linkClient").classList.add("hovered");
+    </script>
+    <script src="../../JS/default/index.js"></script>
+    <script src="../../JS/client/index.js"></script>
+</body>
+</html>

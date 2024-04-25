@@ -1,0 +1,19 @@
+.dispaly_input{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.dispaly_input .group_input{
+    width: 100%;
+}
+
+.dispaly_input .group_input input{
+    width: 95%;
+}
+
+
+.formulaire .button_ajout_log{
+    margin-top: 30px;
+}

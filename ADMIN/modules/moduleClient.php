@@ -3,24 +3,18 @@
 class Client {
     
     function getAllCli($dbo, $search){
-        $cmd = "SELECT * FROM Client 
-                WHERE nomCli LIKE %:nomCli%  OR prenomCli LIKE %:prenomCli%  OR telCli LIKE %:telCli% ";
+        $cmd = "SELECT * FROM Client ";
 
         $query = $dbo->conn->prepare($cmd);
-        $query->execute(
-            [
-                ":nomCli"=>$search,
-                ":prenomCli"=>$search,
-                ":telCli"=>$search
-            ]);
+        $query->execute();
         $res = $query->fetchAll(PDO::FETCH_ASSOC);
-        return json_encode($res);
+        return $res;
 
     }
 
-    function insertCli($dbo, $nomCli, $adrsCli, $prenomCli, $CINCli, $sexeCli, $professionCli, $telCli, $photo){
-        $cmd = "INSERT INTO Client
-                VALUES (NULL, :nomCli, :adrsCli :prenomCli, :CINCli, :sexeCli, :professionCli, :telCli)";
+    function insertCli($dbo, $nomCli, $adrsCli, $prenomCli, $CINCli, $professionCli, $telCli, $photoCli){
+        $cmd = "INSERT INTO client
+                VALUES (NULL, :nomCli, :adrsCli, :prenomCli, :CINCli, NULL, :professionCli, :telCli, :photoCli)";
         
         $query = $dbo->conn->prepare($cmd);
         try {
@@ -30,14 +24,17 @@ class Client {
                     ":adrsCli"=>$adrsCli,
                    ":prenomCli"=>$prenomCli, 
                     ":CINCli"=>$CINCli, 
-                    ":sexeCli"=>$sexeCli, 
+                    // ":sexeCli"=>$sexeCli, 
                     ":professionCli"=>$professionCli, 
-                    ":telCli"=>$telCli
+                    ":telCli"=>$telCli,
+                    ":photoCli"=>$photoCli
                 ]);
-            return "Une nouvelle client a ete ajoute";
+            return 1;
+            // return "Une nouvelle client a ete ajoute";
 
         } catch (Exception $e) {
-            return "Erreur lors de l'ajout du Client" . $e->getMessage();
+            return 0;
+            // return "Erreur lors de l'ajout du Client" . $e->getMessage();
         }
     }
 
