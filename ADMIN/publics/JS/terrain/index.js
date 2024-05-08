@@ -1,51 +1,17 @@
-import { alertErreur, regexNumber, styleErrorInput, styleSuccesInput } from "../default/functions.js";
+import { fetchData ,alertErreur, regexNumber, styleErrorInput, styleSuccesInput } from "../default/functions.js";
 
 const urlTer = `http://localhost/gestion_vente_logement/ADMIN/controleurs/controleurTerrain.php`;
 const urlProv = `http://localhost/gestion_vente_logement/ADMIN/controleurs/controleurProvince.php
 `
+
 //FETCH START
-function fetchJSON(url_p, action, methode_p, data_p = {}) {
-    const url = `${url_p}?action=${encodeURIComponent(action)}`;
-    
-    // const formData = new FormData();
-    // for( let [key, val] of Object.entries(data_p) ) {
-    //     formData.append(key, val);
-    // }
-
-    fetch(url, {
-        method: methode_p,
-        headers : {"contentType":"application/json"},
-        // contentType: false,
-        processData: false
-        // body: formData
-    })
-    .then(res => {
-        if (!res.ok) {
-            throw new Error("Erreur lors de la requete")
-        }
-        return res.json();
-        
-    })
-    .then(response => {
-        console.log(response);
-        printsDatas(response);
-        //location.reload();
-        return response;
-    })
-    //.catch( e => console.log(e.Error, {cause : e}) );
-
-}
-
-fetchJSON(urlTer, "getAllTer", "POST");
-
-// fetchJSON(urlProv, "getAllProv", "POST");
-
-const printClient = (data) => {
+fetchData(urlTer, "getAllTer", "POST").then(data =>{ dataTerrains(data) });
+const showDataTer = (data) => {
     let c = data;
     return( `
                 <tr class="tr liste_terrain">
-                                <td><span class="status delivered">${c.numTer}</span></td>
-                                <td><span class="status delivered">${c.superficieTer}</span></td>
+                                <td>${c.numTer}</td>
+                                <td>${c.superficieTer}</td>
                                 <td class="action">
                                     <div class="tr_hover">
                                     <a href="#" id=${c.numTer} ><img src="../../publics/icon/icons8_eye_60px_4.png" ></a>
@@ -67,46 +33,46 @@ const printClient = (data) => {
         console.log(e.target.id);
     });
 }
-
-function printsDatas(dataClient){
-    dataClient.forEach(client => {
-        document.getElementById("liste_terrain").innerHTML += printClient(client);
+function dataTerrains(datas) {
+    let nombreTer = 0;
+    datas.forEach(data => {
+        document.getElementById("liste_terrain").innerHTML += showDataTer(data);
+        nombreTer++;
     });
+    document.getElementById("nombreTer").innerHTML = nombreTer;
 }
-
-
 
 //FETCH START
-function fetchJSONPost(url_p, action, methode_p, data_p = {}) {
-    const url = `${url_p}?action=${encodeURIComponent(action)}`;
+// function fetchJSONPost(url_p, action, methode_p, data_p = {}) {
+//     const url = `${url_p}?action=${encodeURIComponent(action)}`;
     
-    const formData = new FormData();
-    for( let [key, val] of Object.entries(data_p) ) {
-        formData.append(key, val);
-    }
+//     const formData = new FormData();
+//     for( let [key, val] of Object.entries(data_p) ) {
+//         formData.append(key, val);
+//     }
 
-    fetch(url, {
-        method: methode_p,
-        // headers : {"contentType":"application/json"},
-        contentType: false,
-        processData: false,
-        body: formData
-    })
-    .then(res => {
-        if (!res.ok) {
-            throw new Error("Erreur lors de la requete")
-        }
-        return res;
+//     fetch(url, {
+//         method: methode_p,
+//         // headers : {"contentType":"application/json"},
+//         contentType: false,
+//         processData: false,
+//         body: formData
+//     })
+//     .then(res => {
+//         if (!res.ok) {
+//             throw new Error("Erreur lors de la requete")
+//         }
+//         return res;
         
-    })
-    .then(response => {
-        console.log(response);
-        //location.reload();
-        return response;
-    })
-    //.catch( e => console.log(e.Error, {cause : e}) );
+//     })
+//     .then(response => {
+//         console.log(response);
+//         //location.reload();
+//         return response;
+//     })
+//     //.catch( e => console.log(e.Error, {cause : e}) );
 
-}
+// }
 
 const getsDataForm = (inputsFields, inpFileImg) => {
     const data = {};
@@ -161,9 +127,9 @@ document.querySelector("#formAddTer").addEventListener("submit", (e) => {
 
     if ( valid && validSuper()) {
 
-        let d = getsDataForm(inputsFields, inpFileImg);
-        // console.log(d);
-        fetchJSONPost(urlTer, "insertTer", "POST", d );
+        const data = getsDataForm(inputsFields, inpFileImg);
+        // console.log(data);
+        fetchData(urlTer, "insertTer", "POST", data ).then(res => console.log(res));
         // location.reload();
 
     }else{
@@ -197,11 +163,13 @@ document.querySelector(".paragraphe .close").addEventListener("click", (e)=>{
 
 
 
+
+
+
 // var cartShopBox = document.createElement("div");
 // cartShopBox.classList.add("card-box");
 
 // var tableHead = document.querySelector(".formulaire table tbody");
-
 
 // var cartBoxContent = `
 //                         <tr>
@@ -229,7 +197,6 @@ document.querySelector(".paragraphe .close").addEventListener("click", (e)=>{
 //         console.log("CLICK");
 //         tableHead.innerHTML += cartBoxContent;
 // })
-
 // var button = document.querySelector(".cart_remove");
 // button.addEventListener("click", ()=>{
 //     console.log("MOVE");

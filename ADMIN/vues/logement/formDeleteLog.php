@@ -2,7 +2,7 @@
                             <div class="confirmater_supp_pro">
                                 <div class="division">
                                     <div class="image_attention">
-                                        <img src="../../icon/icons8_box_important_64px_1.png">
+                                        <img src=<?php echo FOLDER_ICON . "icons8_box_important_64px_1.png"; ?> >
                                     </div>
                                     <div class="text_del">
                                         <p>Voulez-vous supprimer se produit n°10</p>

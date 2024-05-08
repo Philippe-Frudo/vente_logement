@@ -50,7 +50,7 @@
                         </thead>
 
                         <tbody id="allClients">
-                            <tr class="tr">
+                            <!-- <tr class="tr">
                                 <td class="photo_log">
                                     <div>
                                         <img src=<?php echo FOLDER_IMG_SITE . "1681933872284.jpg"; ?> >
@@ -76,10 +76,13 @@
 
                                     </div>
                                 </td>
-                            </tr>
+                            </tr> -->
 
                         </tbody>
                     </table>
+                </div>
+                <div>
+                    <p>Nombre de clients: <strong><span id="nombreClient"> 5</span></strong></p>
                 </div>
              </div>
         </div>

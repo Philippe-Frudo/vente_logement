@@ -1,3 +1,31 @@
+export function fetchData(url_p, action, methode_p, data_p = {}) {
+    
+    const url = `${url_p}?action=${encodeURIComponent(action)}`;
+
+    const formData = new FormData();
+    for( let [key, val] of Object.entries(data_p) ) {
+        formData.append(key, val);
+    }
+    return fetch(url, {
+            method: "POST",
+            contentType:false,
+            processData: false,
+            body: formData
+        }).then(res => {
+            if (!res.ok) { 
+                throw new Error("Erreur lors de la requete") 
+            }
+            return res.json(); 
+
+        }).then(response => {
+            console.log(response);
+            return response
+        })
+        // .catch(error => {
+        //     console.log(error);
+        // })
+}
+
 export function fetchJSON(url_p, action, methode_p, data_p = {}) {
     let url = `${url_p}?action=${encodeURIComponent(action)}`;
     
@@ -29,7 +57,101 @@ export function fetchJSON(url_p, action, methode_p, data_p = {}) {
 
 }
 
+export const validChammps = (inpData) => {
+    inpData.forEach(ip => {
+        let ipAttrName = ip.name;
+        let ipValue = ip.value;
+        let ipType = ip.type
 
+        if( ipAttrName == "prixLog"  && ipValue.trim() !== "" ){
+            if ( !regexNumber(ipValue) ) {
+                console.log(ip.name);
+                styleErrorInput(ip);
+            }
+        }
+        else if( ipValue.trim() == "" ){
+            styleErrorInput(ip);
+        }
+        else if( ipValue.trim() !== "" ){
+            styleSuccesInput(ip);
+        }
+
+    })
+}
+
+
+export const getDataForm = (inpData) => {
+    const data = {}
+    inpData.forEach(ip => {
+        let ipAttrName = ip.name;
+        let ipValue = ip.value;
+        let ipType = ip.type
+
+        if(ipType == "file"){
+            let file = ip.files[0];
+            data[ipAttrName] = file;
+            console.log(file);
+        }
+        data[ipAttrName] = ipValue;
+
+    });
+    console.log(data);
+    return data;
+}
+
+
+export const validField = (inputs) => {
+
+    for (let i = 0; i < inputs.length; i++) {
+        let nameClass = inputs[i].name;
+        let value = inputs[i].value;
+
+        if(nameClass !== "prenomCli"){
+            if (value.trim() == "") {
+                return false;
+            } 
+        }
+    }
+    return true
+    
+}
+
+
+export function validPhone(e) {
+    return regexPhone(e.value);
+}
+
+export function validPassword(e) {
+    return regexPassword(e.value);
+}
+
+
+//RECUPERER DONNE DANS LE CHAMPS 
+export const getsDataForm = (inputsFields, inpFileImg, inpSelect) => {
+    const data = {};
+    inputsFields.forEach(input => {
+
+        let inpName = input.name.trim();
+        let inpValue = input.value.trim();
+        
+        if(input.type !== "file"){
+            data[inpName]= inpValue;
+        }    
+        else if(input.type == "file"){
+            let inpFileName = inpFileImg[0].name;
+            let fileIMG = inpFileImg[0].files[0];
+            data[inpFileName]= fileIMG;
+        }    
+    }); 
+    
+    if(inpSelect !== ""){
+        data[inpSelect.name]= inpSelect.value;
+    }
+
+    console.log(data);
+    return data;
+
+}
 
 
 export function styleErrorInput(val){
@@ -80,7 +202,6 @@ export function alertChamps(champs){
             }
     })
 }
-
 
 
 //REGEX

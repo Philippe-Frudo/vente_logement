@@ -3,12 +3,12 @@
 class Cite {
 
     function getAllCite($dbo, $search){
-        $cmd = "SELECT * FROM cite WHERE libCite LIKE %:libCite%";
+        $cmd = "SELECT * FROM cite";
         $query = $dbo->conn->prepare($cmd);
-        $query->execute([":libCite"=>$search]);
+        $query->execute();
 
         $res = $query->fetchAll(PDO::FETCH_ASSOC);
-        return json_encode($res);
+        return $res;
     }
 
     function insertCite($dbo, $codeCite, $libCite, $codeAg){

@@ -11,17 +11,17 @@ $cite = new Cite();
 
 $action = $_POST["action"] ?? $_GET["action"];
 
-if ( isset($_POST["action"]) && !empty($_POST["action"]) ) {
+if ( isset($action) && !empty($action) ) {
     
 
-    if ($_POST["action"] == "getAllCite") {
+    if ($action == "getAllCite") {
         $search = empty($_POST["searchCite"]) ?? "";
 
         $res = $cite->getAllCite($dbo, $search);
         echo json_encode($res);
     }
 
-    elseif ($_POST["action"] == "insertCite") {
+    elseif ($action == "insertCite") {
         $codeCite = $_POST["codeCite"];
         $libCite = $_POST["libCite"];
         $codeAg = $_POST["codeAg"];
@@ -30,7 +30,7 @@ if ( isset($_POST["action"]) && !empty($_POST["action"]) ) {
         echo $res;
     }
 
-    elseif ($_POST["action"] == "updateCite") {
+    elseif ($action == "updateCite") {
         $codeCite = $_POST["codeCite"];
         $libCite = $_POST["libCite"];
         $codeAg = $_POST["codeAg"];
@@ -39,7 +39,7 @@ if ( isset($_POST["action"]) && !empty($_POST["action"]) ) {
         echo $res;
     }
 
-    elseif ($_POST["action"] == "deletecite") {
+    elseif ($action == "deletecite") {
         $codeCite = $_POST["codeCite"];
         
         $res = $cite->deleteCite($dbo, $codeCite);

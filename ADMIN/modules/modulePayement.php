@@ -12,24 +12,27 @@ class Payement {
         $query = $dbo->conn->prepare($cmd);
         $query->execute();
         $res = $query->fetchAll(PDO::FETCH_ASSOC);
-        return json_encode($res);
+        return $res;
     }
 
-    function insertPayer($dbo, $montantPayer, $numLog, $modePayer){
-        $cmd = "INSERT INTO payement(montantPayer, numLog, modePayement) 
-                VALUES (:montantPayer, :numLog, :modePayement)";
+    function insertPayer($dbo, $codePayer, $montantPayer, $numLog, $modePayer){
+        $cmd = "INSERT INTO payement(codePayement, montantPayer, numLog, modePayement) 
+                VALUES (:codePayement, :montantPayer, :numLog, :modePayement)";
         
         $query = $dbo->conn->prepare($cmd);
         try {
             $query->execute(
                 [
+                    "codePayement"=>$codePayer,
                     ":montantPayer"=>$montantPayer, 
                     ":numLog"=>$numLog, 
                     ":modePayement"=>$modePayer
                 ]);
+                return 1;
             return "Ajout payement succes";
 
         } catch (Exception $e) {
+            return 0;
             return "Erreur lors de l'ajout du payement" . $e->getMessage();
         }
     }

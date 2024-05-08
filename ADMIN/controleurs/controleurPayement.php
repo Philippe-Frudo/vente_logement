@@ -11,37 +11,38 @@ $payement = new Payement();
 
 $action = $_POST["action"] ?? $_GET["action"];
 
-if ( isset($_POST["action"]) && !empty($_POST["action"]) ) {
+if ( isset($action) && !empty($action) ) {
     
-    if ($_POST["action"] == "getAllPayer") {
+    if ($action == "getAllPayer") {
         $search = empty($_POST["search"]) ?? "";
 
-        $res = $payement->getAllPayer($dbo, $search, $search);
+        $res = $payement->getAllPayer($dbo, $search);
         echo json_encode($res);
     }
 
-    elseif ($_POST["action"] == "insertPayer") {
+    elseif ($action == "insertPayer") {
+        $numLog = (int)($_POST["numLog"]);
         $codePayer = $_POST["codeP"];
-        $montantPayer = $_POST["montantP"];
-        $numLog = $_POST["numLog"];
-        $modePayer = $_POST["modeP"];
+        $montantPayer = (int)($_POST["montantP"]);
+        $modePayer = $_POST["modePay"];
 
         $res = $payement->insertPayer($dbo, $codePayer, $montantPayer, $numLog, $modePayer);
-        echo $res;
+        echo json_encode($res);
+        header("Content-Type:application/json");
     }
 
-    elseif ($_POST["action"] == "updatePayer") {
+    elseif ($action == "updatePayer") {
 
-        $codePayement = $_POST["codeP"];
-        $montantPayer = $_POST["montantP"];
+        $codePayement = $_POST["codePay"];
+        $montantPayer = $_POST["montantPay"];
         $numLog = $_POST["numLog"];
         $modePayer = $_POST["modeP"];
 
         $res = $payement->updatePayer($dbo, $codePayement, $montantPayer, $numLog, $modePayer);
-        echo $res;
+        echo json_encode($res);
     }
 
-    elseif ($_POST["action"] == "deletePayer") {
+    elseif ($action == "deletePayer") {
         $codePayer = $_POST["codePayer"];
         
         $res = $payement->deletePayer($dbo, $codePayer);

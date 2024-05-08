@@ -38,7 +38,8 @@
                         </thead>
 
                         <tbody id="liste_terrain">
-                            <tr  class="tr liste_terrain">
+                            
+                        <!-- <tr  class="tr liste_terrain">
                                 <td><span class="status delivered">Delivered</span></td>
                                 <td><span class="status delivered">Delivered</span></td>
                                 <td class="action">
@@ -53,10 +54,13 @@
                                         <a href="#"><img src=<?php echo FOLDER_ICON . "icons8_remove_48px_2.png"; ?>  class="delete_log" ></a>
                                     </div>
                                 </td>
-                            </tr>
+                            </tr> -->
 
                         </tbody>
                     </table>
+                </div>
+                <div>
+                    <p>Nombre de Terrain: <strong><span id="nombreTer"> 5</span></strong></p>
                 </div>
              </div>
         </div>

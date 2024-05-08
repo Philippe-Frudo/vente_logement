@@ -1,78 +1,15 @@
-import { alertErreur, styleErrorInput, styleSuccesInput, regexPhone, regexCIN, regexPassword, regexEmail  } from "../default/functions.js";
+import { fetchData, validPhone, validField, alertErreur, styleErrorInput, styleSuccesInput, regexPhone, regexCIN, regexPassword, regexEmail  } from "../default/functions.js";
 
 let selectQuery = (variable) =>  document.querySelector(variable);
 let selectQueryAll = (variable) =>  document.querySelectorAll(variable);
 
 
-const url = "http://localhost/gestion_vente_logement/ADMIN/controleurs/controleurClient.php";
+const urlCli = "http://localhost/gestion_vente_logement/ADMIN/controleurs/controleurClient.php";
 
 //FETCH START
-function fetchJSON(url_p, action, methode_p, data_p = {}) {
-    const url = `${url_p}?action=${encodeURIComponent(action)}`;
-    
-    const formData = new FormData();
-    for( let [key, val] of Object.entries(data_p) ) {
-        formData.append(key, val);
-    }
+fetchData(urlCli, "getAllCli", "POST", {}).then(data => { dataClients(data) });
 
-    fetch(url, {
-        method: methode_p,
-        headers : {"contentType":"application/json"},
-        // contentType: false,
-        processData: false,
-        // body: formData
-    })
-    .then(res => {
-        if (!res.ok) {
-            throw new Error("Erreur lors de la requete")
-        }
-        return res.json();
-        
-    })
-    .then(response => {
-        printsClients(response);
-        //location.reload();
-        return response;
-    })
-    .catch( e => console.log(e.Error, {cause : e}) );
-
-}
-
-
-//FETCH START
-function fetchJSONPost(url_p, action, methode_p, data_p = {}) {
-    const url = `${url_p}?action=${encodeURIComponent(action)}`;
-    
-    const formData = new FormData();
-    for( let [key, val] of Object.entries(data_p) ) {
-        formData.append(key, val);
-    }
-
-    fetch(url, {
-        method: methode_p,
-        // headers : {"contentType":"application/json"},
-        contentType: false,
-        processData: false,
-        body: formData
-    })
-    .then(res => {
-        if (!res.ok) {
-            throw new Error("Erreur lors de la requete")
-        }
-        return res;
-        
-    })
-    .then(response => {
-        console.log(response);
-        //location.reload();
-        return response;
-    })
-    //.catch( e => console.log(e.Error, {cause : e}) );
-
-}
-fetchJSON(url, "getAllCli", "POST");
-
-const printClient = (client) => {
+const showDataClient = (client) => {
     let c = client;
     return( `
                 <tr class="tr">
@@ -109,18 +46,16 @@ const printClient = (client) => {
         console.log(e.target.id);
     });
 }
-
-function printsClients(dataClient){
+function dataClients(dataClient){
+    let nombreClient = 0;
     dataClient.forEach(client => {
-        document.getElementById("allClients").innerHTML += printClient(client);
+        document.getElementById("allClients").innerHTML += showDataClient(client);
+        nombreClient++;
     });
+    document.getElementById("nombreClient").innerHTML = nombreClient;
 }
 //FETCH END
 
-
-function validPhone(e) {
-    return regexPhone(e.value);
-}
 
 function validCIN(e) {
     return regexCIN(e.value);
@@ -129,24 +64,6 @@ function validCIN(e) {
 
 // *************VALIDATION DES CHAMPS ***********
 
-
-
-
-const validField = (inputs) => {
-
-    for (let i = 0; i < inputs.length; i++) {
-        let nameClass = inputs[i].name;
-        let value = inputs[i].value;
-
-        if(nameClass !== "prenomCli"){
-            if (value.trim() == "") {
-                return false;
-            } 
-        }
-    }
-    return true
-    
-}
 
 document.querySelector(".tel").addEventListener("keyup", (e)=>{
     if (regexPhone(e.target.value) == false) { 

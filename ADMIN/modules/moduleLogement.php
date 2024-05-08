@@ -3,18 +3,19 @@ class Logement {
     
     function getAllLog($dbo, $search){
         //WHERE l.descLog =:descLog OR p.nomProvince =:province OR a.libAg=:libAg
-        $cmd = "SELECT l.numLog, l.photoLog, l.prixLog, t.superficieTer, l.descLog, l.codeCite, c.libCite, a.libAg, a.nomAg , CONCAT(a.codeProvince, ' ' , p.nomProvince) AS Province 
+        $cmd = "SELECT l.numLog, l.photoLog, l.prixLog, t.superficieTer, l.descLog, l.codeCite, c.libCite, a.libAg, CONCAT(a.codeProvince, ' ' , p.nomProvince) AS Province 
                 FROM logement l
                 LEFT JOIN cite c ON c.codeCite = l.codeCite
                 LEFT JOIN terrain t ON t.numTer = l.numTer
                 LEFT JOIN agence a ON a.codeAg = c.codeAg
                 LEFT JOIN province p ON p.codeProvince = a.codeProvince
+                WHERE l.soldLog = FALSE
                 ORDER BY p.nomProvince ASC";
 
         $query = $dbo->conn->prepare($cmd);
         $query->execute();
         $res = $query->fetchAll(PDO::FETCH_ASSOC);
-        return json_encode($res);
+        return $res;
 
     }
 

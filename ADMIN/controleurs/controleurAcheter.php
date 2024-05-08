@@ -10,17 +10,17 @@ $acheter = new Acheter();
 
 $action = $_POST["action"] ?? $_GET["action"];
 
-if ( isset($_POST["action"]) && !empty($_POST["action"]) ) {
+if ( isset($action ) && !empty($action ) ) {
     
 
-    if ($_POST["action"] == "getAllAchat") {
+    if ($action  == "getAllAchat") {
         $search = empty($_POST["search"]) ?? "";
 
         $res = $acheter->getAllAchat($dbo, $search, $search, $search, $search);
         echo json_encode($res);
     }
 
-    elseif ($_POST["action"] == "insertAchat") {
+    elseif ($action  == "insertAchat") {
         $codeCli = $_POST["codeCli"];
         $numLog = $_POST["numLog"];
         $typeVente = $_POST["typeVente"];
@@ -30,7 +30,7 @@ if ( isset($_POST["action"]) && !empty($_POST["action"]) ) {
         echo $res;
     }
 
-    elseif ($_POST["action"] == "updateAchat") {
+    elseif ($action  == "updateAchat") {
         $codeCli = $_POST["codeCli"];
         $numLog = $_POST["numLog"];
         $typeVente = $_POST["typeVente"];
@@ -40,7 +40,7 @@ if ( isset($_POST["action"]) && !empty($_POST["action"]) ) {
         echo $res;
     }
 
-    elseif ($_POST["action"] == "deleteAchat") {
+    elseif ($action  == "deleteAchat") {
         $codeCli = $_POST["codeCli"];
         $numLog = $_POST["numLog"];
         $res = $acheter->deleteAchat($dbo, $codeCli, $numLog);

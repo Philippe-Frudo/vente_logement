@@ -2,21 +2,18 @@
 
 class Agence {
     
-    function getAllAg($dbo, $lib, $tel){
-        /*WHERE libAg LIKE %:nomAg%  OR telAg LIKE %:telAg% ";*/
+    function getAllAg($dbo, $search){
         $cmd = "SELECT a.*, p.nomProvince FROM agence a 
                 LEFT JOIN province p ON p.codeProvince = a.codeProvince";
 
         $query = $dbo->conn->prepare($cmd);
         $query->execute();
-        // [":nomAg"=>$nom, ":prenomAg"=>$prenom, ":telAg"=>$tel ]
         $res = $query->fetchAll(PDO::FETCH_ASSOC);
-        return json_encode($res);
+        return $res;
     }
 
-    function insertAg($dbo, $libAg, $codeProvAg, $adrsAg, $telAg, $password){
-        $cmd = "INSERT INTO agence
-                VALUES (NULL, :libAg, :codeProvAg, :adresseAg, :telAg, :passwordAg )";
+    function insertAg($dbo, $libAg, $codeProvAg, $adrsAg, $telAg, $password) {
+        $cmd = "INSERT INTO agence VALUES (NULL, :libAg, :codeProvAg, :adresseAg, :telAg, :passwordAg )";
         
         $query = $dbo->conn->prepare($cmd);
         try {
@@ -28,9 +25,11 @@ class Agence {
                     ":telAg"=>$telAg, 
                     ":passwordAg"=>$password
                 ]);
+          
             return "Une nouvelle agence a ete cree";
 
         } catch (Exception $e) {
+            
             return "Erreur lors de l'ajout d'une nouvelle Aagence" .  $e->getMessage();
         }
     }

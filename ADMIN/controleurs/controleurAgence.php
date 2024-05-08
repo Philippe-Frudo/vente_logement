@@ -9,27 +9,30 @@ $agence = new Agence();
 
 $action = $_POST["action"] ?? $_GET["action"];
 
-if ( isset($_POST["action"]) && !empty($_POST["action"]) ) {
+if ( isset($action) && !empty($action) ) {
     
-    if ($_POST["action"] == "getAllAg") {
+    if ($action == "getAllAg") {
         $search = empty($_POST["searchAg"]) ?? "";
 
-        $res = $agence->getAllAg($dbo, $search, $search);
+        $res = $agence->getAllAg($dbo, $search);
         echo json_encode($res);
+        // header("location:json/application");
     }
 
-    elseif ($_POST["action"] == "insertAg") {
+    elseif ($action == "insertAg") {
         $libAg= $_POST["libAg"];
-        $codeProvAg= $_POST["codeProvAg"]; 
-        $adrsAg= $_POST["adrsAg"]; 
+        $codeProvAg= $_POST["codeProvince"]; 
+        $adrsAg= $_POST["adresseAg"]; 
         $telAg= $_POST["telAg"];
         $password = $_POST["passwordAg"];
 
         $res = $agence->insertAg($dbo, $libAg, $codeProvAg, $adrsAg, $telAg, $password);
-        echo $res;
+
+        echo json_encode($res);
+        header("contentType:application/json");
     }
 
-    elseif ($_POST["action"] == "updateAg") {
+    elseif ($action == "updateAg") {
         $codeAg= $_POST["codeAg"];
         $libAg= $_POST["libAg"];
         $codeProvAg= $_POST["codeProvAg"]; 
@@ -41,7 +44,7 @@ if ( isset($_POST["action"]) && !empty($_POST["action"]) ) {
         echo $res;
     }
 
-    elseif ($_POST["action"] == "deleteAg") {
+    elseif ($action == "deleteAg") {
         $codeAg = $_POST["codeAg"];
         $res = $agence->deleteAg($dbo, $codeAg);
         echo $res;
