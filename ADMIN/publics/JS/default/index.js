@@ -1,19 +1,5 @@
 //OUVRIR NAVBAR AJOUTER ET CLOSE
 
-const BtnAjout = document.querySelector(".btn");
-const BtnClose = document.querySelector(".close");
-const Formulaire = document.querySelector(".fenetre_modale_ajout_log");
-
-BtnAjout.addEventListener("click" , ()=>{
-    Formulaire.classList.add("ajout");
-})
-
-BtnClose.addEventListener("click" , ()=>{
-    Formulaire.classList.remove("ajout");
-})
-
-
-
 
 
 //===========================================

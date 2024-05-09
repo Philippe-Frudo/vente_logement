@@ -5,47 +5,56 @@
                 <img src=<?php echo FOLDER_ICON . "icons8_cancel_64px_1.png"; ?> class="close">
             </div>
             <form action="#" class="form_input" id="formAddClient">
-                <div class="photo_logement_ajo">
+                <div id="imgChange" class="photo_logement_ajo" >
                     <div>
                         <img src=<?php echo FOLDER_ICON . "icons8_photo_video_48px.png"; ?> >
                     </div>
                     <div class="group_input_file">
                         Télecharger image
-                        <input name="photoCli" type="file">
+                        <input class="inpData" name="photoCli" type="file">
                     </div>
                 </div>
                 <div class="dispaly_input">
                     <div class="group_input">
                         <label for="#">Nom</label>
-                        <input name="nomCli" type="text" placeholder="">
+                        <input class="inpData" name="nomCli" type="text" placeholder="">
                     </div>
                     <div class="group_input">
                         <label for="#">Prénom</label>
-                        <input name="prenomCli" type="text" placeholder="">
+                        <input class="inpData" name="prenomCli" type="text" placeholder="">
                     </div>
                 </div>
                 <div class="dispaly_input">
                     <div class="group_input">
                         <label for="#">Profession</label>
-                        <input name="professionCli" type="text" placeholder="">
+                        <input class="inpData" name="professionCli" type="text" placeholder="">
                     </div>
                     <div class="group_input">
                         <label for="#">Numero CIN </label>
-                        <input name="CINCli" class="CIN" type="text" placeholder="">
+                        <input id="CIN" class="inpData CIN" name="CINCli" class="CIN" type="text" placeholder="">
                     </div>
                 </div>
                 <div class="dispaly_input">
                     <div class="group_input">
                         <label for="#">Telephone</label>
-                        <input name="telCli" class="tel" type="text" placeholder="">
+                        <input id="tel" class="inpData tel" name="telCli" class="tel" type="text" placeholder="">
                     </div>
                     <div class="group_input">
                         <label for="#">Adresse</label>
-                        <input name="adrsCli"  type="text" placeholder="">
+                        <input class="inpData" name="adrsCli"  type="text" placeholder="">
+                    </div>
+                </div>
+                <div class="dispaly_input">
+                    <div class="group_input">
+                        <label for="#">Sexe</label>
+                        <div class="sexe">  
+                            <label><input class="inpData" name="sexeCli" class="sexe" type="radio" value="F" > Feminin</label>
+                            <label><input class="inpData" name="sexeCli" class="sexe" type="radio" value="M" checked> Masculin</label>
+                        </div>
                     </div>
                 </div>
                 <div class="button_ajout_log">
-                    <button type="reset">Annuler</button>
+                    <button type="reset" class="reset">Annuler</button>
                     <button type="submit" class="creer_terr">Enregistrer</button>
                 </div>
             </form>

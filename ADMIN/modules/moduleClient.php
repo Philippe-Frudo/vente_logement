@@ -12,9 +12,9 @@ class Client {
 
     }
 
-    function insertCli($dbo, $nomCli, $adrsCli, $prenomCli, $CINCli, $professionCli, $telCli, $photoCli){
+    function insertCli($dbo, $nomCli, $adrsCli, $prenomCli, $CINCli, $sexeCli,$professionCli, $telCli, $photoCli){
         $cmd = "INSERT INTO client
-                VALUES (NULL, :nomCli, :adrsCli, :prenomCli, :CINCli, NULL, :professionCli, :telCli, :photoCli)";
+                VALUES (NULL, :nomCli, :adrsCli, :prenomCli, :CINCli, :sexeCli, :professionCli, :telCli, :photoCli)";
         
         $query = $dbo->conn->prepare($cmd);
         try {
@@ -24,7 +24,7 @@ class Client {
                     ":adrsCli"=>$adrsCli,
                    ":prenomCli"=>$prenomCli, 
                     ":CINCli"=>$CINCli, 
-                    // ":sexeCli"=>$sexeCli, 
+                    ":sexeCli"=>$sexeCli, 
                     ":professionCli"=>$professionCli, 
                     ":telCli"=>$telCli,
                     ":photoCli"=>$photoCli
@@ -39,8 +39,8 @@ class Client {
     }
 
     function updateCli($dbo, $numCli, $nomCli, $adrsCli, $prenomCli, $CINCli, $sexeCli, $professionCli, $telCli, $photo){
-        $cmd = "UPDATE Client SET nomCli=:nomCli, adrsCli=:adrsCli, prenomCli=:prenomCli, CINCli=:CINCli, sexeCli=:sexeCli, professionCli=:professionCli, telCli=:telCli
-                WHERE numCli=:numCli";
+        $cmd = "UPDATE Client SET photoCli=:photoCli, nomCli=:nomCli, adrsCli=:adrsCli, prenomCli=:prenomCli, CINCli=:CINCli, sexeCli=:sexeCli, professionCli=:professionCli, telCli=:telCli
+                WHERE codeCli=:numCli";
         
         $query = $dbo->conn->prepare($cmd);
         try {
@@ -53,26 +53,30 @@ class Client {
                     ":CINCli"=>$CINCli, 
                     ":sexeCli"=>$sexeCli, 
                     ":professionCli"=>$professionCli, 
-                    ":telCli"=>$telCli
+                    ":telCli"=>$telCli, 
+                    ":photoCli"=>$photo
                 ]);
             
-            return "Modification Client reussite";
+            return 1;
+            // return "Modification Client reussite";
 
         } catch (Exception $e) {
-            return "Echec de la modification de Client" . $e->getMessage();
+            return 0;
+            // return "Echec de la modification de Client" . $e->getMessage();
         }
     }
 
     function deleteCli($dbo, $numCli){
-        $cmd = "DELETE FROM Client WHERE numCli=:numCli";
+        $cmd = "DELETE FROM Client WHERE codeCli=:numCli";
         $query  = $dbo->conn->prepare($cmd);
 
         try {
             $query->execute([":numCli"=>$numCli]);
-            return "Le client a ete supprime";
+            return 1;
 
         } catch (Exception $e) {
-            return "Erreur lors de la suppression du Client" . $e->getMessage();
+            return 0;
+            // return "Erreur lors de la suppression du Client" . $e->getMessage();
         }
     }
 

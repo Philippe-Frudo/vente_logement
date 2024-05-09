@@ -1,55 +1,239 @@
-import { fetchData, validPhone, validField, alertErreur, styleErrorInput, styleSuccesInput, regexPhone, regexCIN, regexPassword, regexEmail  } from "../default/functions.js";
-
-let selectQuery = (variable) =>  document.querySelector(variable);
-let selectQueryAll = (variable) =>  document.querySelectorAll(variable);
-
+import { srcChange ,msgError, msgSucces, clearInputs ,getsDataForm ,updateForm ,openWindow ,fetchData, validPhone, validCIN,validField, alertErreur, styleErrorInput, styleSuccesInput, regexPhone, regexCIN, regexPassword, regexEmail, validChammps  } from "../default/functions.js";
 
 const urlCli = "http://localhost/gestion_vente_logement/ADMIN/controleurs/controleurClient.php";
 
-//FETCH START
-fetchData(urlCli, "getAllCli", "POST", {}).then(data => { dataClients(data) });
 
-const showDataClient = (client) => {
-    let c = client;
-    return( `
-                <tr class="tr">
-                <td class="photo_log">
-                    <div>
-                        <img src=${ c.photoCli == null  ? "../../publics/icon/icons8_user.ico": c.photoCli.trim() }> >
-                    </div>
-                </td>
-                <td>${c.nomCli}</td>
-                <td>${c.prenomCli}</td>
-                <td>${c.CINCli}</td>
-                <td>${c.professionCli}</td>
-                <td>${c.adrsCli}</td>
-                <td>${c.telCli}</td>
-                <td><span class="status delivered">Delivered</span></td>
-                <td class="action">
-                    <div class="tr_hover">
-                        <a href="#" id=${c.codeCli} ><img src="../../publics/icon/icons8_eye_60px_4.png" ></a>
-                        <a href="#" id=${c.codeCli} ><img src= "../../publics/icon/icons8_edit_48px_1.png" ></a>
-                        <a href="#" id=${c.codeCli} ><img src= "../../publics/icon/icons8_trash_can_48px.png" ></a>
-                    </div>  
-                    <div class="tr_dishover">
-                        <a href="#" id=${c.codeCli} ><img src= "../../publics/icon/icons8_eye_60px_5.png" ></a>
-                        <a href="#" id=${c.codeCli} ><img src= "../../publics/icon/icons8_edit_48px_2.png" class="edit_log" ></a>
-                        <a href="#" id=${c.codeCli} ><img src= "../../publics/icon/icons8_remove_48px_2.png"  class="delete_log" ></a>
-
-                    </div>
-                </td>
-            </tr>
-            
-            `); 
-
-    document.querySelector(".tr_dishover .edit_log").addEventListener("click", (e)=>{
-        console.log(e.target.id);
-    });
+const tel = (champs)=>{
+    if (regexPhone(champs.value) == false) { 
+        styleErrorInput(champs); 
+    }
+    else{ 
+        styleSuccesInput(champs);
+    }
 }
-function dataClients(dataClient){
+
+document.querySelector(".tel").addEventListener("input", (e)=>{
+    tel(e.target)
+});
+
+const CIN = (champ)=>{
+    if (regexCIN(champ.value) == false) {
+        styleErrorInput(champ); 
+    }
+    else{ 
+        styleSuccesInput(champ);
+    }
+}
+document.querySelector(".CIN").addEventListener("input", (e)=>{
+    CIN(e.target)
+});
+
+
+//FETCH START
+fetchData(urlCli, "getAllCli",  {}).then(data => { dataClients(data) });
+
+const openWindowUpdateClient = (id, data) => {
+    const client = data;
+    if (data.codeCli == id) {
+
+        document.getElementById("formUpdateClient").innerHTML = `
+                <div id="imgChange" class="photo_logement_ajo">
+                <div>
+                    <img src="../${data.photoCli}">
+                </div>
+                <div class="group_input_file">
+                    <label for="photoCli">Télecharger image</label>
+                    <input class="inpData photo" name="photoCli" type="file" value="${data.photoCli}">
+                </div>
+            </div>
+            <div class="dispaly_input">
+                <div class="group_input">
+                    <label for="nomCli">Nom</label>
+                    <input class="inpData" name="nomCli" type="text" value="${data.nomCli}" placeholder="">
+                </div>
+                <div class="group_input">
+                    <label for="#">Prénom</label>
+                    <input class="inpData" name="prenomCli" type="text" value="${data.prenomCli}" placeholder="">
+                </div>
+            </div>
+            <div class="dispaly_input">
+                <div class="group_input">
+                    <label for="#">Profession</label>
+                    <input class="inpData" name="professionCli" type="text" value="${data.professionCli}" placeholder="">
+                </div>
+                <div class="group_input">
+                    <label for="#">Numero CIN </label>
+                    <input id="CIN" class="inpData CIN" name="CINCli" class="CIN" type="text" value="${data.CINCli}" placeholder="">
+                </div>
+            </div>
+            <div class="dispaly_input">
+                <div class="group_input">
+                    <label for="#">Telephone</label>
+                    <input id="tel" class="inpData tel" name="telCli" class="tel" type="text" value="${data.telCli}" placeholder="">
+                </div>
+                <div class="group_input">
+                    <label for="#">Adresse</label>
+                    <input class="inpData" name="adrsCli"  type="text" value="${data.adrsCli}" placeholder="">
+                </div>
+            </div>
+            <div class="dispaly_input">
+                <div class="group_input">
+                    <label for="#">Sexe</label>
+                    <div class="sexe">  
+                        <label><input class="inpData" name="sexeCli" class="sexe" type="radio" value="F" ${data.sexeCli == "F" ? "checked":null} > Feminin</label>
+                        <label><input class="inpData" name="sexeCli" class="sexe" type="radio" value="M" ${data.sexeCli == "M" ? "checked":null}  > Masculin</label>
+                    </div>
+                </div>
+                <div class="group_input">
+                    <label for="#">Id</label>
+                    <input class="inpData" name="numCli"  type="text" value="${data.codeCli}" disabled>
+                </div>
+            </div>
+            <div class="button_ajout_log">
+                <button type="reset" class="reset">Annuler</button>
+                <button type="submit" class="modifier">Modifier</button>
+            </div>
+        `  
+
+        document.querySelector("form input[type='file']").addEventListener("change", (e)=>{
+            srcChange(e.target);
+            //alert()
+        })
+
+        document.querySelector(".modifier").addEventListener("click", (e)=>{
+            e.preventDefault();
+            const inputs = document.querySelectorAll("#fenetreUpdate .inpData");
+            
+            const tel = document.querySelector("#fenetreUpdate #tel");
+            const cin = document.querySelector("#fenetreUpdate #CIN");
+
+            if ( validField(inputs) && validCIN(cin) && validPhone(tel)) {
+
+                const data = getsDataForm(inputs)
+                fetchData(urlCli, "updateCli", data).then(data => { res(data) });  
+                function res(res) {
+                    if (res) {
+                        msgSucces(`Client N: ${id} est modifie`);
+                        setTimeout(function () {location.reload() }, 2000)
+
+                    }else{
+                       msgError(`Verifier l'erreur`);
+                    }
+                }       
+            }else{
+                alertErreur(inputs);
+            }
+        })
+
+        document.querySelector('.tel').addEventListener("input", (e)=>{ 
+            alert()
+            console.log("input");
+            tel(e.target);
+        })
+        
+        document.querySelector('.CIN').addEventListener("input", (e)=>{ 
+            alert()
+            console.log("input");
+            tel(e.target);
+        })
+   
+    }
+
+};
+
+// const  updateClient = (id) => {
+//     // const data = {numCli: id}
+//     // fetchData(urlCli, "updateCli", "POST", data).then(data => { dataClients(data) });
+// };
+
+const createElement = (tagName, attributes = {}, content) => {
+    const element = document.createElement(tagName);
+    for (const [key, attr] of Object.entries(attributes)) {
+        if(attr !=null){
+            element.setAttribute(key, attr);
+        }
+    }
+    element.innerHTML = content == null ? "":content;
+    return element;
+}
+
+const showDataClient = (data) => {
+    const client = data;
+    // publics\images\clients\442fd633ed.png
+    // vues\client\index.php
+    let img = createElement("img", { src: client.photoCli == null  ? "../../publics/icon/icons8_user.ico": "../"+client.photoCli.trim() });
+    let divImg = createElement("div", {}, '');
+    let tdImg = createElement("td", {class: "photo_log"}, '');
+    tdImg.appendChild(divImg).appendChild(img);
+
+    let nom = createElement("td", {},  client.nomCli);
+    let prenom = createElement("td", {},  client.prenomCli);
+    let CIN = createElement("td", {},  client.CINCli);
+    let profession = createElement("td", {},  client.professionCli);
+    let adresse = createElement("td", {},  client.adrsCli);
+    let phone = createElement("td", {},  client.telCli);
+    let sexe = createElement("td", {},  client.sexeCli);
+    let tr = createElement("tr", {class: "tr"},  "");
+
+    let update = createElement("td", {id: client.codeCli}, "");
+    let imgUpdate = createElement("img", {src:"../../publics/icon/icons8_edit_48px_1.png", 
+        class:"td_action", style:'object-fit: cover; width: 100%; max-width: 40px; padding: 5px; cursor: pointer;'}
+        , "");
+    update.append(imgUpdate);
+
+    imgUpdate.addEventListener("click", (e)=>{
+        const id = e.target.parentElement.id
+        openWindowUpdateClient(id, client);
+        openWindow(updateForm);
+    });
+
+
+    let supp = createElement("td", {id: client.codeCli}, "");
+    let imgSupp = createElement("img", {src:"../../publics/icon/icons8_trash_can_48px.png", 
+        class:"td_action", style:'object-fit: cover; width: 100%; max-width: 40px; padding: 5px; cursor: pointer;'}
+        , "");
+    supp.append(imgSupp);
+
+    supp.addEventListener("click", (e)=>{
+        const id = e.target.parentElement.id
+        const data = {"numCli":id}
+
+        if ( confirm(`Confirmez-vous la suppression de client N: ${id}`) ) {
+
+            fetchData(urlCli, "deleteCli", data).then(res => {result(res)});
+
+            function result(res) {
+                if (res) {
+                    msgSucces(`Client N: ${id} a supprime`);
+                    setTimeout(function () {location.reload() }, 2000)
+                }else{
+                    msgError(`Verifier l'erreur`);
+                }
+            }
+        }
+
+    });
+
+    
+    tr.append(tdImg);
+    tr.append(nom);
+    tr.append(prenom);
+    tr.append(CIN);
+    tr.append(profession);
+    tr.append(adresse);
+    tr.append(phone);
+    tr.append(sexe);
+    tr.append(update);
+    tr.append(supp);
+
+    //console.log(tr);
+    document.getElementById("allClients").append(tr);
+}
+
+function dataClients(datas){
     let nombreClient = 0;
-    dataClient.forEach(client => {
-        document.getElementById("allClients").innerHTML += showDataClient(client);
+    datas.forEach(data => {
+         showDataClient(data);
         nombreClient++;
     });
     document.getElementById("nombreClient").innerHTML = nombreClient;
@@ -57,72 +241,33 @@ function dataClients(dataClient){
 //FETCH END
 
 
-function validCIN(e) {
-    return regexCIN(e.value);
-}
-
-
 // *************VALIDATION DES CHAMPS ***********
-
-
-document.querySelector(".tel").addEventListener("keyup", (e)=>{
-    if (regexPhone(e.target.value) == false) { 
-        styleErrorInput(e.target); 
-    }
-    else{ 
-        styleSuccesInput(e.target);
-    }
-});
-
-
-document.querySelector(".CIN").addEventListener("keyup", (e)=>{
-    if (regexCIN(e.target.value) == false) {
-        styleErrorInput(e.target); 
-    }
-    else{ 
-        styleSuccesInput(e.target);
-    }
-});
-
-
-const getsDataForm = (inputsFields, inpFileImg) => {
-    let data = {};
-    inputsFields.forEach(input => {
-        let inpName = input.name.trim();
-        let inpValue = input.value.trim();
-        
-        data[inpName]= inpValue;
-    });
-
-    let inpFileName = inpFileImg[0].name;
-    let fileIMG = inpFileImg[0].files[0];
-    data[inpFileName]= fileIMG;
-
-
-    console.log(data);
-    return data;
-
-}
 
 
 document.querySelector("#formAddClient").addEventListener("submit", (e) => {
     e.preventDefault();
-    const inputsFields =  e.target.querySelectorAll(".group_input input");
-    const inpFileImg =  e.target.querySelectorAll(".group_input_file input");
+    const inputs =  e.target.querySelectorAll(".inpData");
 
-    const valid = validField(inputsFields);
+    const tel = document.querySelector("#formAddClient .tel");
+    const CIN = document.querySelector("#formAddClient .CIN")
 
-    console.log(valid, validPhone(document.querySelector("#formAddClient .tel")), validCIN(document.querySelector("#formAddClient .CIN")));
-    if ( valid && validPhone(document.querySelector("#formAddClient .tel")) && validCIN(document.querySelector("#formAddClient .CIN"))) {
+    const data = getsDataForm(inputs);
+    console.log(data);
+    if ( validField(inputs) && validPhone(tel) && validCIN(CIN)) {
 
-        let dCli = getsDataForm(inputsFields, inpFileImg);
-        fetchJSONPost(url, "insertCli", "POST", dCli );
-        // location.reload();
+        fetchData(urlCli, "insertCli", data).then(res => {result(res)});
 
-    }else{
-        
-        const alertErreurs = alertErreur(inputsFields);
-        console.log("Invalid");
+        function result(res) {
+            if (res) {
+                msgSucces(`Ajout de nouveau client reuissite`);
+                setTimeout(function () {location.reload() }, 2000)
+            }else{
+                msgError(`Verifier l'erreur`);
+            }
+        }
+
+    }else{ 
+       alertErreur(inputs);
     }
 
 

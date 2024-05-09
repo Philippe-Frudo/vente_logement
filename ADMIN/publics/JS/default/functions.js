@@ -1,4 +1,57 @@
-export function fetchData(url_p, action, methode_p, data_p = {}) {
+const addForm = document.querySelector(".fenetre_modale_ajout_log");
+export const updateForm = document.querySelector("#fenetreUpdate");
+
+const btnOpenWindow = document.querySelector(".btn");
+const btnCloseWindow = document.querySelectorAll(".close");
+
+const message = document.querySelector("#contentMessage");
+const imgChange = document.querySelector("#imgChange img");
+const getFile = document.querySelector("form input[type='file']");
+
+
+export function openWindow(form) {
+    form.classList.add("ajout");
+}
+
+export function closeWindow(form) {
+    form.classList.remove("ajout");
+}
+
+btnOpenWindow.addEventListener("click" , ()=>{
+    openWindow(addForm);
+});
+
+
+btnCloseWindow.forEach(btn =>{
+    btn.addEventListener("click" , ()=>{
+        closeWindow(addForm);
+        closeWindow(updateForm);
+        document.querySelector("form").reset();
+    });
+})
+
+export function clearInputs(){
+    document.querySelectorAll("form .inpData").forEach(inp =>{
+        inp.style.borderColor = "#000";
+    });
+}
+
+
+export const srcChange = (inptut)=>{
+    imgChange.src = URL.createObjectURL(inptut.files[0]);
+}
+
+getFile.addEventListener("change", (e)=>{
+    srcChange(e.target)
+});
+
+// document.querySelector('form .reset').addEventListener("click", ()=>{ 
+//     clearInputs();
+//     alert()
+// })
+
+
+export function fetchData(url_p, action, data_p = {}) {
     
     const url = `${url_p}?action=${encodeURIComponent(action)}`;
 
@@ -117,6 +170,7 @@ export const validField = (inputs) => {
 }
 
 
+//VALIDATION DES CHAMPS PARTICULIER 
 export function validPhone(e) {
     return regexPhone(e.value);
 }
@@ -125,28 +179,40 @@ export function validPassword(e) {
     return regexPassword(e.value);
 }
 
+export function validCIN(e) {
+    return regexCIN(e.value);
+}
+
+
+
 
 //RECUPERER DONNE DANS LE CHAMPS 
-export const getsDataForm = (inputsFields, inpFileImg, inpSelect) => {
+export const getsDataForm = (inputs) => {
     const data = {};
-    inputsFields.forEach(input => {
+    inputs.forEach(input => {
 
         let inpName = input.name.trim();
         let inpValue = input.value.trim();
         
-        if(input.type !== "file"){
+        if(input.type == "text"){
             data[inpName]= inpValue;
         }    
+        else if(input.type == "radio"){
+            if (input.checked == true) {
+                data[inpName]= inpValue;
+            }
+        }   
         else if(input.type == "file"){
-            let inpFileName = inpFileImg[0].name;
-            let fileIMG = inpFileImg[0].files[0];
-            data[inpFileName]= fileIMG;
+            // let inpNameFile = input.name;
+            let fileIMG = input.files[0];
+            console.log(fileIMG);
+            data[inpName]= fileIMG;
         }    
     }); 
     
-    if(inpSelect !== ""){
-        data[inpSelect.name]= inpSelect.value;
-    }
+    // if(inpSelect !== ""){
+    //     data[inpSelect.name]= inpSelect.value;
+    // }
 
     console.log(data);
     return data;
@@ -174,17 +240,17 @@ export function styleAllinputsNormal(k){
 
 
 //ALERT D'ENVOYE
-export function alertSucces(el, msg) {
-    el.innerHTML = msg;
-    el.style.display= "block"
-    el.style.background= "rgb(64, 156, 52, 0.7)";
-    setTimeout(function () {el.style.display= "none"; el.innerHTML = ""; }, 1000)
+export function msgSucces(msg) {
+    message.innerHTML = msg;
+    message.style.display= "block"
+    message.style.background= "rgb(64, 156, 52, 0.7)";
+    setTimeout(function () {message.style.display= "none"; message.innerHTML = ""; }, 2000)
 }
 
-export function alertError(el, msg) {
-    el.innerHTML = msg;
-    el.style.display= "block"
-    setTimeout(function () { el.style.display= "none"; el.innerHTML = ""; }, 1000)
+export function msgError(msg) {
+    message.innerHTML = msg;
+    message.style.display= "block"
+    setTimeout(function () { message.style.display= "none"; message.innerHTML = ""; }, 2000)
 }
 
 export function alertInput(val){
@@ -251,60 +317,38 @@ export const alertErreur = (inputs) => {
         let nameClass = inputs[i].name;
         let value = inputs[i].value.trim();
         let clas = inputs[i].className;
-        if(value == "" &&  nameClass !== "prenomCli"){
-            styleErrorInput(inputs[i]);
+        let id = inputs[i].id;
+        //console.log(clas);
 
-        }else if(value !== "" && nameClass !== "prenomCli"){
+       if(value !== "" && nameClass !== "prenomCli"){
           
-                if(clas == "tel" && regexPhone(value) == false){
+                if(id == "tel" && regexPhone(value) == false){
                     styleErrorInput(inputs[i]);
                 }
 
-                else if(clas == "email" && regexEmail(value) == false){
+                else if(id == "email" && regexEmail(value) == false){
                     styleErrorInput(inputs[i]);
                 }
 
-                else if(clas == "CIN" && regexCIN(value) == false){
+                else if(id == "CIN" && regexCIN(value) == false){
                     styleErrorInput(inputs[i]);
                 }
-
-                else if(clas == "password" && regexPassword(value) == false){
+                else if(id == "password" && regexPassword(value) == false){
                     styleErrorInput(inputs[i]);
-
-                }else if(clas == "password" && regexPassword(value) == false){
-                    styleErrorInput(inputs[i]);
-
-                }else{
+                }
+                else{
                     styleSuccesInput(inputs[i]);
                 }
+        } 
+        else if( value == "" &&  nameClass !== "prenomCli"){
+            styleErrorInput(inputs[i]);
         }
+        // else{
+        //     styleSuccesInput(inputs[i]);
+        // }
     }
     
 }
-
-
-
-// document.querySelector(".email").addEventListener("keyup", (e)=>{
-//         if (regexEmail(e.target.value) == false) { 
-//             styleErrorInput(e.target); 
-//         }
-//         else{ 
-//             styleSuccesInput(e.target);
-//         }
-// });
-
-
-// document.querySelector(".password").addEventListener("keyup", (e)=>{
-//         if (regexPassword(e.target.value) == false) { 
-//             styleErrorInput(e.target); 
-//         }
-//         else{ 
-//             styleSuccesInput(e.target);
-//         }
-// });
-
-
-
 
 
 
