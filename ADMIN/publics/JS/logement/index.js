@@ -1,4 +1,4 @@
-import {fetchData, getDataForm, validChammps, regexNumber, getsDataForm, validField, validPhone, validPassword, alertErreur, styleErrorInput, styleSuccesInput, regexPhone, regexCIN, regexPassword, regexEmail  } from "../default/functions.js";
+import { msgSucces, srcChange, updateForm ,openWindow  ,createElement, fetchData, getDataForm, validChammps, regexNumber, getsDataForm, validField, validPhone, validPassword, alertErreur, styleErrorInput, styleSuccesInput, regexPhone, regexCIN, regexPassword, regexEmail  } from "../default/functions.js";
 
 const urlLog = `http://localhost/gestion_vente_logement/ADMIN/controleurs/controleurLogement.php`;
 const urlTer = `http://localhost/gestion_vente_logement/ADMIN/controleurs/controleurTerrain.php`
@@ -36,49 +36,142 @@ let price = document.querySelector('#formAddLog input[name="prixLog"]')
 
 //DATA LOGEMENT
 fetchData(urlLog, "getAllLog", "GET").then(data => { datasLogement(data) });
-const showDataLog = (data) => {
-    let c = data;
-    let tr = ( `
-            <tr class="tr">
-                <td class="photo_log">
-                    <div>
-                        <img src=${c.photoLog !== null ?  c.photoLog:"../../publics/images/1681933872284.jpg" } >
-                    </div>
-                </td>
-                <td>${c.numLog}</td>
-                <td>${c.descLog}</td>
-                <td>${c.superficieTer}</td>
-                <td>${c.prixLog} Km<sup>2</sup></td>
-                <td>${c.codeCite, c.libCite}</td>
-                <td>${c.Province}</td>
-                <td>${c.libAg}</td>
-                <td><span class="status delivered">Delivered</span></td>
-                <td class="action">
-                    <div class="tr_hover">
-                        <a href="#"><img src="../../publics/icon/icons8_eye_60px_4.png" ></a>
-                        <a href="#"><img src="../../publics/icon/icons8_edit_48px_1.png" ></a>
-                        <a href="#"><img src="../../publics/icon/icons8_trash_can_48px.png" ></a>
-                    </div>  
-                    <div class="tr_dishover">
-                        <a href="#"><img src="../../publics/icon/icons8_eye_60px_5.png" ></a>
-                        <a href="#"><img src="../../publics/icon/icons8_edit_48px_2.png" class="edit_log" ></a>
-                        <a href="#"><img src="../../publics/icon/icons8_remove_48px_2.png"  class="delete_log" ></a>
-                    </div>
-                </td>
-            </tr>
-            `); 
 
-    return tr;
+const openWindowUpdateLog = (id, data) => {
+    const c = data;
+    if (c.numLog == id) {
+        document.getElementById("formUpdateLog").innerHTML = `
+            <div id="imgChange" class="photo_logement_ajo">
+                <div>
+                    <img src="../${c.photoLog}">
+                </div>
+                <div>
+                    Télecharger image
+                    <input class="inputData" name="photoLog" type="file" placeholder="Clique pour selectionner de photo" value="${c.photoLog}">
+                </div>
+            </div>
+            <div class="input">
+                <div class="group_input">
+                    <label for="#">Prix</label>
+                    <input class="inputData prixLog" name="prixLog" type="text" value="${c.prixLog}">  
+                </div>
+                </div>
+                <div class="group_input">
+                    <label for="#">Désription</label>
+                    <textarea  rows="5" class="inputData" name="descLog" type="text" value="${c.descLog}" placeholder="mesure, nombre de piece, ..."></textarea>
+                </div>
+            </div>
+            <div class="button_ajout_log">
+                <button type="reset" class="reset">Annuler</button>
+                <button type="submit" class="modifier">Modifier</button>
+            </div>
+        `  
+        document.querySelector("form input[type='file']").addEventListener("change", (e)=>{
+            alert()
+            srcChange(e.target);
+        })
+
+        document.querySelector(".modifier").addEventListener("click", (e)=>{
+            e.preventDefault();
+
+            const inputs = document.querySelectorAll("#fenetreUpdate .inpData");
+            let prix = document.querySelector(".prixLog"); 
+
+            if ( validField(inputs) && validPrice(prix) ) {
+                const data = getsDataForm(inputs);
+                fetchData(urlLog, "updateLog", data).then(data => { res(data) });  
+                function res(res) {
+                    if (res) {
+                        msgSucces(`Logement N: ${id} est modifie`);
+                        setTimeout(function () {location.reload() }, 2000)
+
+                    }else{
+                       msgError(`Erreur lors de la requete`);
+                    }
+                }       
+            }else{
+                alertErreur(inputs);
+            }
+        })
+
+    }
+
+};
+
+
+const showDataLog = (data) => {
+    const c = data;
+
+    let img = createElement("img", { src: c.photoLog !== null ?  c.photoLog:"../../publics/images/1681933872284.jpg" });
+    let divImg = createElement("div", {}, '');
+    let tdImg = createElement("td", {class: "photo_log"}, '');
+    tdImg.appendChild(divImg).appendChild(img);
+
+    let num = createElement("td", {},  c.numLog);
+    let desc = createElement("td", {},  c.descLog);
+    let superficie = createElement("td", {},  c.superficieTer);
+    let prix = createElement("td", {},  c.prixLog);
+    let cite = createElement("td", {},  (c.codeCite, c.libCite));
+    let province = createElement("td", {},  c.Province);
+    let libele = createElement("td", {},  c.libAg);
+    let tr = createElement("tr", {class: "tr"},  "");
+
+    let update = createElement("td", {id: c.numLog}, "");
+    let imgUpdate = createElement("img", {src:"../../publics/icon/icons8_edit_48px_1.png", 
+        class:"td_action", style:'object-fit: cover; width: 100%; max-width: 40px; padding: 5px; cursor: pointer;'}
+        , "");
+    update.append(imgUpdate);
+
+    imgUpdate.addEventListener("click", (e)=>{
+        const id = e.target.parentElement.id
+        openWindowUpdateLog(id, c);
+        openWindow(updateForm);
+    });
+
+    let supp = createElement("td", {id: c.numLog}, "");
+    let imgSupp = createElement("img", {src:"../../publics/icon/icons8_trash_can_48px.png", 
+        class:"td_action", style:'object-fit: cover; width: 100%; max-width: 40px; padding: 5px; cursor: pointer;'}
+        , "");
+    supp.append(imgSupp);
+
+    supp.addEventListener("click", (e)=>{
+        const id = e.target.parentElement.id
+        const data = {"numLog":id}
+
+        if ( confirm(`Confirmez-vous la suppression de c N: ${id}`) ) {
+
+            fetchData(urlLog, "deleteLog", data).then(res => {result(res)});
+
+            function result(res) {
+                if (res) {
+                    msgSucces(`Logement N: ${id} a supprime`);
+                    setTimeout(function () {location.reload() }, 1500)
+                }else{
+                    msgError(`Verifier l'erreur`);
+                }
+            }
+        }
+
+    });
+
+    tr.append(tdImg);
+    tr.append(num);
+    tr.append(desc);
+    tr.append(superficie);
+    tr.append(prix);
+    tr.append(cite);
+    tr.append(province);
+    tr.append(libele);
+    tr.append(update);
+    tr.append(supp);
+
+    document.getElementById("listeLogement").append(tr);
 }
 function datasLogement(datas){
     let nombreLog = 0;
     datas.forEach(data => {
-        document.getElementById("listeLogement").innerHTML += showDataLog(data);
+        showDataLog(data);
         nombreLog++;
-        
-        document.querySelector(".tr_dishover .edit_log").addEventListener("click", (e)=>{
-            console.log(e.target.id);
-        });
     });
     document.getElementById("nombreLog").innerHTML = nombreLog;
 }
@@ -130,64 +223,27 @@ const validPrice = (val) => {
 
 document.querySelector("#formAddLog").addEventListener("submit", (e)=>{
     e.preventDefault();
-    const inputsData = e.target.querySelectorAll(".inputData");
 
+    const inputsData = e.target.querySelectorAll(".inputData");
+    
     const validLog = validField(inputsData);
 
-    if ( validLog && validPrice(price) ) {
-        
-        const data = getDataForm( inputsData );
-        const res = fetchData(urlLog, "insertLog", "POST", data);
-        console.log(res, "bonjour");
+    if ( validLog && validPrice(price) ) { 
+        const data = getsDataForm( inputsData );
+        fetchData(urlLog, "insertLog", "POST", data).then(res => response(res));
+        function response(res) {
+            if (res) {
+                msgSucces(`Ajout logement succes`);
+                setTimeout(function () {location.reload() }, 2000)
+
+            }else{
+               msgError(`Erreur lors de la requete`);
+            }
+        }       
 
     } else {
         validChammps(inputsData)
     }
 })
-
-
-// //INSERTION
-
-
-// document.querySelector("#formAddAg").addEventListener("submit", (e) => {
-//     e.preventDefault();
-//     const inputsFields =  e.target.querySelectorAll(".group_input input");
-//     const inpFileImg =  e.target.querySelectorAll(".group_input_file input");
-//     const inpSelect =  e.target.querySelector("select");
-    
-    
-//     console.log(inpSelect.value);
-    
-//     const valid = validField(inputsFields);
-//     const validP = validPhone(document.querySelector("#formAddAg .tel")) 
-//     const validPass = validPassword(document.querySelector("#formAddAg .password"));
-    
-//     // function selected(sel){
-//     //     sel.forEach(s => {
-//     //         s.addEventListener("change", (e)=>{
-//     //             return e.target.value.trim();
-//     //         });
-//     //     });
-
-//     // }
-
-//     console.log(document.querySelector("#formAddAg .password").value);
-//     console.log(valid,  validP, validPass );
-//     if ( valid && validP && validPass && inpSelect.value !== "" ) {
-    
-//         let d = getsDataForm(inputsFields, inpFileImg, inpSelect);
-        
-//         fetchJSONPost(urlAg, "insertAg", "POST", d );
-//         // location.reload();
-
-//     }else{
-        
-//         const alertErreurs = alertErreur(inputsFields);
-//         console.log("Invalid");
-//     }
-
-
-// });
-
 
 

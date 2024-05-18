@@ -1,4 +1,4 @@
-import { srcChange ,msgError, msgSucces, clearInputs ,getsDataForm ,updateForm ,openWindow ,fetchData, validPhone, validCIN,validField, alertErreur, styleErrorInput, styleSuccesInput, regexPhone, regexCIN, regexPassword, regexEmail, validChammps  } from "../default/functions.js";
+import { createElement, srcChange ,msgError, msgSucces, clearInputs ,getsDataForm ,updateForm ,openWindow ,fetchData, validPhone, validCIN,validField, alertErreur, styleErrorInput, styleSuccesInput, regexPhone, regexCIN, regexPassword, regexEmail, validChammps  } from "../default/functions.js";
 
 const urlCli = "http://localhost/gestion_vente_logement/ADMIN/controleurs/controleurClient.php";
 
@@ -37,7 +37,7 @@ const openWindowUpdateClient = (id, data) => {
     if (data.codeCli == id) {
 
         document.getElementById("formUpdateClient").innerHTML = `
-                <div id="imgChange" class="photo_logement_ajo">
+            <div id="imgChange" class="photo_logement_ajo">
                 <div>
                     <img src="../${data.photoCli}">
                 </div>
@@ -141,26 +141,9 @@ const openWindowUpdateClient = (id, data) => {
 
 };
 
-// const  updateClient = (id) => {
-//     // const data = {numCli: id}
-//     // fetchData(urlCli, "updateCli", "POST", data).then(data => { dataClients(data) });
-// };
-
-const createElement = (tagName, attributes = {}, content) => {
-    const element = document.createElement(tagName);
-    for (const [key, attr] of Object.entries(attributes)) {
-        if(attr !=null){
-            element.setAttribute(key, attr);
-        }
-    }
-    element.innerHTML = content == null ? "":content;
-    return element;
-}
-
 const showDataClient = (data) => {
     const client = data;
-    // publics\images\clients\442fd633ed.png
-    // vues\client\index.php
+
     let img = createElement("img", { src: client.photoCli == null  ? "../../publics/icon/icons8_user.ico": "../"+client.photoCli.trim() });
     let divImg = createElement("div", {}, '');
     let tdImg = createElement("td", {class: "photo_log"}, '');
@@ -211,10 +194,8 @@ const showDataClient = (data) => {
                 }
             }
         }
-
     });
 
-    
     tr.append(tdImg);
     tr.append(nom);
     tr.append(prenom);
@@ -225,8 +206,7 @@ const showDataClient = (data) => {
     tr.append(sexe);
     tr.append(update);
     tr.append(supp);
-
-    //console.log(tr);
+    
     document.getElementById("allClients").append(tr);
 }
 

@@ -16,11 +16,6 @@
                     </div>
                 </div>
                 <div class="input">
-                    <div class="dispaly_input">
-                        <!-- <div class="group_input">
-                            <label for="#">Libélé</label>
-                            <input class="inputData" name="libCite" type="text" placeholder="label">
-                        </div> -->
                         <div class="group_input">
                             <label for="#">Prix</label>
                             <input class="inputData prixLog" name="prixLog" type="text" placeholder="">  
@@ -31,7 +26,40 @@
                         <textarea class="inputData" name="descLog" type="text" placeholder=""></textarea>
                     </div>
                 </div>
+                <div class="select">
+                    <div class="group_select">
+                        <div class="element_select">
+                            <span>Terrain</span>
+                            <select class="inputData" id="terrainLog" name="numTer">
+                                <option value="">--select terrain</option>
+                            </select>
+                        </div>
+                        <div>
+                            <p></p>
+                        </div>
+                    </div>
+                    <div class="group_select">
+                        <div class="element_select">
+                            <span>Cité</span>
+                            <select class="inputData" id="citeLog" name="codeCite">
+                                <option value="">--select cité</option>
+                            </select>
+                        </div>
+                        <div>
+                            <p></p>
+                        </div>
+                    </div>
+                </div>
 
+                <div class="button_ajout_log">
+                    <button type="reset">Cancel</button>
+                    <button type="submit">Enregistrer</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+            
                 <!-- <div class="select">
                     <div class="group_select">
                         <div class="element_select">
@@ -56,37 +84,9 @@
                         <div>
                             <p></p>
                         </div>
-                    </div> -->
-                    <div class="group_select">
-                        <div class="element_select">
-                            <span>Terrain</span>
-                            <select class="inputData" id="terrainLog" name="numTer">
-                                <option value="">--select terrain</option>
-                                <!-- <option value=""></option> -->
-                            </select>
-                        </div>
-                        <div>
-                            <p></p>
-                        </div>
                     </div>
-                    <div class="group_select">
-                        <div class="element_select">
-                            <span>Cité</span>
-                            <select class="inputData" id="citeLog" name="codeCite">
-                                <option value="">--select cité</option>
-                                <!-- <option value=""></option> -->
-                            </select>
-                        </div>
-                        <div>
-                            <p></p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="button_ajout_log">
-                    <button type="reset">Cancel</button>
-                    <button type="submit">Enregistrer</button>
-                </div>
-            </form>
-        </div>
-    </div>
+                    <div class="dispaly_input">
+                        <div class="group_input">
+                            <label for="#">Libélé</label>
+                            <input class="inputData" name="libCite" type="text" placeholder="label">
+                        </div> -->

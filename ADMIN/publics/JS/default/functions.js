@@ -1,5 +1,4 @@
 const addForm = document.querySelector(".fenetre_modale_ajout_log");
-export const updateForm = document.querySelector("#fenetreUpdate");
 
 const btnOpenWindow = document.querySelector(".btn");
 const btnCloseWindow = document.querySelectorAll(".close");
@@ -8,6 +7,7 @@ const message = document.querySelector("#contentMessage");
 const imgChange = document.querySelector("#imgChange img");
 const getFile = document.querySelector("form input[type='file']");
 
+export const updateForm = document.querySelector("#fenetreUpdate");
 
 export function openWindow(form) {
     form.classList.add("ajout");
@@ -49,6 +49,18 @@ getFile.addEventListener("change", (e)=>{
 //     clearInputs();
 //     alert()
 // })
+
+
+export const createElement = (tagName, attributes = {}, content) => {
+    const element = document.createElement(tagName);
+    for (const [key, attr] of Object.entries(attributes)) {
+        if(attr !=null){
+            element.setAttribute(key, attr);
+        }
+    }
+    element.innerHTML = content == null ? "":content;
+    return element;
+}
 
 
 export function fetchData(url_p, action, data_p = {}) {
@@ -197,11 +209,14 @@ export const getsDataForm = (inputs) => {
         if(input.type == "text"){
             data[inpName]= inpValue;
         }    
+        if(input.type == "select"){
+            data[inpName]= inpValue;
+        }    
         else if(input.type == "radio"){
             if (input.checked == true) {
                 data[inpName]= inpValue;
             }
-        }   
+        }     
         else if(input.type == "file"){
             // let inpNameFile = input.name;
             let fileIMG = input.files[0];

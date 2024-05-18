@@ -79,9 +79,7 @@ if ( isset($action) && !empty($action) ) {
         $unique_photo = substr(md5(time()), 0, 10). '.' . $photo_text;
         
         if ( $photo_size > 10000 ) {
-            
             $upload_photo = "../publics/images/clients/". $unique_photo;
-
             move_uploaded_file($photo_temp, $upload_photo);
 
             $res = $client->updateCli($dbo, $numCli, $nomCli, $adrsCli, $prenomCli, $CINCli, $sexeCli, $professionCli, $telCli, $upload_photo);

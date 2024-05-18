@@ -75,10 +75,12 @@ class Logement {
                     ":soldLog"=>$soldLog
                 ]);
             
-            return "Le logement est vendu";
-
+            return 1;
+            
         } catch (Exception $e) {
-            return "Le logement a ete deja vendu" . $e->getMessage();
+            
+            return 0;
+            // return "Le logement a ete deja vendu" . $e->getMessage();
         }
     }
 
@@ -89,10 +91,11 @@ class Logement {
         try {
             $query->execute([":numLog"=>$numLog]);
 
-            return "le logement est supprime";
+            return 1;
 
         } catch (Exception $e) {
-            return "Erreur lors de la suppression de logement" . $e->getMessage();
+            return 0;
+            // return "Erreur lors de la suppression de logement" . $e->getMessage();
         }
     }
 

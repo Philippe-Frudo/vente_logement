@@ -65,18 +65,8 @@
     <div id="contentMessage">
         <p id="message">Voici une message</p>
     </div>
-    <style>
-        #contentMessage{
-            position: absolute;
-            top: 20%;
-            left: 50%;
-            transform: translate(-20%, -50%);
-            padding: 1rem 1.5rem;
-            background: #fff;
-            font-size: 1.5rem;
-            display: none;
-        }
-    </style>
+
+    
     <!----------------- Scripts -------------->
     <script>
         document.querySelector(".navigation ul li.linkClient").classList.add("hovered");

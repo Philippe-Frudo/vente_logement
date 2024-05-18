@@ -36,11 +36,11 @@
                                 <td>Description</td>
                                 <td>Superficie</td>
                                 <td>Prix</td>
-                                <td>Libélé</td>
-                                <td>cité</td>
+                                <td>Cite</td>
                                 <td>Province</td>
                                 <td> Agence</td>
-                                <td>Action</td>
+                                <td>Modifier</td>
+                                <td>Supprimer</td>
                             </tr>
                         </thead>
 
@@ -72,7 +72,6 @@
                                         <a href="#"><img src=<?php //echo FOLDER_ICON . "icons8_eye_60px_5.png"; ?> ></a>
                                         <a href="#"><img src=<?php //echo FOLDER_ICON . "icons8_edit_48px_2.png"; ?> class="edit_log" ></a>
                                         <a href="#"><img src=<?php //echo FOLDER_ICON . "icons8_remove_48px_2.png"; ?>  class="delete_log" ></a>
-
                                     </div>
                                 </td>
                             </tr> -->
@@ -89,6 +88,12 @@
 
     <!-- AJOUTER NOUVEAU LONGEMENT -->
     <?php require_once("./formAddLog.php"); ?>
+    <?php require_once("./formUpdateLog.php"); ?>
+
+
+    <div id="contentMessage">
+        <p id="message">Voici une message</p>
+    </div>
 
     
     <!----------------- Scripts -------------->

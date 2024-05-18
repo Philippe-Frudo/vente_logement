@@ -48,7 +48,7 @@
                     <div class="group_input">
                         <label for="#">Sexe</label>
                         <div class="sexe">  
-                            <label><input class="inpData" name="sexeCli" class="sexe" type="radio" value="F" > Feminin</label>
+                            <label><input class="inpData" name="sexeCli" class="sexe" type="radio" value="F"> Feminin</label>
                             <label><input class="inpData" name="sexeCli" class="sexe" type="radio" value="M" checked> Masculin</label>
                         </div>
                     </div>
