@@ -27,11 +27,12 @@ if ( isset($action) && !empty($action) ) {
         
         $photo = $_FILES["photoLog"];
         $photo_name = $photo["name"];
+        $photo_size = $photo["size"];
         $photo_temp = $photo["tmp_name"];
         $photo_div = explode('.', $photo_name);
         $photo_text = strtolower(end($photo_div));
         $unique_photo = substr(md5(time()), 0, 10). '.' . $photo_text;
-        if ( $photo_size > 10000 ) {
+        if ( $photo_size > 1000 ) {
             $upload_photo = "../publics/images/logements/". $unique_photo;
             move_uploaded_file($photo_temp, $upload_photo);
             $res = $logement->insertLog($dbo, $prixLog, $codeCite, $numTer, $descLog, $upload_photo);
@@ -51,10 +52,10 @@ if ( isset($action) && !empty($action) ) {
         $numLog = $_POST["numLog"];
         $prixLog = $_POST["prixLog"];
         $descLog = $_POST["descLog"];
-        $codeCite = $_POST["codeCite"];
-        $numTer = $_POST["numTer"];
+        // $codeCite = $_POST["codeCite"];
+        // $numTer = $_POST["numTer"];
 
-        $photo = $_FILES["photoLog"]!== null ? $_FILES["photoCli"]:"C:\xampp\htdocs\gestion_vente_logement\ADMIN\publics\images\clients\8a61b9dbb9.jpg";
+        $photo = $_FILES["photoLog"];
         $photo_name = $photo["name"];
         $photo_size = $photo['size'];
         $photo_temp = $photo["tmp_name"];
@@ -63,17 +64,18 @@ if ( isset($action) && !empty($action) ) {
         $unique_photo = substr(md5(time()), 0, 10). '.' . $photo_text;
         $upload_photo = FOLDER_IMG_LOG . $unique_photo;
 
-        if ( $photo_size > 10000 ) {
+        if ( $photo_size > 1000 ) {
             
             $upload_photo = "../publics/images/logements/". $unique_photo;
 
             move_uploaded_file($photo_temp, $upload_photo);
 
-            $res = $logement->updateLog($dbo, $numLog, $prixLog, $descLog, $codeCite, $numTer, $upload_photo);
+            $res = $logement->updateLog($dbo, $numLog, $prixLog, $descLog, $upload_photo);
+            // $codeCite, $numTer, 
             echo $res;
             
         }else{
-            $res = $logement->updateLog($dbo, $numLog, $prixLog, $descLog, $codeCite, $numTer, "");
+            $res = $logement->updateLog($dbo, $numLog, $prixLog, $descLog, "");
             echo $res;
         }
 

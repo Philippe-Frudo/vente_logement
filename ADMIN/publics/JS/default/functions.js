@@ -2,12 +2,14 @@ const addForm = document.querySelector(".fenetre_modale_ajout_log");
 
 const btnOpenWindow = document.querySelector(".btn");
 const btnCloseWindow = document.querySelectorAll(".close");
+const btnCloseWindowAcheter = document.querySelectorAll("#close");
 
 const message = document.querySelector("#contentMessage");
 const imgChange = document.querySelector("#imgChange img");
 const getFile = document.querySelector("form input[type='file']");
 
 export const updateForm = document.querySelector("#fenetreUpdate");
+export const formAcheter = document.querySelector("#formAcheter");
 
 export function openWindow(form) {
     form.classList.add("ajout");
@@ -21,14 +23,20 @@ btnOpenWindow.addEventListener("click" , ()=>{
     openWindow(addForm);
 });
 
-
 btnCloseWindow.forEach(btn =>{
     btn.addEventListener("click" , ()=>{
         closeWindow(addForm);
         closeWindow(updateForm);
+        closeWindow(formAcheter);
         document.querySelector("form").reset();
     });
 })
+
+
+// btnCloseWindowAcheter.addEventListener("click" , ()=>{
+//     document.querySelector("#formAcheter").style.display = "none";
+// });
+
 
 export function clearInputs(){
     document.querySelectorAll("form .inpData").forEach(inp =>{
@@ -195,7 +203,14 @@ export function validCIN(e) {
     return regexCIN(e.value);
 }
 
-
+export function validDateLimite(dateLimite){
+    let getDateLimite = new Date(dateLimite.value).getTime();
+    let dateNow = Date.now();
+    if ( getDateLimite < dateNow ) {
+        return false
+    }
+    return true
+}
 
 
 //RECUPERER DONNE DANS LE CHAMPS 
@@ -209,9 +224,6 @@ export const getsDataForm = (inputs) => {
         if(input.type == "text"){
             data[inpName]= inpValue;
         }    
-        if(input.type == "select"){
-            data[inpName]= inpValue;
-        }    
         else if(input.type == "radio"){
             if (input.checked == true) {
                 data[inpName]= inpValue;
@@ -223,6 +235,10 @@ export const getsDataForm = (inputs) => {
             console.log(fileIMG);
             data[inpName]= fileIMG;
         }    
+        else{
+            data[inpName]= inpValue;
+        } 
+        // (input.type == "select")   
     }); 
     
     // if(inpSelect !== ""){
@@ -307,11 +323,11 @@ export const regexCIN = (phone)=>{
     const regex = /^\d{12}$/;
     return regex.test(phone);
 }
-export const regexNumber = (num)=>{
-    const regex = /^\d{1,10}$/;
-    return regex.test(num);
-}
 
+export const regexNumber = (value)=>{
+    const regex = /^\d{1,10}$/;
+    return regex.test(value);
+}
 
 function inputNormal(val){
     val.style.border = "1px solid black";
@@ -349,6 +365,9 @@ export const alertErreur = (inputs) => {
                     styleErrorInput(inputs[i]);
                 }
                 else if(id == "password" && regexPassword(value) == false){
+                    styleErrorInput(inputs[i]);
+                }
+                else if(clas == "getDateLimite" && !validDateLimite(document.querySelector(".dateLimite"))){
                     styleErrorInput(inputs[i]);
                 }
                 else{

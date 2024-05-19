@@ -43,7 +43,7 @@ const openWindowUpdateClient = (id, data) => {
                 </div>
                 <div class="group_input_file">
                     <label for="photoCli">Télecharger image</label>
-                    <input class="inpData photo" name="photoCli" type="file" value="${data.photoCli}">
+                    <input class="inpData photo" name="photoCli" type="file" value="../${data.photoCli}">
                 </div>
             </div>
             <div class="dispaly_input">

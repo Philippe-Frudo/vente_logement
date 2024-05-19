@@ -22,9 +22,10 @@ class Acheter {
 
     }
 
-    function insertAchat($dbo, $codeCli, $numLog, $typeVente, $dateLimite){
-        $cmd = "INSERT INTO acheter(codeCli, numLog, typeVente, dateLimite) 
-                VALUES (:codeCli, :numLog, :typeVente, :dateLimite)";
+    function insertAchat($dbo, $codeCli, $numLog, $dateLimite){
+        // $typeVente,  typeVente,  :typeVente, 
+        $cmd = "INSERT INTO acheter(codeCli, numLog, dateLimite) 
+                VALUES (:codeCli, :numLog, :dateLimite)";
         
         $query = $dbo->conn->prepare($cmd);
         try {
@@ -32,13 +33,16 @@ class Acheter {
                 [
                     ":codeCli"=>$codeCli, 
                     ":numLog"=>$numLog, 
-                    ":typeVente"=>$typeVente, 
+                    // ":typeVente"=>$typeVente, 
                     ":dateLimite"=>$dateLimite
                 ]);
-            return "Achat succes";
+            return 1;
+            // return "Achat succes";
 
         } catch (Exception $e) {
-            return "Erreur lors de l'ajout du acheter" . $e->getMessage();
+            echo "Erreur lors de l'ajout du acheter" . $e->getMessage();
+            return 0;
+            // return "Erreur lors de l'ajout du acheter" . $e->getMessage();
         }
     }
 

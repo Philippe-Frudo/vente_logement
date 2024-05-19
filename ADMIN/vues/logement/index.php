@@ -39,6 +39,7 @@
                                 <td>Cite</td>
                                 <td>Province</td>
                                 <td> Agence</td>
+                                <td>Acheter</td>
                                 <td>Modifier</td>
                                 <td>Supprimer</td>
                             </tr>
@@ -89,6 +90,7 @@
     <!-- AJOUTER NOUVEAU LONGEMENT -->
     <?php require_once("./formAddLog.php"); ?>
     <?php require_once("./formUpdateLog.php"); ?>
+    <?php require_once("./formAcheter.php"); ?>
 
 
     <div id="contentMessage">

@@ -16,6 +16,7 @@
                     </div>
                 </div>
                 <div class="input">
+                    <div class="dispaly_input">
                         <div class="group_input">
                             <label for="#">Prix</label>
                             <input class="inputData prixLog" name="prixLog" type="text" placeholder="">  
@@ -57,7 +58,7 @@
                 </div>
             </form>
         </div>
-    </div>
+</div>
 
             
                 <!-- <div class="select">

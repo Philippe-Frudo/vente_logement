@@ -3,7 +3,7 @@ class Logement {
     
     function getAllLog($dbo, $search){
         //WHERE l.descLog =:descLog OR p.nomProvince =:province OR a.libAg=:libAg
-        $cmd = "SELECT l.numLog, l.photoLog, l.prixLog, t.superficieTer, l.descLog, l.codeCite, c.libCite, a.libAg, CONCAT(a.codeProvince, ' ' , p.nomProvince) AS Province 
+        $cmd = "SELECT  l.photoLog, l.numLog, l.prixLog, t.superficieTer, l.descLog, l.codeCite, c.libCite, a.libAg, CONCAT(a.codeProvince, ' ' , p.nomProvince) AS Province 
                 FROM logement l
                 LEFT JOIN cite c ON c.codeCite = l.codeCite
                 LEFT JOIN terrain t ON t.numTer = l.numTer
@@ -33,15 +33,18 @@ class Logement {
                     ":descLog"=>$descLog,
                     ":photoLog"=>$photoLog
                 ]);
-            return "Un nouveaux logement a ete ajoute";
+                return 1;
+            // return "Un nouveaux logement a ete ajoute";
 
         } catch (Exception $e) {
-            return "Erreur lors de l'ajout du logement" . $e->getMessage();
+            return 0;
+            // return "Erreur lors de l'ajout du logement" . $e->getMessage();
         }
     }
 
-    function updateLog($dbo, $numLog, $prixLog, $codeCite, $numTer, $descLog, $photoLog){
-        $cmd = "UPDATE logement SET prixLog=:prixLog, codeCite=:codeCite, numTer=:numTer, descLog=:descLog, photoLog=:photoLog
+    function updateLog($dbo, $numLog, $prixLog, $descLog, $photoLog){
+        // $numTer, $codeCite, codeCite=:codeCite, numTer=:numTer, 
+        $cmd = "UPDATE logement SET prixLog=:prixLog, descLog=:descLog, photoLog=:photoLog
                 WHERE numLog=:numLog";
         
         $query = $dbo->conn->prepare($cmd);
@@ -49,17 +52,19 @@ class Logement {
             $query->execute(
                 [
                     ":prixLog"=>$prixLog, 
-                    ":codeCite"=>$codeCite, 
-                    ":numTer"=>$numTer, 
+                    // ":codeCite"=>$codeCite, 
+                    // ":numTer"=>$numTer, 
                     ":descLog"=>$descLog,
                     ":numLog"=>$numLog,
                     ":photoLog"=>$photoLog
                 ]);
             
-            return "Modification logement reussite";
+            return 1;
+            // return "Modification logement reussite";
 
         } catch (Exception $e) {
-            return "Echec de la modification de logement" . $e->getMessage();
+            return 0;
+            // return "Echec de la modification de logement" . $e->getMessage();
         }
     }
 

@@ -23,10 +23,10 @@ if ( isset($action ) && !empty($action ) ) {
     elseif ($action  == "insertAchat") {
         $codeCli = $_POST["codeCli"];
         $numLog = $_POST["numLog"];
-        $typeVente = $_POST["typeVente"];
+        // $typeVente = $_POST["typeVente"];
         $dateLimite = $_POST["dateLimite"];
 
-        $res = $acheter->insertAchat($dbo, $codeCli, $numLog, $typeVente, $dateLimite);
+        $res = $acheter->insertAchat($dbo, $codeCli, $numLog, $dateLimite);
         echo $res;
     }
 
