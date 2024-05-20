@@ -24,7 +24,8 @@
                 <div class="recentOrders">
                     <div class="cardHeader">
                         <h2>LOGEMENT EN COURS DE PAYEMENT</h2>
-                        <a href="#" class="btn">Ajouter Nouveau</a>
+                        <a style="display: none;" href="#" class="btn">Ajouter Nouveau</a>
+                        <input type="text" placeholder="Votre recherche" style="padding-left: 0.5rem;">
                     </div>
 
                     <table style="overflow-x: auto;">
@@ -44,45 +45,25 @@
                                 <td>Prix</td>
                                 <td>Cite</td>
                                 <td>Lieu</td>
-                                <td>Type de vente</td>
+                                <td>Mode payement</td>
                                 <td>Date de vente</td>
-                                <td>Reste a payer</td>
                                 <td>Date de limite</td>
                                 <td>Total de payement</td>
+                                <td>Reste a payer</td>
                                 <td>Nombre de payement</td>
-                                <td>Action</td>
-                                <td>Payement</td>
-                   
+                                <td>Detaille</td>
+                                <td>Nouveau Payement</td>
+                                <td>Supprimer</td>
+                                <td>Imprimer</td>
                             </tr>
                         </thead>
-
                          <tbody id="listeLogement">
-                            <!--<tr class="tr liste_terrain">
-                                <td><span class="status delivered">Delivered</span></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td class="action">
-                                    <div class="tr_hover">
-                                        <a href="#"><img src=<?php //echo FOLDER_ICON . "icons8_eye_60px_4.png"; ?> ></a>
-                                        <a href="#"><img src=<?php //echo FOLDER_ICON . "icons8_edit_48px_1.png"; ?> ></a>
-                                        <a href="#"><img src=<?php //echo FOLDER_ICON . "icons8_trash_can_48px.png"; ?> ></a>
-                                    </div>
-                                    <div class="tr_dishover">
-                                        <a href="#"><img src=<?php //echo FOLDER_ICON . "icons8_eye_60px_5.png"; ?> ></a>
-                                        <a href="#"><img src=<?php //echo FOLDER_ICON . "icons8_edit_48px_2.png"; ?> class="edit_log" ></a>
-                                        <a href="#"><img src=<?php //echo FOLDER_ICON . "icons8_remove_48px_2.png"; ?> class="delete_log" ></a>
-
-                                    </div>
-                                </td>
-                            </tr> -->
 
                         </tbody>
                     </table>
                 </div>
                 <div>
-                    <p>Nombre total de logement acheter: <strong><span id="nobreTotalAcheter"></span></strong></p>
+                    <p>Nombre total de logement vendu: <strong><span id="nobreTotalAcheter"></span></strong></p>
                 </div>
             </div>
             </div>
@@ -90,7 +71,11 @@
 
     <!-- AJOUTER NOUVEAU ACHAT -->
     <?php require_once("./formAddPayement.php"); ?>
+    <?php require_once("./detailsPay.php"); ?>
     
+    <div id="contentMessage">
+        <p id="message">Voici une message</p>
+    </div>
 
     <!----------------- Scripts -------------->
     <script>

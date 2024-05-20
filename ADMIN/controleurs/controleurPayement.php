@@ -19,11 +19,11 @@ if ( isset($action) && !empty($action) ) {
         $res = $payement->getAllPayer($dbo, $search);
         echo json_encode($res);
     }
-
+    
     elseif ($action == "insertPayer") {
         $numLog = (int)($_POST["numLog"]);
-        $codePayer = $_POST["codeP"];
-        $montantPayer = (int)($_POST["montantP"]);
+        $codePayer = $_POST["codePay"];
+        $montantPayer = (int)($_POST["montantPay"]);
         $modePayer = $_POST["modePay"];
 
         $res = $payement->insertPayer($dbo, $codePayer, $montantPayer, $numLog, $modePayer);
@@ -32,7 +32,7 @@ if ( isset($action) && !empty($action) ) {
     }
 
     elseif ($action == "updatePayer") {
-
+        
         $codePayement = $_POST["codePay"];
         $montantPayer = $_POST["montantPay"];
         $numLog = $_POST["numLog"];
@@ -49,6 +49,12 @@ if ( isset($action) && !empty($action) ) {
         echo $res;
     }
 
+    else if ($action == "getBy") {
+        $numLog = $_POST["numLog"];
+
+        $res = $payement->getBy($dbo, $numLog);
+        echo json_encode($res);
+    }
 
 }
 

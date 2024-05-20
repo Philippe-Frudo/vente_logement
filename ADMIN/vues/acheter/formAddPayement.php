@@ -1,4 +1,3 @@
-
 <div class="fenetre_modale_ajout_log">
         <div class="formulaire">
             <div class="paragraphe">
@@ -8,7 +7,7 @@
             <form action="#" id="formAddPayement" class="form_input">
                 <div class="group_input">
                     <label for="numLog">N logement</label>
-                    <input class="inputData" name="numLog" type="text" value="15" disabled>
+                    <input class="inputData getNumLog" name="numLog" type="text" disabled>
                 </div>
                 <div class="group_input">
                     <label for="modePay">Mode de payement</label>

@@ -4,7 +4,7 @@ class Acheter {
     
     function getAllAchat($dbo, $search){
         //WHERE l.descachet =:descachet OR p.nomProvince =:province OR a.libAg=:libAg
-        $cmd = "SELECT c.codeCli, c.nomCli, c.prenomCli, c.telCli, c.adrsCli, a.numLog, l.prixLog, a.typeVente, a.dateVente, a.dateLimite, CONCAT(l.codeCite ,' ', cite.libCite) AS cite, prov.nomProvince, (l.prixLog - SUM(p.montantPayer)) AS reste, SUM(p.montantPayer) AS totalPay, COUNT(p.codePayement) AS nombrePay FROM acheter a
+        $cmd = "SELECT c.codeCli, c.nomCli, c.prenomCli, c.telCli, c.adrsCli, a.numLog, l.prixLog, a.typeVente, a.dateVente, a.dateLimite, CONCAT(l.codeCite ,' ', cite.libCite) AS cite, prov.nomProvince, p.modePayement ,(l.prixLog - SUM(p.montantPayer)) AS reste, SUM(p.montantPayer) AS totalPay, COUNT(p.codePayement) AS nombrePay FROM acheter a
                 LEFT JOIN client c ON c.codeCli = a.codeCli
                 LEFT JOIN logement l ON l.numLog = a.numLog
                 LEFT JOIN cite ON cite.codeCite = l.codeCite 

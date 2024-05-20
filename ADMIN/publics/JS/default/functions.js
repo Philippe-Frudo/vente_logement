@@ -1,15 +1,15 @@
-const addForm = document.querySelector(".fenetre_modale_ajout_log");
+export const addForm = document.querySelector(".fenetre_modale_ajout_log");
 
 const btnOpenWindow = document.querySelector(".btn");
 const btnCloseWindow = document.querySelectorAll(".close");
-const btnCloseWindowAcheter = document.querySelectorAll("#close");
-
+const close = document.querySelector("#close");
 const message = document.querySelector("#contentMessage");
 const imgChange = document.querySelector("#imgChange img");
 const getFile = document.querySelector("form input[type='file']");
 
 export const updateForm = document.querySelector("#fenetreUpdate");
 export const formAcheter = document.querySelector("#formAcheter");
+export const containerDetailsPay = document.querySelector("#containerDetailsPay");
 
 export function openWindow(form) {
     form.classList.add("ajout");
@@ -21,6 +21,10 @@ export function closeWindow(form) {
 
 btnOpenWindow.addEventListener("click" , ()=>{
     openWindow(addForm);
+});
+
+close.addEventListener("click" , ()=>{
+    closeWindow(containerDetailsPay);
 });
 
 btnCloseWindow.forEach(btn =>{
@@ -49,9 +53,9 @@ export const srcChange = (inptut)=>{
     imgChange.src = URL.createObjectURL(inptut.files[0]);
 }
 
-getFile.addEventListener("change", (e)=>{
-    srcChange(e.target)
-});
+// getFile.addEventListener("change", (e)=>{
+//     srcChange(e.target)
+// });
 
 // document.querySelector('form .reset').addEventListener("click", ()=>{ 
 //     clearInputs();

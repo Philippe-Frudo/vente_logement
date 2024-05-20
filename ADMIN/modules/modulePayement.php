@@ -6,8 +6,8 @@ class Payement {
         //WHERE l.descPayer =:descPayer OR p.nomProvince =:province OR a.libAg=:libAg
         $cmd = "SELECT *, SUM(p.montantPayer) AS Total_Montant_P FROM  payement p
                 LEFT JOIN logement l ON l.numLog = p.numLog
-                GROUP BY p.numLog
-                ORDER BY p.numLog ASC";
+                GROUP BY p.datePayement ASC";
+
 
         $query = $dbo->conn->prepare($cmd);
         $query->execute();
@@ -29,11 +29,11 @@ class Payement {
                     ":modePayement"=>$modePayer
                 ]);
                 return 1;
-            return "Ajout payement succes";
+            // return "Ajout payement succes";
 
         } catch (Exception $e) {
             return 0;
-            return "Erreur lors de l'ajout du payement" . $e->getMessage();
+            // return "Erreur lors de l'ajout du payement" . $e->getMessage();
         }
     }
 
@@ -51,7 +51,8 @@ class Payement {
                     ":modePayement"=>$modePayer
                 ]);
             
-            return "Modification payement reussite";
+            return 1;
+            // return "Modification payement reussite";
 
         } catch (Exception $e) {
             return "Echec de la modification de payement" . $e->getMessage();
@@ -64,13 +65,22 @@ class Payement {
 
         try {
             $query->execute([":codePayement"=>$codeP]);
-            return "Suppression d'achat succes";
+            return 1;
+            // return "Suppression d'achat succes";
 
         } catch (Exception $e) {
             return "Erreur lors de la suppression d'achat" . $e->getMessage();
         }
     }
 
+    function getBy($dbo, $numLog){
+        $cmd = "SELECT * FROM payement WHERE numLog=:numLog  ORDER BY datePayement ";
+
+        $query = $dbo->conn->prepare($cmd);
+        $query->execute( [":numLog"=>$numLog ]);
+        $res = $query->fetchAll(PDO::FETCH_ASSOC);
+        return $res;
+    }
 
 }
 
