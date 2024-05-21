@@ -2,7 +2,6 @@
 
 <?php require_once("../header/header.php"); ?>
     <title>AGENCE</title>
-
     <!----------------- Style -------------->
     <link rel="stylesheet" href=<?php echo default_global_CSS; ?> >
     <link rel="stylesheet" href=<?php echo default_fenetre_CSS; ?> >
@@ -26,20 +25,18 @@
                         <h2>AGENCES</h2>
                         <a href="#" class="btn">Ajouter Nouveau</a>
                     </div>
-
                     <table>
                         <thead class="liste_terrain">
                             <tr>
                                 <td>Code</td>
-                                <td style="width: 0;"></td>
                                 <td>Libélé</td>
                                 <td>Adresse</td>
                                 <td>Telephone</td>
                                 <td>Province</td>
-                                <td>Action</td>
+                                <td>Modifier</td>
+                                <td>Supprimer</td>
                             </tr>
                         </thead>
-
                         <tbody id="listeAg">
     
                         </tbody>
@@ -52,10 +49,13 @@
         </div>
     </div>
 
-
     <!-- AJOUTER NOUVEAU AGENCE -->
     <?php require_once("./formAddAgence.php"); ?>
+    <?php require_once("./formUpdateAg.php"); ?>
     
+    <div id="contentMessage">
+        <p id="message">Voici une message</p>
+    </div>
     <!----------------- Scripts -------------->
     <script>
         document.querySelector(".navigation ul li.linkAgence").classList.add("hovered");

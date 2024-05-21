@@ -32,7 +32,7 @@ document.querySelector(".CIN").addEventListener("input", (e)=>{
 //FETCH START
 fetchData(urlCli, "getAllCli",  {}).then(data => { dataClients(data) });
 
-const openWindowUpdateClient = (id, data) => {
+const openWindowUpdate = (id, data) => {
     const client = data;
     if (data.codeCli == id) {
 
@@ -166,10 +166,9 @@ const showDataClient = (data) => {
 
     imgUpdate.addEventListener("click", (e)=>{
         const id = e.target.parentElement.id
-        openWindowUpdateClient(id, client);
+        openWindowUpdate(id, client);
         openWindow(updateForm);
     });
-
 
     let supp = createElement("td", {id: client.codeCli}, "");
     let imgSupp = createElement("img", {src:"../../publics/icon/icons8_trash_can_48px.png", 

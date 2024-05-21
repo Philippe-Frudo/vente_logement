@@ -353,7 +353,6 @@ export const alertErreur = (inputs) => {
         let value = inputs[i].value.trim();
         let clas = inputs[i].className;
         let id = inputs[i].id;
-        //console.log(clas);
 
        if(value !== "" && nameClass !== "prenomCli"){
           

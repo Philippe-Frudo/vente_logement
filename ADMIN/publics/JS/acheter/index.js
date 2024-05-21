@@ -214,7 +214,6 @@ const showDataAchat = (data) => {
                 resteP.style.color = "red";
             }
             
-            
             tr.append(nom);
             tr.append(prenom);
             tr.append(phone);

@@ -26,11 +26,12 @@ class Agence {
                     ":passwordAg"=>$password
                 ]);
           
+            return 1;
             return "Une nouvelle agence a ete cree";
 
         } catch (Exception $e) {
-            
-            return "Erreur lors de l'ajout d'une nouvelle Aagence" .  $e->getMessage();
+            return 0;
+            // return "Erreur lors de l'ajout d'une nouvelle Aagence" .  $e->getMessage();
         }
     }
 
@@ -50,10 +51,12 @@ class Agence {
                     ":passwordAg"=>$password
                 ]);
             
-            return "Modification d'une agence reussite";
+            return 1;
+            // return "Modification d'une agence reussite";
 
         } catch (Exception $e) {
-            return "Echec de la modification de agence" . $e->getMessage();
+            return 0;
+            // return "Echec de la modification de agence" . $e->getMessage();
         }
     }
 
@@ -63,10 +66,12 @@ class Agence {
 
         try {
             $query->execute([":codeAg"=>$codeAg]);
-            return "L'agence a ete supprime";
+            return 1;
+            // return "L'agence a ete supprime";
 
         } catch (Exception $e) {
-            return "Erreur lors de la suppression de l'agence" . $e->getMessage();
+            echo "Erreur lors de la suppression de l'agence" . $e->getMessage();
+            return 0;
         }
     }
 
