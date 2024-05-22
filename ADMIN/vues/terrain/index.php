@@ -27,18 +27,18 @@
                         <h2>Terrains</h2>
                         <a href="#" class="btn">Ajouter Nouveau</a>
                     </div>
-
                     <table>
                         <thead class="liste_terrain">
                             <tr>
                                 <td>Numero</td>
                                 <td>Superficie</td>
-                                <td>Action</td>
+                                <td>Modifier</td>
+                                <td>Supprimer</td>
                             </tr>
                         </thead>
 
-                        <tbody id="liste_terrain">
-                            
+                        <tbody id="liste_terrain" class="liste_terrain">
+
                         <!-- <tr  class="tr liste_terrain">
                                 <td><span class="status delivered">Delivered</span></td>
                                 <td><span class="status delivered">Delivered</span></td>
@@ -55,7 +55,6 @@
                                     </div>
                                 </td>
                             </tr> -->
-
                         </tbody>
                     </table>
                 </div>
@@ -69,7 +68,11 @@
 
     <!-- AJOUTER NOUVEAU TERRAIN -->
     <?php require_once("./formAddTer.php"); ?>
+    <?php require_once("./formUpdateTer.php"); ?>
 
+    <div id="contentMessage">
+        <p id="message">Voici une message</p>
+    </div>
 
     <!----------------- Scripts -------------->
     <script>

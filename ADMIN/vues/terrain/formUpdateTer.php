@@ -1,10 +1,10 @@
-<div class="fenetre_modale_ajout_log">
+<div class="fenetre_modale_ajout_log" id="formUpdate">
         <div class="formulaire">
             <div class="paragraphe">
-                <p>Nouveau Terrain</p>
+                <p>Modification du terrain</p>
                 <img src=<?php echo FOLDER_ICON . "icons8_cancel_64px_1.png"; ?> class="close" id="close">
             </div>
-            <form action="#" id="formAddTer" class="form_input">
+            <form action="#" id="formUpdateTer" class="form_input">
                 <div class="hiddene">
                     <table>
                         <thead>
@@ -14,29 +14,6 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <!-- LISTE EFA VITA AJOUTER -->
-                            <!-- <tr>
-                                <td>
-                                    <div>
-                                        <img src=<?php //echo FOLDER_ICON . "icons8_menu_rounded_100px.png"; ?> >
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="supperficie">
-                                        <input type="text" disabled>
-                                        <p>590000 km<sup>2</sup></p>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="cart_remove">
-                                        <a href="#">
-                                            <img src=<?php //echo FOLDER_ICON . "icons8_delete_60px.png"; ?> >
-                                        </a>
-                                    </div>
-                                </td>
-                            </tr> -->
-
-                            <!-- FROMULAIRE HIAJOUTER -->
                             <tr>
                                 <td>
                                     <div>

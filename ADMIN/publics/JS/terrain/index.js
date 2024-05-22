@@ -1,144 +1,184 @@
-import { fetchData ,alertErreur, regexNumber, styleErrorInput, styleSuccesInput } from "../default/functions.js";
+import { addForm ,validField ,getsDataForm ,msgSucces ,fetchData ,alertErreur, regexNumber, styleErrorInput, styleSuccesInput } from "../default/functions.js";
 
 const urlTer = `http://localhost/gestion_vente_logement/ADMIN/controleurs/controleurTerrain.php`;
-const urlProv = `http://localhost/gestion_vente_logement/ADMIN/controleurs/controleurProvince.php
-`
+const urlProv = `http://localhost/gestion_vente_logement/ADMIN/controleurs/controleurProvince.php`
 
 //FETCH START
-fetchData(urlTer, "getAllTer", "POST").then(data =>{ dataTerrains(data) });
+
+const openWindowUpdate = (id, c) => {
+    document.getElementById("formUpdateTer").innerHTML = `
+    <div class="hiddene">
+        <table>
+            <thead>
+                <tr>
+                    <th>Ordre</th>
+                    <th>Superficie en km<sup>2</sup></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <div>
+                            <img src=<?php echo FOLDER_ICON . "icons8_menu_rounded_100px.png"; ?> >
+                        </div>
+                    </td>
+                    <td>
+                        <div>
+                            <input class="inpData" name="numTer" type="text" placeholder="Numero terrain">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="cart_remove">
+                            <img src=<?php echo FOLDER_ICON . "icons8_delete_60px.png"; ?> >
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div>
+                            <img src=<?php echo FOLDER_ICON . "icons8_menu_rounded_100px.png"; ?> >
+                        </div>
+                    </td>
+                    <td>
+                        <div>
+                            <input class=" inpData superficieTer" name="superficieTer" type="text" placeholder="Spurficie du terrain en m2">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="cart_remove">
+                            <img src=<?php echo FOLDER_ICON . "icons8_delete_60px.png"; ?> >
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+            </table>
+            </div>
+            <div class="button_ajout_log">
+                <button type="reset">Annuler</button>
+                <button type="submit" class="modifier creer_terr">Créer</button>
+            </div>
+    `
+    document.querySelector(".modifier").addEventListener("click", (e)=>{
+        e.preventDefault();
+        const inputs = document.querySelectorAll("#fenetreUpdateTer .inpData");
+
+        if ( validField(inputs) ) {
+            const data = getsDataForm(inputs); 
+            fetchData(urlTer, "updateTer", data).then(res => { response(res) });  
+            function response(res) {
+                if (res) {
+                    msgSucces(`Terrain N: ${id} est modifie`);
+                    setTimeout(function () {location.reload() }, 1500);
+                }else{
+                msgError(`Verifier l'erreur`);
+                }
+            }       
+        }else{
+            alertErreur(inputs);
+        }
+    })
+}
+
+
+fetchData(urlTer, "getAllTer", {}).then(data =>{ dataTerrains(data) });
 const showDataTer = (data) => {
     let c = data;
-    return( `
-                <tr class="tr liste_terrain">
-                                <td>${c.numTer}</td>
-                                <td>${c.superficieTer}</td>
-                                <td class="action">
-                                    <div class="tr_hover">
-                                    <a href="#" id=${c.numTer} ><img src="../../publics/icon/icons8_eye_60px_4.png" ></a>
-                                    <a href="#" id=${c.numTer} ><img src= "../../publics/icon/icons8_edit_48px_1.png" ></a>
-                                    <a href="#" id=${c.numTer} ><img src= "../../publics/icon/icons8_trash_can_48px.png" ></a>
-                                    </div>  
-                                    <div class="tr_dishover">
-                                        <a href="#" id=${c.numTer} ><img src= "../../publics/icon/icons8_eye_60px_5.png" ></a>
-                                        <a href="#" id=${c.numTer} ><img src= "../../publics/icon/icons8_edit_48px_2.png" class="edit_log" ></a>
-                                        <a href="#" id=${c.numTer} ><img src= "../../publics/icon/icons8_remove_48px_2.png"  class="delete_log" ></a>
-                
-                                    </div>
-                                </td>
-                            </tr>
-            
-            `); 
 
-    document.querySelector(".tr_dishover .edit_log").addEventListener("click", (e)=>{
-        console.log(e.target.id);
+    let numTer = createElement("td", {},  c.numTer);
+    let superficieTer = createElement("td", {}, c.superficieTer );
+
+    let nouveau = createElement("td", {id: c.numLog}, "");
+    let img = createElement("img", {src:"../../publics/icon/icons8_edit_48px_1.png", 
+    class:"td_action btn", style:'object-fit: cover; width: 100%; max-width: 40px; padding: 5px; cursor: pointer;'}, "");
+    nouveau.append(img);
+    
+    imgPay.addEventListener("click", (e)=>{
+        const id = e.target.parentElement.id
+        openWindowUpdate(id, data);
+        openWindow(addForm);
     });
+
+    let supp = createElement("td", {id: c.numTer}, "");
+    let imgSupp = createElement("img", {src:"../../publics/icon/icons8_trash_can_48px.png", 
+    class:"td_action", style:'object-fit: cover; width: 100%; max-width: 40px; padding: 5px; cursor: pointer;'}
+    , "");
+    supp.append(imgSupp);
+
+    let btnImprimer = createElement("button", {id: c.numTer, class:"td_action",
+        style: "border: none; outline: none; padding: 0.5rem; background: #2a2185; cursor: pointer; color: #fff; display:none;"}, "Facture");
+    let tdImprimer = createElement("td", {id: c.numLog }, "");
+    tdImprimer.append(btnImprimer);
+
+
+    let tr = createElement("tr", { class:"tr" },  "");
+
+    supp.addEventListener("click", (e)=>{
+        const id = e.target.parentElement.id
+        const data = {"numCli":id}
+
+        if ( confirm(`Confirmez-vous la suppression de c N: ${id}`) ) {
+
+            fetchData(urlTer, "deleteTer", data).then(res => {response(res)});
+
+            function response(res) {
+                if (res) {
+                    msgSucces(`Terrain N: ${id} a supprime`);
+                    setTimeout(function () {location.reload() }, 1500)
+                }else{
+                    msgError(`Verifier l'erreur`);
+                }
+            }
+        }
+    });
+
+    tr.append(numTer);
+    tr.append(superficieTer);
+    tr.append(nouveau);
+    tr.append(supp);
+
+    document.getElementById("liste_terrain").append(tr);
+    
+
 }
 function dataTerrains(datas) {
+    console.log("Ok");
     let nombreTer = 0;
     datas.forEach(data => {
-        document.getElementById("liste_terrain").innerHTML += showDataTer(data);
+        showDataTer(data);
         nombreTer++;
     });
     document.getElementById("nombreTer").innerHTML = nombreTer;
-}
-
-//FETCH START
-// function fetchJSONPost(url_p, action, methode_p, data_p = {}) {
-//     const url = `${url_p}?action=${encodeURIComponent(action)}`;
-    
-//     const formData = new FormData();
-//     for( let [key, val] of Object.entries(data_p) ) {
-//         formData.append(key, val);
-//     }
-
-//     fetch(url, {
-//         method: methode_p,
-//         // headers : {"contentType":"application/json"},
-//         contentType: false,
-//         processData: false,
-//         body: formData
-//     })
-//     .then(res => {
-//         if (!res.ok) {
-//             throw new Error("Erreur lors de la requete")
-//         }
-//         return res;
-        
-//     })
-//     .then(response => {
-//         console.log(response);
-//         //location.reload();
-//         return response;
-//     })
-//     //.catch( e => console.log(e.Error, {cause : e}) );
-
-// }
-
-const getsDataForm = (inputsFields, inpFileImg) => {
-    const data = {};
-    inputsFields.forEach(input => {
-
-        let inpName = input.name.trim();
-        let inpValue = input.value.trim();
-        
-        if(input.type !== "file"){
-            data[inpName]= inpValue;
-        }    
-        else if(input.type == "file"){
-            let inpFileName = inpFileImg[0].name;
-            let fileIMG = inpFileImg[0].files[0];
-            data[inpFileName]= fileIMG;
-        }    
-    });    
-
-    // console.log(data);
-    return data;
-
-}
-
-
-const validField = (inputs) => {
-
-    for (let i = 0; i < inputs.length; i++) {
-        let nameClass = inputs[i].name;
-        let value = inputs[i].value;
-
-        if(nameClass !== "prenomCli"){
-            if (value.trim() == "") {
-                return false;
-            } 
-        }
-    }
-    return true
 }
 
 const validSuper = (v)=>{
     return regexNumber(v);
 }
 
-
 document.querySelector("#formAddTer").addEventListener("submit", (e) => {
     e.preventDefault();
-    const inputsFields =  e.target.querySelectorAll(" input");
+    const inputsFields =  e.target.querySelectorAll(".inpData");
     const superficie =  e.target.querySelector('input[name="superficieTer"]').value;
     const inpFileImg =  e.target.querySelectorAll(".group_input_file input");
 
     const valid = validField(inputsFields);
+    const data = getsDataForm(inputsFields);
+console.log(data);
+    if ( valid ) {
 
-    if ( valid && validSuper()) {
 
-        const data = getsDataForm(inputsFields, inpFileImg);
-        // console.log(data);
-        fetchData(urlTer, "insertTer", "POST", data ).then(res => console.log(res));
-        // location.reload();
+        fetchData(urlTer, "insertTer", "POST", data ).then(res => response(res));
+        function response(res) {
+            if (res) {
+                msgSucces(`Ajout success`);
+                setTimeout(function () {location.reload() }, 1500);
 
+            }else{
+               msgError(`Erreur lors de la requete`);
+            }
+        }       
     }else{
-        
-        const alertErreurs = alertErreur(inputsFields);
-        console.log("Invalid");
+        alertErreur(inputsFields);
     }
-
-
 });
 //FETCH END
 
@@ -150,54 +190,3 @@ document.querySelector(".superficieTer").addEventListener("keyup", (e)=>{
             styleSuccesInput(e.target);
         }
 });
-
-document.querySelector(".paragraphe .close").addEventListener("click", (e)=>{
-    if (e.target == "IMG") {
-        e.target.querySelector("img")
-    }
-    const m = e.target;
-    console.log(e.target);
-});
-
-
-
-
-
-
-
-
-// var cartShopBox = document.createElement("div");
-// cartShopBox.classList.add("card-box");
-
-// var tableHead = document.querySelector(".formulaire table tbody");
-
-// var cartBoxContent = `
-//                         <tr>
-//                             <td>
-//                                 <div>
-//                                     <img src="../../icon/icons8_menu_rounded_100px.png">
-//                                 </div>
-//                             </td>
-//                             <td>
-//                                 <div>
-//                                     <input type="text">
-//                                 </div>
-//                             </td>
-//                             <td>
-//                                 <div class="cart_remove">
-//                                     <img src="../../icon/icons8_delete_60px.png">
-//                                 </div>
-//                             </td>
-//                         </tr>
-//                     `;
-//     cartShopBox = cartBoxContent.innerHTML;
-
-// var creer_terr = document.querySelector(".creer_terr");
-//     creer_terr.addEventListener("click", ()=>{
-//         console.log("CLICK");
-//         tableHead.innerHTML += cartBoxContent;
-// })
-// var button = document.querySelector(".cart_remove");
-// button.addEventListener("click", ()=>{
-//     console.log("MOVE");
-// })

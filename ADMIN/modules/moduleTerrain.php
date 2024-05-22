@@ -24,10 +24,12 @@ class Terrain {
                     ":superficieTer"=>$superficieTer 
                 ]);
                 
-            return "L'ajout de terrain a ete succes";
-
+            return 1;
+            // return "L'ajout de terrain a ete succes";
+            
         } catch (Exception $e) {
-            return "Erreur lors de l'ajout de terrain" . $e->getMessage();
+            return 0;
+            // return "Erreur lors de l'ajout de terrain" . $e->getMessage();
         }
     }
 
@@ -42,10 +44,13 @@ class Terrain {
                     ":numTer"=>$numTer, 
                     ":superficieTer"=>$superficieTer 
                 ]);
-            return "Modification de terrain a ete succes";
+                return 1;
+            // return "Modification de terrain a ete succes";
 
         } catch (Exception $e) {
-            return "Erreur lors de la modification de terrain" . $e->getMessage();
+            echo "Erreur lors de la modification de terrain" . $e->getMessage();
+            return 0;
+            // return "Erreur lors de la modification de terrain" . $e->getMessage();
         }
     }
 
@@ -55,10 +60,13 @@ class Terrain {
 
         try {
             $query->execute([":numTer"=>$numTer]);
-            return "uppression du terrain a ete succes";
+            return 1;
+            // return "uppression du terrain a ete succes";
 
         } catch (Exception $e) {
-            return "Erreur lors de la suppression du terrain" . $e->getMessage();
+            echo "Erreur lors de la suppression du terrain" . $e->getMessage();
+            return 0;
+            // return "Erreur lors de la suppression du terrain" . $e->getMessage();
         }
     }
 }
