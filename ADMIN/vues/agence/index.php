@@ -23,6 +23,7 @@
                 <div class="recentOrders">
                     <div class="cardHeader">
                         <h2>AGENCES</h2>
+                        <input style="padding-left: 5px" id="myinputSearch" type="text" placeholder="Rechercher">
                         <a href="#" class="btn">Ajouter Nouveau</a>
                     </div>
                     <table>
@@ -37,7 +38,7 @@
                                 <td>Supprimer</td>
                             </tr>
                         </thead>
-                        <tbody id="listeAg">
+                        <tbody id="listeAg" class="myTable">
     
                         </tbody>
                     </table>

@@ -1,4 +1,4 @@
-<div class="fenetre_modale_ajout_log" id="containerDetailsPay">
+<div class="fenetre_modale_details" id="containerDetailsPay">
         <div class="formulaire">
             <div class="paragraphe">
                 <p>Historique de payement de logement</p>
@@ -21,8 +21,11 @@
                     </table>
                 </div>
                 <div>
-                    <p>Somme total: <strong class="totalPayement"></strong></p>
+                    <p>Prix du logement: <strong id="prixDuLog" ></strong></p>
+                    <p>total de payement: <strong class="totalPayement"></strong></p>
                     <p>Nombre de payement: <strong id="nobrePayenment" ></strong></p>
+                    <p>Retour: <strong id="retour" ></strong></p>
+                    <p>Reste: <strong id="reste" ></strong></p>
                 </div>
             </div>
         </div>

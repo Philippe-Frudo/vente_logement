@@ -32,8 +32,7 @@ if ( isset($action) && !empty($action) ) {
     
             $res = $terrain->insertTer($dbo, $numTer, $superficieTer);
             echo json_decode($res);
-            header("ContentType: application/json");
-            getD();
+            // header("ContentType: application/json");
         }
 
         elseif ($action == "updateTer") {
@@ -47,8 +46,12 @@ if ( isset($action) && !empty($action) ) {
         elseif ($action == "deleteTer") {
             $numTer = $_POST["numTer"];
 
-            $res = $terrain->deleteTer($dbo, $numTer, $superficieTer);
+            $res = $terrain->deleteTer($dbo, $numTer);
             echo $res;
+        }
+        elseif ($action == "getNumber") {
+            $res = $terrain->getNumber($dbo);
+            echo json_encode($res);
         }
 
 

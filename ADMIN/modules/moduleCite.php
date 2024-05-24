@@ -61,6 +61,13 @@ class Cite {
             return "Erreur lors de la suppression de cite" . $e->getMessage();
         }
     }
+    function getNumber($dbo){
+        $cmd = "SELECT COUNT(*) AS nombreCite FROM cite";
+        $query = $dbo->conn->prepare($cmd);
+        $query->execute();
+        $res = $query->fetchAll(PDO::FETCH_ASSOC);
+        return $res;
+    }
 
 }
 

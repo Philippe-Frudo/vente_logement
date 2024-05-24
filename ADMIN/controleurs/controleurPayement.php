@@ -51,11 +51,26 @@ if ( isset($action) && !empty($action) ) {
 
     else if ($action == "getBy") {
         $numLog = $_POST["numLog"];
-
         $res = $payement->getBy($dbo, $numLog);
         echo json_encode($res);
     }
+    
+    elseif ($action  == "getAllLimit") {
+        $res = $payement->getAllLimit($dbo);
+        echo json_encode($res);
+    }
 
+    elseif ($action  == "getSumManey") {
+        $res = $payement->getSumMoney($dbo);
+        echo json_encode($res);
+    }
+    
+    elseif ($action  == "getSumManeyMonthNow") {
+        $mois = date("n");
+        $res = $payement->getSumManeyMonthNow($dbo, $mois);
+        echo json_encode($res);
+    }
 }
+
 
 ?>

@@ -1,0 +1,166 @@
+body{
+    font-size: 120%;
+}
+
+#facture{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.sutiation{
+    font-weight: 100;
+    font-size: 13px;
+}
+
+.content{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 90vh;
+}
+
+/* *******************AJOUTER VENTE right****************** */
+
+.ajout_vente .vente_right{
+    position: relative;
+    width: 700px;
+    border-radius: 10px;
+    padding: 10px;
+    z-index: 9;
+    margin-top: -20px;
+}
+
+/*SHADOW*/
+.shadow{
+    z-index: 10000;
+    padding: 20px 0 50px;
+    margin-bottom: -15px;
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.637), 0 1px 5px rgba(0, 0, 0, 0.658);
+    min-height: 400px;
+}
+
+.facture{
+    margin: 0 50px;
+}
+
+.facture table{
+    width: 100%;
+}
+
+
+/*============ TABLE 1*/
+.facture .fact_title{
+    width: 100%;
+    text-align: left;
+    border-collapse: collapse;
+}
+
+/*left*/
+.fact_title .fact_title_left{
+    font-size: 25px;
+    font-weight: 900;
+    color: rgba(0, 0, 0, 0.829);
+}
+
+/*right*/
+.fact_title .fact_title_right{
+    font-size: 13px;
+    text-align: end;
+    line-height: 20px;
+}
+
+.fact_title_right .marg_left{
+    margin-right: 30px;
+}
+
+.fact_title_right .gras{
+    font-weight: 900;
+    color: rgba(0, 0, 0, 0.829);
+}
+
+
+/*============ TABLE 2*/
+.facture .address_cli{
+    text-align: left;
+    color: rgba(0, 0, 0, 0.829);
+    padding-bottom: 20px;
+    margin-bottom: 8px;
+    border-bottom: 2px dashed gray;
+}
+
+.facture .address_cli th{
+    font-size: 18px;
+    font-weight: 900;
+    padding-bottom: 5px;
+}
+
+.facture .address_cli td{
+    font-size: 12px;
+    color: rgba(0, 0, 0, 0.747);
+    font-weight: 900;
+    line-height: 20px;
+}
+
+
+/*============ TABLE 3*/
+.table_depense{
+    width: 100%;
+    text-align: left;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+    padding: 50px;
+    border-bottom: 2px dashed gray;
+}
+
+.quantity_center{
+    text-align: center;
+}
+
+.prix_end{
+    text-align: end;
+}
+
+.table_depense .vente_titre th{
+    background-color: rgba(0, 0, 0, 0.781);
+    padding: 5px;
+    color: #fff;
+    font-size: 15px;
+}
+
+.table_depense td{
+    font-size: 14px;
+    padding: 5px 0;
+    color: rgba(0, 0, 0, 0.747);
+    font-weight: 900;
+}
+
+.quantity_center.marge,
+.prix_end.marge,
+.medic.marge{
+    padding-bottom: 25px;
+}
+
+.quantity_center.total_quantity,
+.prix_end.total_prix{
+    border-top: 2px dashed gray;
+}
+
+
+
+/*===============ligne_bottom_table*/
+.ligne_bottom_table,
+.ligne_haut_adress_cli{
+    width: 100%;
+    height: 2px;
+    background-color: gray;
+    margin-top: 40px;
+}
+
+/*===============ligne_top_adress_cli*/
+.ligne_haut_adress_cli{
+    height: 3px;
+    margin: 20px 0 10px;
+}

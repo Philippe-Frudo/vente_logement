@@ -4,6 +4,41 @@ const urlAg = `http://localhost/gestion_vente_logement/ADMIN/controleurs/control
 const urlProv = `http://localhost/gestion_vente_logement/ADMIN/controleurs/controleurProvince.php`;
 
 
+//RECHERCHE
+function searchList(input) {
+    let filter, table, tr, i;
+    input = document.getElementById("myinputSearch");
+    filter = input.value.toUpperCase();
+    table = document.querySelector(".myTable");
+    tr = table.getElementsByTagName("tr");
+    for (i = 0; i < tr.length; i++) {
+
+      let td_code = tr[i].getElementsByTagName("td")[0];
+      let libele = tr[i].getElementsByTagName("td")[1];
+      let td_adrs = tr[i].getElementsByTagName("td")[2];
+      let td_tel = tr[i].getElementsByTagName("td")[3];
+      let td_province = tr[i].getElementsByTagName("td")[4];
+
+      if (td_code || libele || td_adrs || td_tel || td_province ) {
+        if (
+            td_code.innerText.toUpperCase().indexOf(filter) > -1 || 
+            libele.innerText.toUpperCase().indexOf(filter) > -1 || 
+            td_adrs.innerText.toUpperCase().indexOf(filter) > -1 || 
+            td_tel.innerText.toUpperCase().indexOf(filter) > -1 || 
+            td_province.innerText.toUpperCase().indexOf(filter) > -1
+        ) {
+          tr[i].style.display = "";
+        } else {
+          tr[i].style.display = "none";
+        }
+      }       
+    }
+  }
+  document.querySelector("#myinputSearch").addEventListener("input", (e)=>{
+    searchList(e.target);
+})
+
+
 //GET PROVINCE
 fetchData(urlProv, "getAllProv", "GET").then(data => { datasProv(data) });
 const showDataProv = (data) => {
@@ -17,8 +52,6 @@ function datasProv(datas){
 
 }
 //GET PROVINCE
-
-
 
 
 const openWindowUpdate = (id, data)=>{

@@ -16,7 +16,7 @@ if ( isset($action ) && !empty($action ) ) {
     if ($action  == "getAllAchat") {
         $search = empty($_POST["search"]) ?? "";
 
-        $res = $acheter->getAllAchat($dbo, $search, $search, $search, $search);
+        $res = $acheter->getAllAchat($dbo, $search);
         echo json_encode($res);
     }
 
@@ -46,6 +46,7 @@ if ( isset($action ) && !empty($action ) ) {
         $res = $acheter->deleteAchat($dbo, $codeCli, $numLog);
         echo $res;
     }
+
 
 
 }

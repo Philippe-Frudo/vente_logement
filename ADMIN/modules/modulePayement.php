@@ -8,7 +8,6 @@ class Payement {
                 LEFT JOIN logement l ON l.numLog = p.numLog
                 GROUP BY p.datePayement ASC";
 
-
         $query = $dbo->conn->prepare($cmd);
         $query->execute();
         $res = $query->fetchAll(PDO::FETCH_ASSOC);
@@ -78,6 +77,37 @@ class Payement {
 
         $query = $dbo->conn->prepare($cmd);
         $query->execute( [":numLog"=>$numLog ]);
+        $res = $query->fetchAll(PDO::FETCH_ASSOC);
+        return $res;
+    }
+
+    function getAllLimit($dbo){
+        $cmd = "SELECT c.nomCli, c.telCli, p.modePayement, p.montantPayer, p.datePayement 
+        FROM  payement p    
+        LEFT JOIN acheter a ON a.numLog = p.numLog
+        LEFT JOIN client c ON c.codeCli = a.codeCli
+        LEFT JOIN logement l ON l.numLog = p.numLog
+        ORDER BY p.datePayement DESC
+        LIMIT 5";
+
+        $query = $dbo->conn->prepare($cmd);
+        $query->execute();
+        $res = $query->fetchAll(PDO::FETCH_ASSOC);
+        return $res;
+    }
+
+    function getSumMoney($dbo){
+        $cmd = "SELECT SUM( montantPayer ) AS total FROM payement";
+        $query = $dbo->conn->prepare($cmd);
+        $query->execute();
+        $res = $query->fetchAll(PDO::FETCH_ASSOC);
+        return $res;
+    }
+
+    function getSumManeyMonthNow($dbo, $mois){
+        $cmd = "SELECT SUM( montantPayer ) AS total FROM payement WHERE MONTH(datePayement) = :mois";
+        $query = $dbo->conn->prepare($cmd);
+        $query->execute([":mois"=> $mois]);
         $res = $query->fetchAll(PDO::FETCH_ASSOC);
         return $res;
     }

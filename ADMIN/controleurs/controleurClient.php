@@ -17,7 +17,6 @@ if ( isset($action) && !empty($action) ) {
         $search = empty($_POST["searchCli"]) ?? "";
         $res = $client->getAllCli($dbo, $search);
         echo  json_encode($res);
-
     }
 
     if ($action == "getAllCli") {
@@ -90,13 +89,21 @@ if ( isset($action) && !empty($action) ) {
             echo json_encode($res);
         }
 
-
     }
     elseif ($action == "deleteCli") {
         $numCli = $_POST["numCli"];
         $res = $client->deleteCli($dbo, $numCli);
         echo json_encode($res);
     }
+    elseif ($action == "getNumber") {
+        $res = $client->getNumber($dbo);
+        echo  json_encode($res);
+    }
+    elseif ($action == "getAllLimit") {
+        $res = $client->getAllLimit($dbo);
+        echo  json_encode($res);
+    }
+
 
 }
 

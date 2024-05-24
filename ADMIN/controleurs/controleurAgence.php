@@ -18,14 +18,12 @@ if ( isset($action) && !empty($action) ) {
         echo json_encode($res);
         // header("location:json/application");
     }
-
     elseif ($action == "insertAg") {
         $libAg= $_POST["libAg"];
         $codeProvAg= $_POST["codeProvince"]; 
         $adrsAg= $_POST["adresseAg"]; 
         $telAg= $_POST["telAg"];
         $password = $_POST["passwordAg"];
-
         $res = $agence->insertAg($dbo, $libAg, $codeProvAg, $adrsAg, $telAg, $password);
 
         echo json_encode($res);
@@ -43,15 +41,16 @@ if ( isset($action) && !empty($action) ) {
         $res = $agence->updateAg($dbo, $codeAg, $libAg, $codeProvAg, $adrsAg, $telAg, $password);
         echo $res;
     }
-
     elseif ($action == "deleteAg") {
         $codeAg = $_POST["codeAg"];
         $res = $agence->deleteAg($dbo, $codeAg);
         echo $res;
     }
-
+    elseif ($action == "getNumber") {
+        $res = $agence->getNumber($dbo);
+        echo json_encode($res);
+    }
 
 }
-
 
 ?>

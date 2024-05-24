@@ -1,4 +1,4 @@
-import { addForm ,validField ,getsDataForm ,msgSucces ,fetchData ,alertErreur, regexNumber, styleErrorInput, styleSuccesInput } from "../default/functions.js";
+import { openWindow ,createElement ,addForm ,validField ,getsDataForm ,msgSucces ,fetchData ,alertErreur, regexNumber, styleErrorInput, styleSuccesInput } from "../default/functions.js";
 
 const urlTer = `http://localhost/gestion_vente_logement/ADMIN/controleurs/controleurTerrain.php`;
 const urlProv = `http://localhost/gestion_vente_logement/ADMIN/controleurs/controleurProvince.php`
@@ -79,7 +79,6 @@ const openWindowUpdate = (id, c) => {
     })
 }
 
-
 fetchData(urlTer, "getAllTer", {}).then(data =>{ dataTerrains(data) });
 const showDataTer = (data) => {
     let c = data;
@@ -92,7 +91,7 @@ const showDataTer = (data) => {
     class:"td_action btn", style:'object-fit: cover; width: 100%; max-width: 40px; padding: 5px; cursor: pointer;'}, "");
     nouveau.append(img);
     
-    imgPay.addEventListener("click", (e)=>{
+    img.addEventListener("click", (e)=>{
         const id = e.target.parentElement.id
         openWindowUpdate(id, data);
         openWindow(addForm);
@@ -109,14 +108,13 @@ const showDataTer = (data) => {
     let tdImprimer = createElement("td", {id: c.numLog }, "");
     tdImprimer.append(btnImprimer);
 
-
     let tr = createElement("tr", { class:"tr" },  "");
 
     supp.addEventListener("click", (e)=>{
         const id = e.target.parentElement.id
-        const data = {"numCli":id}
+        const data = {"numTer":id}
 
-        if ( confirm(`Confirmez-vous la suppression de c N: ${id}`) ) {
+        if ( confirm(`Confirmez-vous la suppression du terrain N: ${id}`) ) {
 
             fetchData(urlTer, "deleteTer", data).then(res => {response(res)});
 
@@ -137,11 +135,9 @@ const showDataTer = (data) => {
     tr.append(supp);
 
     document.getElementById("liste_terrain").append(tr);
-    
 
 }
 function dataTerrains(datas) {
-    console.log("Ok");
     let nombreTer = 0;
     datas.forEach(data => {
         showDataTer(data);
@@ -151,27 +147,22 @@ function dataTerrains(datas) {
 }
 
 const validSuper = (v)=>{
-    return regexNumber(v);
+    return regexNumber(v.value);
 }
 
 document.querySelector("#formAddTer").addEventListener("submit", (e) => {
     e.preventDefault();
     const inputsFields =  e.target.querySelectorAll(".inpData");
-    const superficie =  e.target.querySelector('input[name="superficieTer"]').value;
+    const superficie =  e.target.querySelector('input[name="superficieTer"]');
     const inpFileImg =  e.target.querySelectorAll(".group_input_file input");
 
-    const valid = validField(inputsFields);
-    const data = getsDataForm(inputsFields);
-console.log(data);
-    if ( valid ) {
-
-
-        fetchData(urlTer, "insertTer", "POST", data ).then(res => response(res));
+    if ( validField(inputsFields) && validSuper(superficie) ) {
+        const data = getsDataForm(inputsFields);
+        fetchData(urlTer, "insertTer", data ).then(res => response(res));
         function response(res) {
             if (res) {
                 msgSucces(`Ajout success`);
                 setTimeout(function () {location.reload() }, 1500);
-
             }else{
                msgError(`Erreur lors de la requete`);
             }

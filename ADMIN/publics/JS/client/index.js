@@ -2,6 +2,42 @@ import { createElement, srcChange ,msgError, msgSucces, clearInputs ,getsDataFor
 
 const urlCli = "http://localhost/gestion_vente_logement/ADMIN/controleurs/controleurClient.php";
 
+function searchList(input) {
+    let filter, table, tr, td, i, txtValue;
+    input = document.getElementById("myinputSearch");
+    filter = input.value.toUpperCase();
+    table = document.querySelector(".myTable");
+    tr = table.getElementsByTagName("tr");
+    for (i = 0; i < tr.length; i++) {
+
+      let td_nom = tr[i].getElementsByTagName("td")[1];
+      let td_prenom = tr[i].getElementsByTagName("td")[2];
+      let td_CIN = tr[i].getElementsByTagName("td")[3];
+      let td_profession = tr[i].getElementsByTagName("td")[4];
+      let td_adrs = tr[i].getElementsByTagName("td")[5];
+      let td_tel = tr[i].getElementsByTagName("td")[6];
+      let td_sexe = tr[i].getElementsByTagName("td")[7];
+
+      if (td_nom || td_prenom || td_CIN || td_profession || td_adrs || td_tel || td_sexe ) {
+        if (
+            td_nom.innerText.toUpperCase().indexOf(filter) > -1 || 
+            td_prenom.innerText.toUpperCase().indexOf(filter) > -1 || 
+            td_CIN.innerText.toUpperCase().indexOf(filter) > -1 || 
+            td_profession.innerText.toUpperCase().indexOf(filter) > -1 || 
+            td_adrs.innerText.toUpperCase().indexOf(filter) > -1 || 
+            td_tel.innerText.toUpperCase().indexOf(filter) > -1 || 
+            td_sexe.innerText.toUpperCase().indexOf(filter) > -1 
+        ) {
+          tr[i].style.display = "";
+        } else {
+          tr[i].style.display = "none";
+        }
+      }       
+    }
+  }
+  document.querySelector("#myinputSearch").addEventListener("input", (e)=>{
+    searchList(e.target);
+})
 
 const tel = (champs)=>{
     if (regexPhone(champs.value) == false) { 

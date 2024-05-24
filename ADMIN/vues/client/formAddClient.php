@@ -2,7 +2,7 @@
         <div class="formulaire">
             <div class="paragraphe">
                 <p>Nouveau Client</p>
-                <img src=<?php echo FOLDER_ICON . "icons8_cancel_64px_1.png"; ?> class="close">
+                <img src=<?php echo FOLDER_ICON . "icons8_cancel_64px_1.png"; ?> class="close" id="close">
             </div>
             <form action="#" class="form_input" id="formAddClient">
                 <div id="imgChange" class="photo_logement_ajo" >

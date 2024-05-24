@@ -1,12 +1,9 @@
-import { validDateLimite ,formAcheter, updateForm ,openWindow  ,createElement, fetchData, getDataForm, validChammps, regexNumber, getsDataForm, validField, validPhone, validPassword, alertErreur, styleErrorInput, styleSuccesInput, regexPhone, regexCIN, regexPassword, regexEmail  } from "../default/functions.js";
+import { close  ,validDateLimite ,formAcheter, updateForm ,openWindow  ,createElement, fetchData, getDataForm, validChammps, regexNumber, getsDataForm, validField, validPhone, validPassword, alertErreur, styleErrorInput, styleSuccesInput, regexPhone, regexCIN, regexPassword, regexEmail  } from "../default/functions.js";
 
 const urlPay = `http://localhost/gestion_vente_logement/ADMIN/controleurs/controleurPayement.php`
 
-
-
-
 //DATA LOGEMENT
-fetchData(urlPay, "getAllPayer", {}).then(data => { console.log(data) });
+fetchData(urlPay, "getAllPayer", {}).then(data => { datasPayement(data) });
 const openWindowUpdateLog = (id, data) => {
     const c = data;
     if (c.numLog == id) {

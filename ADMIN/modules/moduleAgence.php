@@ -74,6 +74,13 @@ class Agence {
             return 0;
         }
     }
-
+        
+    function getNumber($dbo){
+        $cmd = "SELECT COUNT(*) AS nombreAg FROM agence";
+        $query = $dbo->conn->prepare($cmd);
+        $query->execute();
+        $res = $query->fetchAll(PDO::FETCH_ASSOC);
+        return $res;
+    }
 
 }

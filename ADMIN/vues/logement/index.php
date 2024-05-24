@@ -25,6 +25,7 @@
                 <div class="recentOrders">
                     <div class="cardHeader">
                         <h2>Logements</h2>
+                        <input style="padding-left: 5px" id="myinputSearch" type="text" placeholder="Rechercher">
                         <a href="#" class="btn">Ajouter Nouveau</a>
                     </div>
 
@@ -48,7 +49,7 @@
                         <!-- SUPPRESSION LONGEMENT -->
                         <?php require_once("./formDeleteLog.php") ?>
 
-                        <tbody id="listeLogement">
+                        <tbody id="listeLogement" class="myTable">
 
                             <!-- <tr class="tr">
                                 <td class="photo_log">

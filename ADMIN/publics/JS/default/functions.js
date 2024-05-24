@@ -1,15 +1,15 @@
 export const addForm = document.querySelector(".fenetre_modale_ajout_log");
+export const close = document.querySelector("#close");
 
 const btnOpenWindow = document.querySelector(".btn");
 const btnCloseWindow = document.querySelectorAll(".close");
-const close = document.querySelector("#close");
 const message = document.querySelector("#contentMessage");
 const imgChange = document.querySelector("#imgChange img");
 const getFile = document.querySelector("form input[type='file']");
 
 export const updateForm = document.querySelector("#fenetreUpdate");
 export const formAcheter = document.querySelector("#formAcheter");
-export const containerDetailsPay = document.querySelector("#containerDetailsPay");
+
 
 export function openWindow(form) {
     form.classList.add("ajout");
@@ -21,10 +21,6 @@ export function closeWindow(form) {
 
 btnOpenWindow.addEventListener("click" , ()=>{
     openWindow(addForm);
-});
-
-close.addEventListener("click" , ()=>{
-    closeWindow(containerDetailsPay);
 });
 
 btnCloseWindow.forEach(btn =>{

@@ -9,6 +9,41 @@ const urlAcheter = "http://localhost/gestion_vente_logement/ADMIN/controleurs/co
 let price = document.querySelector('#formAddLog input[name="prixLog"]')
 
 
+function searchList(input) {
+    let filter, table, tr, i;
+    input = document.getElementById("myinputSearch");
+    filter = input.value.toUpperCase();
+    table = document.querySelector(".myTable");
+    tr = table.getElementsByTagName("tr");
+    for (i = 0; i < tr.length; i++) {
+
+      let td_num = tr[i].getElementsByTagName("td")[1];
+      let td_desc = tr[i].getElementsByTagName("td")[2];
+      let td_cite = tr[i].getElementsByTagName("td")[5];
+      let td_province = tr[i].getElementsByTagName("td")[5];
+      let td_agence = tr[i].getElementsByTagName("td")[7];
+
+
+      if (td_num || td_desc || td_cite || td_province || td_agence ) {
+        if (
+            td_num.innerText.toUpperCase().indexOf(filter) > -1 || 
+            td_desc.innerText.toUpperCase().indexOf(filter) > -1 || 
+            td_cite.innerText.toUpperCase().indexOf(filter) > -1 || 
+            td_province.innerText.toUpperCase().indexOf(filter) > -1 || 
+            td_agence.innerText.toUpperCase().indexOf(filter) > -1
+        ) {
+          tr[i].style.display = "";
+        } else {
+          tr[i].style.display = "none";
+        }
+      }       
+    }
+  }
+  document.querySelector("#myinputSearch").addEventListener("input", (e)=>{
+    searchList(e.target);
+})
+
+
 //============== DELETE PRODUIT=====================
 
 //DELETE produits

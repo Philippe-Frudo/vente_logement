@@ -29,7 +29,8 @@
                                 <a href="#" class="btn"> Ajouter Nouveau </a>
                             </p>
                         </div>
-                        <a href="#" class="btn">Filtrer</a>
+                        <!-- <a href="#" class="btn">Filtrer</a> -->
+                        <input style="padding-left: 5px" id="myinputSearch" type="text" placeholder="Rechercher">
                     </div>
                     <table>
                         <thead>
@@ -46,7 +47,7 @@
                                 <td>Supprimer</td>
                             </tr>
                         </thead>
-                        <tbody id="allClients">
+                        <tbody id="allClients" class="myTable">
  
                         </tbody>
                     </table>

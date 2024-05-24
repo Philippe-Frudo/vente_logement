@@ -20,12 +20,12 @@
 
             <!-- ===================== Orders Details List =====================  -->
 
-        <div class="details">
+            <div class="details">
                 <div class="recentOrders">
                     <div class="cardHeader">
                         <h2>LOGEMENT EN COURS DE PAYEMENT</h2>
                         <a style="display: none;" href="#" class="btn">Ajouter Nouveau</a>
-                        <input type="text" placeholder="Votre recherche" style="padding-left: 0.5rem;">
+                        <input style="padding-left: 5px" id="myinputSearch" type="text" placeholder="Rechercher">
                     </div>
 
                     <table style="overflow-x: auto;">
@@ -57,7 +57,7 @@
                                 <td>Imprimer</td>
                             </tr>
                         </thead>
-                         <tbody id="listeLogement">
+                         <tbody id="listeLogement" class="myTable">
 
                         </tbody>
                     </table>
@@ -66,12 +66,13 @@
                     <p>Nombre total de logement vendu: <strong><span id="nobreTotalAcheter"></span></strong></p>
                 </div>
             </div>
-            </div>
         </div>
+    </div>
 
     <!-- AJOUTER NOUVEAU ACHAT -->
     <?php require_once("./formAddPayement.php"); ?>
     <?php require_once("./detailsPay.php"); ?>
+    <?php require_once("../facture/facture.php");?>
     
     <div id="contentMessage">
         <p id="message">Voici une message</p>
@@ -84,6 +85,7 @@
     <script type="module" src=<?php echo default_JS; ?>></script>
     <script type="module" src=<?php echo default_functions_JS; ?>></script>
     <script type="module" src=<?php echo acheter_JS; ?>></script>
+    <!-- <script type="module" src=<?php echo payement_JS; ?>></script> -->
 
 </body>
 </html>

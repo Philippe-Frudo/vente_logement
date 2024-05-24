@@ -1,8 +1,64 @@
-import { msgSucces, addForm, openWindow ,createElement, fetchData, getDataForm, validChammps, regexNumber, getsDataForm, validField, validPhone, validPassword, alertErreur, styleErrorInput, styleSuccesInput, regexPhone, regexCIN, regexPassword, regexEmail  } from "../default/functions.js";
+import { msgSucces, close ,addForm, closeWindow ,openWindow ,createElement, fetchData, getDataForm, validChammps, regexNumber, getsDataForm, validField, validPhone, validPassword, alertErreur, styleErrorInput, styleSuccesInput, regexPhone, regexCIN, regexPassword, regexEmail  } from "../default/functions.js";
 
 let montantP = document.querySelector("#formAddPayement input[name='montantPay']");
 const urlPay = `http://localhost/gestion_vente_logement/ADMIN/controleurs/controleurPayement.php`
 const urlAchat = `http://localhost/gestion_vente_logement/ADMIN/controleurs/controleurAcheter.php`
+const urlCli = `http://localhost/gestion_vente_logement/ADMIN/controleurs/controleurClient.php`;
+const urlLog = `http://localhost/gestion_vente_logement/ADMIN/controleurs/controleurLogement.php`
+
+const containerDetailsPay = document.querySelector("#containerDetailsPay");
+
+close.addEventListener("click" , ()=>{
+    closeWindow(containerDetailsPay);
+});
+
+
+// RECHERCHE
+function searchList(input) {
+    let filter, table, tr, i;
+    input = document.getElementById("myinputSearch");
+    filter = input.value.toUpperCase();
+    table = document.querySelector(".myTable");
+    tr = table.getElementsByTagName("tr");
+    for (i = 0; i < tr.length; i++) {
+
+      let td_nom = tr[i].getElementsByTagName("td")[0];
+      let td_prenom = tr[i].getElementsByTagName("td")[1];
+      let td_tel = tr[i].getElementsByTagName("td")[2];
+      let td_adrs = tr[i].getElementsByTagName("td")[3];
+      let td_numLog = tr[i].getElementsByTagName("td")[4];
+      let td_cite = tr[i].getElementsByTagName("td")[5];
+      let td_lieu = tr[i].getElementsByTagName("td")[6];
+      let td_modePay = tr[i].getElementsByTagName("td")[7];
+      let td_dateVente = tr[i].getElementsByTagName("td")[8];
+      let td_dateLimit = tr[i].getElementsByTagName("td")[9];
+
+
+      if (td_nom || td_prenom || td_tel || td_adrs || td_numLog || td_cite || td_lieu  || td_modePay || td_dateVente || td_dateLimit ) {
+        if (
+            td_nom.innerText.toUpperCase().indexOf(filter) > -1 || 
+            td_prenom.innerText.toUpperCase().indexOf(filter) > -1 || 
+            td_tel.innerText.toUpperCase().indexOf(filter) > -1 || 
+            td_adrs.innerText.toUpperCase().indexOf(filter) > -1 || 
+            td_numLog.innerText.toUpperCase().indexOf(filter) > -1 || 
+            td_cite.innerText.toUpperCase().indexOf(filter) > -1 || 
+            td_lieu.innerText.toUpperCase().indexOf(filter) > -1 ||
+            td_modePay.innerText.toUpperCase().indexOf(filter) > -1 || 
+            td_dateVente.innerText.toUpperCase().indexOf(filter) > -1 || 
+            td_dateLimit.innerText.toUpperCase().indexOf(filter) > -1
+        ) {
+          tr[i].style.display = "";
+        } else {
+          tr[i].style.display = "none";
+        }
+      }       
+    }
+  }
+  document.querySelector("#myinputSearch").addEventListener("input", (e)=>{
+    searchList(e.target);
+})
+
+
 
 
 //DETAILLE PAYEMENT
@@ -21,95 +77,50 @@ const showDataPayement = (d) => {
 
 fetchData(urlAchat, "getAllAchat", {} ).then(data => { datasAchat(data)  })
 //FETCH START
-const openWindowUpdatePyer = (id, data) => {
-            const c = data;
-            if (data.codeCli == id) {
-        
-                document.getElementById("formUpdate").innerHTML = `
-                    <div id="imgChange" class="photo_logement_ajo">
-                        <div>
-                            <img src="../${data.photoCli}">
-                        </div>
-                        <div class="group_input_file">
-                            <label for="photoCli">Télecharger image</label>
-                            <input class="inpData photo" name="photoCli" type="file" value="../${data.photoCli}">
-                        </div>
-                    </div>
-
-                    <div class="dispaly_input">
-                        <div class="group_input">
-                            <label for="#">Telephone</label>
-                            <input id="tel" class="inpData tel" name="telCli" class="tel" type="text" value="${data.telCli}" placeholder="">
-                        </div>
-                        <div class="group_input">
-                            <label for="#">Adresse</label>
-                            <input class="inpData" name="adrsCli"  type="text" value="${data.adrsCli}" placeholder="">
-                        </div>
-                    </div>
-                    <div class="dispaly_input">
-                        <div class="group_input">
-                            <label for="#">Sexe</label>
-                            <div class="sexe">  
-                                <label><input class="inpData" name="sexeCli" class="sexe" type="radio" value="F" ${data.sexeCli == "F" ? "checked":null} > Feminin</label>
-                                <label><input class="inpData" name="sexeCli" class="sexe" type="radio" value="M" ${data.sexeCli == "M" ? "checked":null}  > Masculin</label>
-                            </div>
-                        </div>
-                        <div class="group_input">
-                            <label for="#">Id</label>
-                            <input class="inpData" name="numCli"  type="text" value="${data.codeCli}" disabled>
-                        </div>
-                    </div>
-                    <div class="button_ajout_log">
-                        <button type="reset" class="reset">Annuler</button>
-                        <button type="submit" class="modifier">Modifier</button>
-                    </div>
-                `  
-        
-                document.querySelector("form input[type='file']").addEventListener("change", (e)=>{
-                    srcChange(e.target);
-                    //alert()
-                })
-        
-                document.querySelector(".modifier").addEventListener("click", (e)=>{
-                    e.preventDefault();
-                    const inputs = document.querySelectorAll("#fenetreUpdate .inpData");
-                    
-                    const tel = document.querySelector("#fenetreUpdate #tel");
-                    const cin = document.querySelector("#fenetreUpdate #CIN");
-        
-                    if ( validField(inputs) && validCIN(cin) && validPhone(tel)) {
-        
-                        const data = getsDataForm(inputs)
-                        fetchData(urlCli, "updateCli", data).then(data => { res(data) });  
-                        function res(res) {
-                            if (res) {
-                                msgSucces(`c N: ${id} est modifie`);
-                                setTimeout(function () {location.reload() }, 2000)
-        
-                            }else{
-                               msgError(`Verifier l'erreur`);
-                            }
-                        }       
-                    }else{
-                        alertErreur(inputs);
-                    }
-                })
-        
-                document.querySelector('.tel').addEventListener("input", (e)=>{ 
-                    alert()
-                    console.log("input");
-                    tel(e.target);
-                })
-                
-                document.querySelector('.CIN').addEventListener("input", (e)=>{ 
-                    alert()
-                    console.log("input");
-                    tel(e.target);
-                })
-           
-            }
-        
-};
+const infoCliFact = (data, id)=>{
+    if (id == data.codeCli) {
+        return `
+            <tr>
+                <th>Facturé à <span class="sutiation">Mr/Mme/Mlle :</span></th>
+            </tr>
+            <tr>
+                <td>Nom: ${data.nomCli}</td>
+                <td>Adresse: ${data.adrsCli}</td>
+            </tr>
+            <tr>
+                <td>Prenom: ${data.prenomCli== "" ? "": data.prenomCli}</td>
+                <td>Telephone: ${data.telCli}</td>
+            </tr>
+            <tr>
+                <td>N° CIN: ${data.CINCli}</td>
+                <td>Profession: ${data.professionCli}</td>
+            </tr>
+            <tr>
+                <td>Sexe: ${data.sexeCli}</td>
+            </tr>
+        ` 
+    }
+}
+const infoLogFact = (data, id)=>{
+    if (id == data.numLog) {
+        return `
+            <tr>
+                <th>Information de logement</th>
+            </tr>
+            <tr>
+                <td>N logement: ${id}</td>
+                <td>Date de vente: ${data.dateVente}</td>
+            </tr>
+            <tr>
+                <td>Cite: ${data.cite}</td>
+                <td>Limite de payement: ${data.dateLimite}</td>
+            </tr>
+            <tr>
+                <td>Lieu: ${data.nomProvince}</td>
+            </tr>
+        `
+    }
+}
         
 const showDataAchat = (data) => {
             const c = data;
@@ -145,15 +156,12 @@ const showDataAchat = (data) => {
                 openWindow(addForm);
             });
 
+            
             btnDetail.addEventListener("click", (e)=>{
                 const id = e.target.id
-
-                fetchData(urlPay, "getBy", {"numLog": id} ).then(data => { datasPayement(data) });
                 
+                fetchData(urlPay, "getBy", {"numLog": id} ).then(data => { datasPayement(data) });
                 const datasPayement = (datas)=>{
-                    document.querySelector(".totalPayement").innerHTML = c.totalPay;
-                    document.getElementById("nobrePayenment").innerHTML = c.nombrePay;
-                    
                     let nombreTotal = 0;
                     let bodyTab = " "
                     datas.forEach(data => {
@@ -162,6 +170,18 @@ const showDataAchat = (data) => {
                     });
                     document.getElementById("datailsPay").innerHTML = bodyTab;
                     document.getElementById("nobreTotalAcheter").innerHTML = nombreTotal;
+                    
+                    document.querySelector("#prixDuLog").innerHTML = c.prixLog + " Ar";
+                    document.querySelector(".totalPayement").innerHTML = c.totalPay + " Ar";
+                    document.getElementById("nobrePayenment").innerHTML = c.nombrePay;
+                    if (c.reste < 0 ) {
+                        document.getElementById("retour").innerHTML = c.reste*(-1) + " Ar";  
+                        document.getElementById("reste").innerHTML = "0 Ar";
+                    }else{
+                        document.getElementById("retour").innerHTML = "0 Ar";  
+                        document.getElementById("reste").innerHTML = c.reste + " Ar";
+                    }
+                    
                 }
 
                 openWindow(document.getElementById("containerDetailsPay") );
@@ -175,9 +195,8 @@ const showDataAchat = (data) => {
 
             let btnImprimer = createElement("button", {id: c.numLog, class:"td_action",
                 style: "border: none; outline: none; padding: 0.5rem; background: #2a2185; cursor: pointer; color: #fff; display:none;"}, "Facture");
-            let tdImprimer = createElement("td", {id: c.numLog }, "");
+            let tdImprimer = createElement("td", {id: c.codeCli }, "");
             tdImprimer.append(btnImprimer);
-
 
             //let divDetail = createElement("div", { style: "display: block; background: #000; min-width:40px; min-height:40px", id:"divDetail" , class: "tr"},  "");
             let tr = createElement("tr", { class:"tr" },  "");
@@ -233,17 +252,65 @@ const showDataAchat = (data) => {
             tr.append(supp);
             tr.append(tdImprimer);
             // tr.append(divDetail);
+            document.getElementById("listeLogement").append(tr);
             
-            tdImprimer.addEventListener("click", (e)=>{
-                let id = e.target.id;
-                console.log(id);
+
+            btnImprimer.addEventListener("click", (e)=>{
+                const idLog = e.target.id;
+                const idCli = e.target.parentElement.id;
+
+                document.getElementById("dateFact").innerHTML = new Date().toLocaleDateString();
+
+
+                fetchData(urlPay, "getBy", {"numLog": idLog} ).then(data => { datasPayement(data) });
                 
-                // if(resteP.innerHTML == "Complete" || resteP.innerHTML < 0){
-                //     console.log(tr);
-                //     window.print(tr)}
+                const datasPayement = (datas)=>{
+                    let bodyTab = "";
+                    datas.forEach(data => {
+                        bodyTab += showDataPayement(data); 
+                    });
+                    document.getElementById("datailsPayFacture").innerHTML = bodyTab;
+                }
+
+                fetchData(urlAchat, "getAllAchat" ).then(data => { dataAchat(data) });
+                const dataAchat = (datas)=>{
+                    let infoLog = "";
+                    datas.forEach(data => {
+                        infoLog += infoLogFact(data, idLog);
+                    });
+                    document.getElementById("infoLog").innerHTML = infoLog;
+                }
+
+                fetchData(urlCli, "getAllCli" ).then(data => { dataCli(data) });
+                const dataCli = (datas)=>{
+                    let infoCli = "";
+                    datas.forEach(data => {
+                        infoCli += infoCliFact(data, idCli);
+                    });
+                    document.getElementById("infoCli").innerHTML = infoCli;
+                }
+
+                    // \document.querySelector("#prixDuLogF").innerHTML = c.prixLog + " Ar";
+                    document.querySelector(".totalPayementF").innerHTML = c.totalPay + " Ar";
+                    document.getElementById("nobrePayenmentF").innerHTML = c.nombrePay;
+                    if (c.reste < 0 ) {
+                        document.getElementById("retourF").innerHTML = c.reste*(-1) + " Ar";  
+                        document.getElementById("resteF").innerHTML = "0 Ar";
+                    }else{
+                        document.getElementById("retourF").innerHTML = "0 Ar";  
+                        document.getElementById("resteF").innerHTML = c.reste + " Ar";
+                    }
+
+                    document.getElementById("facture").style.display= "block";
+                    document.getElementById("contentRetour").style.display= "block";
+                    document.querySelector(".container").style.display= "none";
+
+                    setTimeout( function(){ window.print(document.getElementById("facture")) } , 1500);
+
+                    fetchData(urlLog, "updateSupp", {"numLog": idLog} ).then(data => { console.log(data) });
+
             });
             
-            document.getElementById("listeLogement").append(tr);
 }
 
 function datasAchat(datas){
@@ -255,8 +322,6 @@ function datasAchat(datas){
     document.getElementById("nobreTotalAcheter").innerHTML = nombreTotal;
 }
 //FETCH END
-
-
 
 //INSERTION PAYEMENT
 

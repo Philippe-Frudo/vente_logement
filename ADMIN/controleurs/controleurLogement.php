@@ -43,11 +43,9 @@ if ( isset($action) && !empty($action) ) {
             echo json_encode($res);
             header("ContentType: application/json");
         }
-
         exit();
         
     }
-
     elseif ($action == "updateLog") {
         $numLog = $_POST["numLog"];
         $prixLog = $_POST["prixLog"];
@@ -78,7 +76,6 @@ if ( isset($action) && !empty($action) ) {
             $res = $logement->updateLog($dbo, $numLog, $prixLog, $descLog, "");
             echo $res;
         }
-
     }
 
     elseif($action == "updateLogSolt"){
@@ -91,6 +88,21 @@ if ( isset($action) && !empty($action) ) {
         $numLog = $_POST["numLog"];
         $res = $logement->deleteLog($dbo, $numLog);
         echo $res;
+    }
+    
+    elseif ($action == "getNumberAll"){
+        $res = $logement->getNumberAll($dbo);
+         echo json_encode($res);
+    }
+        
+    elseif ($action == "getNumberV"){
+        $res = $logement->getNumberV($dbo);
+         echo json_encode($res);
+    }
+    elseif ($action == "updateSupp"){
+        $numLog = $_POST["numLog"];
+        $res = $logement->updateSupp($dbo, $numLog, 1);
+         echo json_encode($res);
     }
 
 }

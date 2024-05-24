@@ -28,6 +28,7 @@ class Terrain {
             // return "L'ajout de terrain a ete succes";
             
         } catch (Exception $e) {
+            echo "Erreur lors de l'ajout de terrain" . $e->getMessage();
             return 0;
             // return "Erreur lors de l'ajout de terrain" . $e->getMessage();
         }
@@ -68,6 +69,13 @@ class Terrain {
             return 0;
             // return "Erreur lors de la suppression du terrain" . $e->getMessage();
         }
+    }
+    function getNumber($dbo){
+        $cmd = "SELECT COUNT(*) AS nombreTer FROM terrain";
+        $query = $dbo->conn->prepare($cmd);
+        $query->execute();
+        $res = $query->fetchAll(PDO::FETCH_ASSOC);
+        return $res;
     }
 }
 

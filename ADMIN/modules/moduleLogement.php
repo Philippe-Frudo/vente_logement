@@ -18,7 +18,7 @@ class Logement {
         return $res;
 
     }
-
+    
     function insertLog($dbo, $prixLog, $codeCite, $numTer, $descLog, $photoLog){
         $cmd = "INSERT INTO logement(prixLog, codeCite, numTer, descLog, photoLog) 
                 VALUES (:prixLog, :codeCite, :numTer, :descLog, :photoLog)";
@@ -34,16 +34,15 @@ class Logement {
                     ":photoLog"=>$photoLog
                 ]);
                 return 1;
-            // return "Un nouveaux logement a ete ajoute";
-
-        } catch (Exception $e) {
-            return 0;
-            // return "Erreur lors de l'ajout du logement" . $e->getMessage();
+                // return "Un nouveaux logement a ete ajoute";
+                
+            } catch (Exception $e) {
+                return 0;
+                // return "Erreur lors de l'ajout du logement" . $e->getMessage();
+            }
         }
-    }
-
-    function updateLog($dbo, $numLog, $prixLog, $descLog, $photoLog){
-        // $numTer, $codeCite, codeCite=:codeCite, numTer=:numTer, 
+        
+    function updateLog($dbo, $numLog, $prixLog, $descLog, $photoLog){ 
         $cmd = "UPDATE logement SET prixLog=:prixLog, descLog=:descLog, photoLog=:photoLog
                 WHERE numLog=:numLog";
         
@@ -52,18 +51,32 @@ class Logement {
             $query->execute(
                 [
                     ":prixLog"=>$prixLog, 
-                    // ":codeCite"=>$codeCite, 
-                    // ":numTer"=>$numTer, 
                     ":descLog"=>$descLog,
                     ":numLog"=>$numLog,
                     ":photoLog"=>$photoLog
                 ]);
-            
-            return 1;
-            // return "Modification logement reussite";
+                
+                return 1;
+                // return "Modification logement reussite";
 
-        } catch (Exception $e) {
-            return 0;
+            } catch (Exception $e) {
+                return 0;
+            // return "Echec de la modification de logement" . $e->getMessage();
+        }
+    }
+    function updateSupp($dbo, $numLog, $imprimer){ 
+        $cmd = "UPDATE logement SET imprimer=:imprimer WHERE numLog=:numLog";
+        $query = $dbo->conn->prepare($cmd);
+        try {
+            $query->execute(
+                [
+                    ":numLog"=>$numLog,
+                    ":imprimer"=>$imprimer
+                ]);
+                return 1;
+            } catch (Exception $e) {
+                echo "Echec de la modification de logement" . $e->getMessage();
+                return 0;
             // return "Echec de la modification de logement" . $e->getMessage();
         }
     }
@@ -79,30 +92,44 @@ class Logement {
                     ":numLog"=>$numLog,
                     ":soldLog"=>$soldLog
                 ]);
-            
-            return 1;
-            
-        } catch (Exception $e) {
-            
-            return 0;
-            // return "Le logement a ete deja vendu" . $e->getMessage();
+                return 1; 
+            } catch (Exception $e) {
+                echo "Le logement a ete deja vendu" . $e->getMessage();
+                
+                return 0;
+                // return "Le logement a ete deja vendu" . $e->getMessage();
+            }
         }
-    }
-
-    function deleteLog($dbo, $numLog){
-        $cmd = "DELETE FROM logement WHERE numLog=:numLog";
-        $query  = $dbo->conn->prepare($cmd);
-
-        try {
-            $query->execute([":numLog"=>$numLog]);
-
-            return 1;
-
-        } catch (Exception $e) {
-            return 0;
-            // return "Erreur lors de la suppression de logement" . $e->getMessage();
+        function deleteLog($dbo, $numLog){
+            $cmd = "DELETE FROM logement WHERE numLog=:numLog";
+            $query  = $dbo->conn->prepare($cmd);
+            
+            try {
+                $query->execute([":numLog"=>$numLog]);
+                return 1;
+            } catch (Exception $e) {
+                return 0;
+                // return "Erreur lors de la suppression de logement" . $e->getMessage();
+            }
         }
+        
+        function getNumberAll($dbo){
+            $cmd = "SELECT COUNT(*) AS nombreLog FROM logement";
+
+            $query = $dbo->conn->prepare($cmd);
+            $query->execute();
+            $res = $query->fetchAll(PDO::FETCH_ASSOC);
+            return $res;
+        }
+        
+        function getNumberV($dbo){
+            $cmd = "SELECT COUNT(*) AS nombreLog FROM logement WHERE soldLog= TRUE";
+
+            $query = $dbo->conn->prepare($cmd);
+            $query->execute();
+            $res = $query->fetchAll(PDO::FETCH_ASSOC);
+            return $res;
+        }
+        
+        
     }
-
-
-}

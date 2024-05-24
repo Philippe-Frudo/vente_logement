@@ -8,11 +8,11 @@
 }
 
 
-.fenetre_modale_ajout_log{
+.fenetre_modale_ajout_log, .fenetre_modale_details{
     display: none;
 }
 
-.fenetre_modale_ajout_log.ajout{
+.fenetre_modale_ajout_log.ajout, .fenetre_modale_details.ajout{
     display: block;
     position: fixed;
     left: 0;

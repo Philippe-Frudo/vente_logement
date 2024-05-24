@@ -80,5 +80,22 @@ class Client {
         }
     }
 
+    function getNumber($dbo){
+        $cmd = "SELECT COUNT(*) AS nombreCli FROM client";
+        $query = $dbo->conn->prepare($cmd);
+        $query->execute();
+        $res = $query->fetchAll(PDO::FETCH_ASSOC);
+        return $res;
+    }
+
+    function getAllLimit($dbo){
+        $cmd = "SELECT * FROM client ORDER BY codeCli DESC LIMIT 5";
+        $query = $dbo->conn->prepare($cmd);
+        $query->execute();
+        $res = $query->fetchAll(PDO::FETCH_ASSOC);
+        return $res;
+
+    }
+
 
 }

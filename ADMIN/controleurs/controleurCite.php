@@ -41,11 +41,14 @@ if ( isset($action) && !empty($action) ) {
 
     elseif ($action == "deletecite") {
         $codeCite = $_POST["codeCite"];
-        
+    
         $res = $cite->deleteCite($dbo, $codeCite);
         echo $res;
     }
-
+    elseif ($action == "getNumber") {
+        $res = $cite->getNumber($dbo);
+        echo json_encode($res);
+    }
     
 }
 

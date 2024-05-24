@@ -7,14 +7,11 @@
     <link rel="stylesheet" href=<?php echo default_global_CSS; ?> >
     <link rel="stylesheet" href=<?php echo default_fenetre_CSS; ?> >
     <link rel="stylesheet" href=<?php echo terrain_CSS; ?> >
-
 </head>
 <body>
     <!-------------------Navigateu ------------->
     <div class="container">
-
     <?php require_once("../barNav/barNav.php"); ?>
-
         <!-- ===================== Main =====================  -->
         <div class="main">
             <?php require_once("../topBar/topBar.php"); ?>
@@ -80,7 +77,7 @@
     </script>
     <script type="module" src=<?php echo default_JS; ?>></script>
     <script type="module" src=<?php echo default_functions_JS; ?>></script>
-    <script type="module" src=<?php echo terrain_JS; ?>></script>
+    <script type="module" src=<?php echo terrain_JS ; ?>></script>
 
 </body>
 </html>
