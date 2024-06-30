@@ -129,7 +129,8 @@ const showDataAchat = (data) => {
             let prenom = createElement("td", {},  c.prenomCli);
             let phone = createElement("td", {},  c.telCli);
             let adresse = createElement("td", {},  c.adrsCli);
-            let numLog = createElement("td", {},  c.numLog);
+            let numLog = createElement("td", {},  c.numeroLog);
+            // console.log(c.numeroL);
             let prixLog = createElement("td", {},  c.prixLog);
             let cite = createElement("td", {},  c.cite);
             let nomProvince = createElement("td", {},  c.nomProvince);
@@ -140,18 +141,19 @@ const showDataAchat = (data) => {
             let nombrePay = createElement("td", {},  c.nombrePay);
             let resteP = createElement("td", {},  c.reste == 0 ? "Complete":c.reste );
             
-            let btnDetail = createElement("button", {id: c.numLog, class:"td_action",
+            let btnDetail = createElement("button", {id: c.numeroLog, class:"td_action",
                 style: "border: none; outline: none; padding: 0.5rem; background: #2a2185; cursor: pointer; color: #fff;"}, "Detaille");
-            let detaillePay = createElement("td", {id: c.numLog }, "");
+            let detaillePay = createElement("td", {id: c.numeroLog }, "");
             detaillePay.append(btnDetail);
             
-            let nouveauPay = createElement("td", {id: c.numLog}, "");
-            let imgPay = createElement("img", {src:"../../publics/icon/icons8_edit_48px_1.png", 
+            let nouveauPay = createElement("td", {id: c.numeroLog}, "");
+            let imgPay = createElement("img", {src:"../../publics/icon/icons8_edit_48px_1.png", id:c.numeroLog,
             class:"td_action btn", style:'object-fit: cover; width: 100%; max-width: 40px; padding: 5px; cursor: pointer;'}, "");
             nouveauPay.append(imgPay);
             
             imgPay.addEventListener("click", (e)=>{
-                const id = e.target.parentElement.id
+                const id = e.target.id
+                console.log(id);
                 document.querySelector(".getNumLog").value = id
                 openWindow(addForm);
             });
@@ -193,7 +195,7 @@ const showDataAchat = (data) => {
             , "");
             supp.append(imgSupp);
 
-            let btnImprimer = createElement("button", {id: c.numLog, class:"td_action",
+            let btnImprimer = createElement("button", {id: c.numeroLog, class:"td_action",
                 style: "border: none; outline: none; padding: 0.5rem; background: #2a2185; cursor: pointer; color: #fff; display:none;"}, "Facture");
             let tdImprimer = createElement("td", {id: c.codeCli }, "");
             tdImprimer.append(btnImprimer);

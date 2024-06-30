@@ -143,7 +143,7 @@ const openWindowUpdate = (id, data) => {
             const tel = document.querySelector("#fenetreUpdate #tel");
             const cin = document.querySelector("#fenetreUpdate #CIN");
 
-            if ( validField(inputs) && validCIN(cin) && validPhone(tel)) {
+            if ( validField(inputs) && validPhone(tel)) {
 
                 const data = getsDataForm(inputs)
                 fetchData(urlCli, "updateCli", data).then(data => { res(data) });  

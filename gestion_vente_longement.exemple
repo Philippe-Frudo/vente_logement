@@ -1,0 +1,335 @@
+-- phpMyAdmin SQL Dump
+-- version 5.2.1
+-- https://www.phpmyadmin.net/
+--
+-- Hôte : 127.0.0.1
+-- Généré le : mar. 23 avr. 2024 à 20:20
+-- Version du serveur : 10.4.32-MariaDB
+-- Version de PHP : 8.2.12
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Base de données : `gestion_vente_longement`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `acheter`
+--
+
+CREATE TABLE `acheter` (
+  `codeCli` int(10) NOT NULL,
+  `numLog` int(15) NOT NULL,
+  `typeVente` varchar(2) DEFAULT NULL,
+  `dateVente` date DEFAULT current_timestamp(),
+  `dateLimite` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Déchargement des données de la table `acheter`
+--
+
+INSERT INTO `acheter` (`codeCli`, `numLog`, `typeVente`, `dateVente`, `dateLimite`) VALUES
+(1, 13, NULL, NULL, '2026-01-10'),
+(2, 15, NULL, NULL, '2024-06-10'),
+(1, 14, NULL, NULL, '2024-06-10');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `agence`
+--
+
+CREATE TABLE `agence` (
+  `codeAg` int(10) NOT NULL,
+  `libAg` varchar(20) DEFAULT NULL,
+  `codeProvince` varchar(20) NOT NULL,
+  `adresseAg` varchar(50) NOT NULL,
+  `telAg` varchar(10) DEFAULT NULL,
+  `passwordAg` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Déchargement des données de la table `agence`
+--
+
+INSERT INTO `agence` (`codeAg`, `libAg`, `codeProvince`, `adresseAg`, `telAg`, `passwordAg`) VALUES
+(100, 'libAg1', 'codeP1', 'adrsAg1', '034522575', 'agence1'),
+(101, 'libAg2', 'codeP2', 'adrsAg2', '0342250275', 'agence2'),
+(102, 'libAg3', 'codeP2', 'adrsAg3', '0345251275', 'agence3');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `cite`
+--
+
+CREATE TABLE `cite` (
+  `codeCite` varchar(10) NOT NULL,
+  `libCite` varchar(20) NOT NULL,
+  `codeAg` int(10) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Déchargement des données de la table `cite`
+--
+
+INSERT INTO `cite` (`codeCite`, `libCite`, `codeAg`) VALUES
+('codeC1', 'libC1', 100),
+('codeC2', 'libC2', 102),
+('codeC3', 'libC3', 101),
+('codeC4', 'libC4', 100);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `client`
+--
+
+CREATE TABLE `client` (
+  `codeCli` int(10) NOT NULL,
+  `nomCli` varchar(20) NOT NULL,
+  `adrsCli` varchar(15) DEFAULT NULL,
+  `prenomCli` varchar(40) DEFAULT NULL,
+  `CINCli` varchar(10) NOT NULL,
+  `sexeCli` varchar(15) NOT NULL,
+  `professionCli` varchar(50) NOT NULL,
+  `telCli` varchar(10) DEFAULT NULL,
+  `photoCli` varchar(150) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Déchargement des données de la table `client`
+--
+
+INSERT INTO `client` (`codeCli`, `nomCli`, `adrsCli`, `prenomCli`, `CINCli`, `sexeCli`, `professionCli`, `telCli`, `photoCli`) VALUES
+(1, 'Frudo', 'Soanerana', NULL, '', '', '', NULL, NULL),
+(2, 'Larissa', 'Andrainjato', NULL, '', '', '', NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `logement`
+--
+
+CREATE TABLE `logement` (
+  `numLog` int(10) NOT NULL,
+  `prixLog` int(20) NOT NULL,
+  `codeCite` varchar(10) NOT NULL,
+  `numTer` varchar(15) NOT NULL,
+  `descLog` text DEFAULT NULL,
+  `soldLog` tinyint(1) NOT NULL DEFAULT 0,
+  `photoLog` varchar(150) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Déchargement des données de la table `logement`
+--
+
+INSERT INTO `logement` (`numLog`, `prixLog`, `codeCite`, `numTer`, `descLog`, `soldLog`, `photoLog`) VALUES
+(13, 20000000, 'codeC1', 'ter1', NULL, 0, NULL),
+(14, 24000000, 'codeC2', 'ter2', NULL, 0, NULL),
+(15, 25000000, 'codeC3', 'ter3', NULL, 0, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `payement`
+--
+
+CREATE TABLE `payement` (
+  `codePayement` varchar(20) NOT NULL,
+  `montantPayer` int(20) NOT NULL,
+  `numLog` int(15) NOT NULL,
+  `modePayement` varchar(15) DEFAULT NULL,
+  `datePayement` date NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Déchargement des données de la table `payement`
+--
+
+INSERT INTO `payement` (`codePayement`, `montantPayer`, `numLog`, `modePayement`, `datePayement`) VALUES
+('codeP1', 50000, 13, 'Check', '2024-04-23'),
+('codeP2', 50000, 15, 'Espece', '2024-04-23'),
+('codeP3', 40000, 13, 'Espece', '2024-04-23'),
+('codeP4', 65000, 14, 'Check', '2024-04-23'),
+('codeP5', 110000, 13, 'Espece', '2024-04-23');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `province`
+--
+
+CREATE TABLE `province` (
+  `codeProvince` varchar(20) NOT NULL,
+  `nomProvince` varchar(20) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Déchargement des données de la table `province`
+--
+
+INSERT INTO `province` (`codeProvince`, `nomProvince`) VALUES
+('codeP1', 'nomP1'),
+('codeP2', 'nomP2'),
+('codeP3', 'nomP3'),
+('codeP4', 'nomP4');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `terrain`
+--
+
+CREATE TABLE `terrain` (
+  `numTer` varchar(15) NOT NULL,
+  `superficieTer` varchar(25) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Déchargement des données de la table `terrain`
+--
+
+INSERT INTO `terrain` (`numTer`, `superficieTer`) VALUES
+('ter1', 'sup1'),
+('ter2', 'sup2'),
+('ter3', 'sup3'),
+('ter4', 'sup4');
+
+--
+-- Index pour les tables déchargées
+--
+
+--
+-- Index pour la table `acheter`
+--
+ALTER TABLE `acheter`
+  ADD KEY `codeCli` (`codeCli`),
+  ADD KEY `numLog` (`numLog`);
+
+--
+-- Index pour la table `agence`
+--
+ALTER TABLE `agence`
+  ADD PRIMARY KEY (`codeAg`),
+  ADD UNIQUE KEY `adresseAg` (`adresseAg`),
+  ADD UNIQUE KEY `telAg` (`telAg`),
+  ADD KEY `codeProvince` (`codeProvince`);
+
+--
+-- Index pour la table `cite`
+--
+ALTER TABLE `cite`
+  ADD PRIMARY KEY (`codeCite`),
+  ADD KEY `codeAg` (`codeAg`);
+
+--
+-- Index pour la table `client`
+--
+ALTER TABLE `client`
+  ADD PRIMARY KEY (`codeCli`),
+  ADD UNIQUE KEY `photoCli` (`photoCli`);
+
+--
+-- Index pour la table `logement`
+--
+ALTER TABLE `logement`
+  ADD PRIMARY KEY (`numLog`),
+  ADD UNIQUE KEY `photoLog` (`photoLog`),
+  ADD KEY `codeCite` (`codeCite`),
+  ADD KEY `numTer` (`numTer`);
+
+--
+-- Index pour la table `payement`
+--
+ALTER TABLE `payement`
+  ADD PRIMARY KEY (`codePayement`),
+  ADD KEY `numLog` (`numLog`);
+
+--
+-- Index pour la table `province`
+--
+ALTER TABLE `province`
+  ADD PRIMARY KEY (`codeProvince`);
+
+--
+-- Index pour la table `terrain`
+--
+ALTER TABLE `terrain`
+  ADD PRIMARY KEY (`numTer`);
+
+--
+-- AUTO_INCREMENT pour les tables déchargées
+--
+
+--
+-- AUTO_INCREMENT pour la table `agence`
+--
+ALTER TABLE `agence`
+  MODIFY `codeAg` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=109;
+
+--
+-- AUTO_INCREMENT pour la table `client`
+--
+ALTER TABLE `client`
+  MODIFY `codeCli` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT pour la table `logement`
+--
+ALTER TABLE `logement`
+  MODIFY `numLog` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+
+--
+-- Contraintes pour les tables déchargées
+--
+
+--
+-- Contraintes pour la table `acheter`
+--
+ALTER TABLE `acheter`
+  ADD CONSTRAINT `acheter_ibfk_1` FOREIGN KEY (`codeCli`) REFERENCES `client` (`codeCli`),
+  ADD CONSTRAINT `acheter_ibfk_2` FOREIGN KEY (`numLog`) REFERENCES `logement` (`numLog`);
+
+--
+-- Contraintes pour la table `agence`
+--
+ALTER TABLE `agence`
+  ADD CONSTRAINT `agence_ibfk_1` FOREIGN KEY (`codeProvince`) REFERENCES `province` (`codeProvince`),
+  ADD CONSTRAINT `agence_ibfk_2` FOREIGN KEY (`codeProvince`) REFERENCES `province` (`codeProvince`);
+
+--
+-- Contraintes pour la table `cite`
+--
+ALTER TABLE `cite`
+  ADD CONSTRAINT `cite_ibfk_1` FOREIGN KEY (`codeAg`) REFERENCES `agence` (`codeAg`);
+
+--
+-- Contraintes pour la table `logement`
+--
+ALTER TABLE `logement`
+  ADD CONSTRAINT `logement_ibfk_1` FOREIGN KEY (`codeCite`) REFERENCES `cite` (`codeCite`),
+  ADD CONSTRAINT `logement_ibfk_2` FOREIGN KEY (`numTer`) REFERENCES `terrain` (`numTer`);
+
+--
+-- Contraintes pour la table `payement`
+--
+ALTER TABLE `payement`
+  ADD CONSTRAINT `payement_ibfk_1` FOREIGN KEY (`numLog`) REFERENCES `logement` (`numLog`);
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

@@ -1,4 +1,7 @@
 <?php
+
+// Route : pas routeur
+
 require_once("../../Rooteur/rooteur.php");
 
 require_once("../../Database/connexionBD.php");

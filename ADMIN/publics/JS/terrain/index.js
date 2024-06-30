@@ -6,58 +6,60 @@ const urlProv = `http://localhost/gestion_vente_logement/ADMIN/controleurs/contr
 //FETCH START
 
 const openWindowUpdate = (id, c) => {
-    document.getElementById("formUpdateTer").innerHTML = `
-    <div class="hiddene">
-        <table>
-            <thead>
-                <tr>
-                    <th>Ordre</th>
-                    <th>Superficie en km<sup>2</sup></th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>
-                        <div>
-                            <img src=<?php echo FOLDER_ICON . "icons8_menu_rounded_100px.png"; ?> >
-                        </div>
-                    </td>
-                    <td>
-                        <div>
-                            <input class="inpData" name="numTer" type="text" placeholder="Numero terrain">
-                        </div>
-                    </td>
-                    <td>
-                        <div class="cart_remove">
-                            <img src=<?php echo FOLDER_ICON . "icons8_delete_60px.png"; ?> >
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <div>
-                            <img src=<?php echo FOLDER_ICON . "icons8_menu_rounded_100px.png"; ?> >
-                        </div>
-                    </td>
-                    <td>
-                        <div>
-                            <input class=" inpData superficieTer" name="superficieTer" type="text" placeholder="Spurficie du terrain en m2">
-                        </div>
-                    </td>
-                    <td>
-                        <div class="cart_remove">
-                            <img src=<?php echo FOLDER_ICON . "icons8_delete_60px.png"; ?> >
-                        </div>
-                    </td>
-                </tr>
-            </tbody>
-            </table>
-            </div>
-            <div class="button_ajout_log">
-                <button type="reset">Annuler</button>
-                <button type="submit" class="modifier creer_terr">Créer</button>
-            </div>
-    `
+    if (id == c.numTer) {
+        document.getElementById("formUpdateTer").innerHTML = `
+        <div class="hiddene">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Ordre</th>
+                        <th>Superficie en km<sup>2</sup></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <div>
+                                <img src=<?php echo FOLDER_ICON . "icons8_menu_rounded_100px.png"; ?> >
+                            </div>
+                        </td>
+                        <td>
+                            <div>
+                                <input class="inpData" name="numTer" type="text" placeholder="Numero terrain" ${c.numTer}>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="cart_remove">
+                                <img src=<?php echo FOLDER_ICON . "icons8_delete_60px.png"; ?> >
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div>
+                                <img src=<?php echo FOLDER_ICON . "icons8_menu_rounded_100px.png"; ?> >
+                            </div>
+                        </td>
+                        <td>
+                            <div>
+                                <input class=" inpData superficieTer" name="superficieTer" type="text" placeholder="Spurficie du terrain en m2" value="${c.superficieTer}">
+                            </div>
+                        </td>
+                        <td>
+                            <div class="cart_remove">
+                                <img src=<?php echo FOLDER_ICON . "icons8_delete_60px.png"; ?> >
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+                </table>
+                </div>
+                <div class="button_ajout_log">
+                    <button type="reset">Annuler</button>
+                    <button type="submit" class="modifier creer_terr">Créer</button>
+                </div>
+        `
+    }
     document.querySelector(".modifier").addEventListener("click", (e)=>{
         e.preventDefault();
         const inputs = document.querySelectorAll("#fenetreUpdateTer .inpData");
@@ -86,13 +88,14 @@ const showDataTer = (data) => {
     let numTer = createElement("td", {},  c.numTer);
     let superficieTer = createElement("td", {}, c.superficieTer );
 
-    let nouveau = createElement("td", {id: c.numLog}, "");
+    let nouveau = createElement("td", {id: c.numTer}, "");
     let img = createElement("img", {src:"../../publics/icon/icons8_edit_48px_1.png", 
     class:"td_action btn", style:'object-fit: cover; width: 100%; max-width: 40px; padding: 5px; cursor: pointer;'}, "");
     nouveau.append(img);
     
     img.addEventListener("click", (e)=>{
         const id = e.target.parentElement.id
+        console.log(id);
         openWindowUpdate(id, data);
         openWindow(addForm);
     });
