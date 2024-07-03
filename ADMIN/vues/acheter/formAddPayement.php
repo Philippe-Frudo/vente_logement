@@ -19,8 +19,6 @@
                         <option value="MVola">MVola</option>
                         <option value="Airtel Money">Airtel Money</option>
                     </select>
-                    <!-- <label for="">Mode de payement</label>
-                    <input class="inputData" name="modePay" type="text"> -->
                 </div>
                 <div class="group_input">
                     <label for="codePay">Code de payement</label>

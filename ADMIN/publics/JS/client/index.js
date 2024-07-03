@@ -98,7 +98,6 @@ const getsDataForm = (inputsFields, inpFileImg) => {
     let fileIMG = inpFileImg[0].files[0];
     data[inpFileName]= fileIMG;
 
-
     console.log(data);
     return data;
 

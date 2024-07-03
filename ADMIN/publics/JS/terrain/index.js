@@ -42,37 +42,6 @@ function dataTerrains(datas) {
     document.getElementById("nombreTer").innerHTML = nombreTer;
 }
 
-//FETCH START
-// function fetchJSONPost(url_p, action, methode_p, data_p = {}) {
-//     const url = `${url_p}?action=${encodeURIComponent(action)}`;
-    
-//     const formData = new FormData();
-//     for( let [key, val] of Object.entries(data_p) ) {
-//         formData.append(key, val);
-//     }
-
-//     fetch(url, {
-//         method: methode_p,
-//         // headers : {"contentType":"application/json"},
-//         contentType: false,
-//         processData: false,
-//         body: formData
-//     })
-//     .then(res => {
-//         if (!res.ok) {
-//             throw new Error("Erreur lors de la requete")
-//         }
-//         return res;
-        
-//     })
-//     .then(response => {
-//         console.log(response);
-//         //location.reload();
-//         return response;
-//     })
-//     //.catch( e => console.log(e.Error, {cause : e}) );
-
-// }
 
 const getsDataForm = (inputsFields, inpFileImg) => {
     const data = {};
@@ -158,46 +127,3 @@ document.querySelector(".paragraphe .close").addEventListener("click", (e)=>{
     const m = e.target;
     console.log(e.target);
 });
-
-
-
-
-
-
-
-
-// var cartShopBox = document.createElement("div");
-// cartShopBox.classList.add("card-box");
-
-// var tableHead = document.querySelector(".formulaire table tbody");
-
-// var cartBoxContent = `
-//                         <tr>
-//                             <td>
-//                                 <div>
-//                                     <img src="../../icon/icons8_menu_rounded_100px.png">
-//                                 </div>
-//                             </td>
-//                             <td>
-//                                 <div>
-//                                     <input type="text">
-//                                 </div>
-//                             </td>
-//                             <td>
-//                                 <div class="cart_remove">
-//                                     <img src="../../icon/icons8_delete_60px.png">
-//                                 </div>
-//                             </td>
-//                         </tr>
-//                     `;
-//     cartShopBox = cartBoxContent.innerHTML;
-
-// var creer_terr = document.querySelector(".creer_terr");
-//     creer_terr.addEventListener("click", ()=>{
-//         console.log("CLICK");
-//         tableHead.innerHTML += cartBoxContent;
-// })
-// var button = document.querySelector(".cart_remove");
-// button.addEventListener("click", ()=>{
-//     console.log("MOVE");
-// })

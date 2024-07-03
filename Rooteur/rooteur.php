@@ -1,8 +1,6 @@
 <?php
 
 /**
- * 
- 
  <?php require_once("../../../Rooteur/rooteur.php"); ?>
 
  <?php require_once("../header/header.php"); ?>
@@ -14,16 +12,12 @@
 
 <?php require_once("../topBar/topBar.php"); ?>
 
-
-
 <script src=<?php echo default_JS; ?>></script>
 <script src=<?php echo default_functions_JS; ?>></script>
-
 
 <?php echo FOLDER_ICON . ""; ?>
 
 <?php echo FOLDER_IMG_SITE . ""; ?>
-
 
  */
 
@@ -79,26 +73,5 @@ define("logement_PHP", "../logement/index.php");
 define("parametre_PHP", "../parametre/index.php");
 define("terrain_PHP", "../terrain/index.php");
 define("utilisateur_PHP", "../utilisateur/index.php");
-
-
-
-
-// http://localhost/gestion_vente_logement/ADMIN/controleurs/controleurAcheter.php?action=URIencodeComponent(action)
-
-// http://localhost/gestion_vente_logement/ADMIN/controleurs/controleurAgence.php
-
-// http://localhost/gestion_vente_logement/ADMIN/controleurs/controleurCite.php
-
-// http://localhost/gestion_vente_logement/ADMIN/controleurs/controleurClient.php
-
-// http://localhost/gestion_vente_logement/ADMIN/controleurs/controleurLogement.php
-
-// http://localhost/gestion_vente_logement/ADMIN/controleurs/controleurPayement.php
-
-// http://localhost/gestion_vente_logement/ADMIN/controleurs/controleurProvince.php
-
-// http://localhost/gestion_vente_logement/ADMIN/controleurs/controleurTerrain.php
-
-
 
 ?>

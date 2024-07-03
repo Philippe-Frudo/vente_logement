@@ -63,10 +63,6 @@ function datasPayement(datas){
 }
 //GETTER LOGEMENT VENDU
 
-
-
-
-
 //INSERTION PAYEMENT
 
 const validMontant = (inp)=>{
@@ -80,7 +76,6 @@ montantP.addEventListener("keyup", (e)=>{
         styleErrorInput(e.target)
     }
 });
-
 
 document.querySelector("#formAddPayement").addEventListener("submit", (e)=>{
     e.preventDefault();
@@ -98,5 +93,4 @@ document.querySelector("#formAddPayement").addEventListener("submit", (e)=>{
     }
 })
 
-// action();
 

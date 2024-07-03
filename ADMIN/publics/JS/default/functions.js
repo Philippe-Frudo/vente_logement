@@ -281,34 +281,3 @@ export const alertErreur = (inputs) => {
     }
     
 }
-
-
-
-// document.querySelector(".email").addEventListener("keyup", (e)=>{
-//         if (regexEmail(e.target.value) == false) { 
-//             styleErrorInput(e.target); 
-//         }
-//         else{ 
-//             styleSuccesInput(e.target);
-//         }
-// });
-
-
-// document.querySelector(".password").addEventListener("keyup", (e)=>{
-//         if (regexPassword(e.target.value) == false) { 
-//             styleErrorInput(e.target); 
-//         }
-//         else{ 
-//             styleSuccesInput(e.target);
-//         }
-// });
-
-
-
-
-
-
-
-// document.querySelector("#deconnexion").addEventListener("click", (e)=>{
-//     window.location.href = "http://localhost/gestion_vente_logement/ADMIN/vues/login/index.php";
-// })

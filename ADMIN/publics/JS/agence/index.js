@@ -32,9 +32,6 @@ const showDataAg = (data) => {
             
             `); 
 
-    document.querySelector(".tr_dishover .edit_log").addEventListener("click", (e)=>{
-        console.log(e.target.id);
-    });
 }
 function datasAg(datas){
     datas.forEach(data => {
@@ -62,8 +59,6 @@ function datasProv(datas){
 //GET PROVINCE
 
 
-
-
 //INSERTION
 //FETCH START
 
@@ -83,7 +78,6 @@ document.querySelector("#formAddAg").addEventListener("submit", (e) => {
         let data = getsDataForm(inputsFields, inpFileImg, inpSelect);
         
         fetchData(urlAg, "insertAg", "POST", data ).then(res => {console.log(res);});
-        // location.reload();
 
     }else{
         

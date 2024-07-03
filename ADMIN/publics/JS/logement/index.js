@@ -9,30 +9,6 @@ let price = document.querySelector('#formAddLog input[name="prixLog"]')
 
 //============== DELETE PRODUIT=====================
 
-//DELETE produits
-    // var Delete_prod = document.querySelector(".delete_log");
-    // var FenModales = document.querySelector(".confirmater_supp_pro");
-    // var cancel = document.querySelector(".anul_del");
-
-    // // console.log(BtnEditCom)
-    // for(var i = 0; i<Delete_prod.length;i++){
-    //     var button = Delete_prod[i];
-    //     var FenModale = FenModales[i];
-    //     // var Cancel = cancel[i];
-    //     button.addEventListener('click' , DeleteProduits);
-    //     cancel.addEventListener('click', AnnulerDel);
-    // }
-
-    // //Afficher ajustement produits
-    // function DeleteProduits(){
-    //     FenModale.classList.add("active");
-    // }
-
-    // function AnnulerDel(){
-    //     FenModale.classList.remove("active");
-    // }
-
-
 
 //DATA LOGEMENT
 fetchData(urlLog, "getAllLog", "GET").then(data => { datasLogement(data) });
@@ -143,51 +119,4 @@ document.querySelector("#formAddLog").addEventListener("submit", (e)=>{
     } else {
         validChammps(inputsData)
     }
-})
-
-
-// //INSERTION
-
-
-// document.querySelector("#formAddAg").addEventListener("submit", (e) => {
-//     e.preventDefault();
-//     const inputsFields =  e.target.querySelectorAll(".group_input input");
-//     const inpFileImg =  e.target.querySelectorAll(".group_input_file input");
-//     const inpSelect =  e.target.querySelector("select");
-    
-    
-//     console.log(inpSelect.value);
-    
-//     const valid = validField(inputsFields);
-//     const validP = validPhone(document.querySelector("#formAddAg .tel")) 
-//     const validPass = validPassword(document.querySelector("#formAddAg .password"));
-    
-//     // function selected(sel){
-//     //     sel.forEach(s => {
-//     //         s.addEventListener("change", (e)=>{
-//     //             return e.target.value.trim();
-//     //         });
-//     //     });
-
-//     // }
-
-//     console.log(document.querySelector("#formAddAg .password").value);
-//     console.log(valid,  validP, validPass );
-//     if ( valid && validP && validPass && inpSelect.value !== "" ) {
-    
-//         let d = getsDataForm(inputsFields, inpFileImg, inpSelect);
-        
-//         fetchJSONPost(urlAg, "insertAg", "POST", d );
-//         // location.reload();
-
-//     }else{
-        
-//         const alertErreurs = alertErreur(inputsFields);
-//         console.log("Invalid");
-//     }
-
-
-// });
-
-
-
+});

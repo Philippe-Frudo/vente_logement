@@ -13,9 +13,6 @@ BtnClose.addEventListener("click" , ()=>{
 })
 
 
-
-
-
 //===========================================
 
 let toggle = document.querySelector('.toggle');

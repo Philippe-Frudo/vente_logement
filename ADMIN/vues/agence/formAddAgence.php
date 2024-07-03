@@ -10,7 +10,7 @@
                         <span>Province</span>
                         <select name="codeProvince" id="codeProvince">
                             <option value="">--select la province</option>
-                            <!-- <option value=""></option> -->
+                    
                         </select>
                     </div>
                     <div>
