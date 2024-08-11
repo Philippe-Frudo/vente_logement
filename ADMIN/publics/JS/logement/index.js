@@ -39,6 +39,7 @@ function searchList(input) {
       }       
     }
   }
+  
   document.querySelector("#myinputSearch").addEventListener("input", (e)=>{
     searchList(e.target);
 })
